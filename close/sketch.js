@@ -5,16 +5,16 @@ var carImage2;
 var carImage1;
 var mapImage;
  
-function preload() {
+function preload() { 
   carImage1 = loadImage("https://i.imgur.com/9ddMwjp.png");
    carImage2 = loadImage("https://i.imgur.com/EVXDWBZ.png");
 
-  mapImage = loadImage("track.png2.png");
+  mapImage = loadImage("testtrack2.svg");
 
 }
   
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(700, 600);
   car1 = new Car(1); 
   car2 = new Car(2);
 }
@@ -88,7 +88,7 @@ class Car {
       noLoop();
       textSize(45);
       text("PLAYER 1 WINS!", 20, 200);
-  }
+  }  
   }
   }
 
