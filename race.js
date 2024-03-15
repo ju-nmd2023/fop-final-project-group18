@@ -24,6 +24,10 @@ function startPage() {
   text("TWO PLAYER", 615, 535);
 }
 
+function onePlayer() {}
+function twoPlayer() {}
+function resultOne() {}
+
 function draw() {
   startPage();
 }
