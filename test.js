@@ -20,8 +20,8 @@ function setup() {
   track.addPoint(100, 100); // Close the loop
   
   timeElapsed = 0;
-}
-
+}   
+ 
 function draw() {
   background(200);
   
@@ -121,6 +121,6 @@ class Track {
     }
     endShape(CLOSE);
   }
-} 
+}  
 
  
