@@ -12,7 +12,7 @@ function preload() {
   mapImage = loadImage("testtrack2.svg");
 
 }
-  
+    
 function setup() {
   createCanvas(700, 600);
   car1 = new Car(1); 
@@ -36,7 +36,7 @@ function draw() {
 class Car {
   constructor(playerNum) {
     if (playerNum == 1) {
-      this.position = createVector(100, 35);
+      this.position = createVector(100, 46); 
     } else {
       this.position = createVector(100, 35);
     }
@@ -50,9 +50,9 @@ class Car {
     translate(this.position.x, this.position.y);
     rotate(PI / 2 + this.dir.heading());
     if(playerNum == 1){
-      image(carImage1, 0, 0, 20, 20);
+      image(carImage1, 0, 0, 23, 23);
     } else{
-    image(carImage2, 0, 0, 20, 20);
+    image(carImage2, 0, 0, 23, 23);
     }
     pop();
   }
@@ -103,11 +103,11 @@ class Car {
       this.speed = 5;
     }
       if (keyIsDown(LEFT_ARROW)) {
-        this.dir.rotate(0.05);
+        this.dir.rotate(0.08);
       }
 
       if (keyIsDown(RIGHT_ARROW)) {
-        this.dir.rotate(-0.05);
+        this.dir.rotate(-0.08);
       }
     } else{
         if(keyIsDown(87)){
@@ -134,5 +134,5 @@ class Car {
     var directionAndSpeed = this.dir.copy().mult(this.speed);
     this.position.add(directionAndSpeed);
   }
-
+  
 }
