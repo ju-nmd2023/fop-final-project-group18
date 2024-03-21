@@ -1,27 +1,31 @@
 function setup() {
-  createCanvas(1000, 800);
+  createCanvas(width, height);
 }
 
-function startPage() {
+let innerWidth = width / 2;
+let innerHeight = height / 2;
+
+function menuPage() {
   background(23, 59, 109);
   noStroke();
   fill(237, 195, 40);
   textStyle(BOLDITALIC);
-  textFont("Trebuchet MS");
+  textFont("Verdana");
   textSize(60);
-  text("FAST", 400, 150);
-  text("AND", 400, 200);
-  text("FANTASTIC", 400, 250);
-
-  fill(255);
-  rect(width / 2, 500, 150, 50);
-  rect(width / 2 + 250, 500, 150, 50);
+  text("Fast", 100, 150);
+  text("And", 120, 220);
+  text("Fantastic", 150, 290);
 
   fill(0);
-  textStyle(NORMAL);
+  textStyle(BOLD);
   textSize(20);
-  text("ONE PLAYER", 370, 535);
-  text("TWO PLAYER", 615, 535);
+  fill(237, 195, 40);
+  text("Single Player", innerWidth, 530);
+  text("Double Player", width / 2, 600);
+  stroke(237, 195, 40);
+  strokeWeight(2);
+  line(width / 2 - 50, 540, width / 2 + 50, 540);
+  line(width / 2 - 50, 600, width / 2 + 50, 600);
 }
 
 function onePlayer() {}
@@ -29,5 +33,5 @@ function twoPlayer() {}
 function resultOne() {}
 
 function draw() {
-  startPage();
+  menuPage();
 }
