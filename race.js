@@ -4,6 +4,15 @@ function setup() {
 
 let innerWidth = width / 2;
 let innerHeight = height / 2;
+//one player car mede
+function onePlayerCar (x,y){
+  push();
+  translate(x, y);
+  noStroke();
+  fill(0, 0, 200);
+  rect(200, 200, 20, 20);
+  pop(); 
+}
 
 function menuPage() {
   background(23, 59, 109);
@@ -29,10 +38,11 @@ function menuPage() {
 
 function onePlayerScreen() {
   background(0, 255, 0);
+ onePlayerCar(0,0);
 }
 function twoPlayerScreen() {
-  background(0, 255, 255);
-}
+  background(255, 255, 255);
+} 
 function resultOneScreen() {
   background(255, 0, 0);
 }
@@ -42,6 +52,18 @@ function resultTwoScreen() {
 
 let state = "start";
 let onePlayerIsRunning = true;
+let twoPlayerIsRunning = true;
+
+function checkOneOver() {
+  if (!onePlayerIsRunning) {
+    state = "oneResult";
+  }
+}
+function checkTwoOver() {
+  if (!twoPlayerIsRunning) {
+    state = "twoResult";
+  }
+}
 
 function draw() {
   if (state === "start") {
@@ -49,14 +71,24 @@ function draw() {
   } else if (onePlayerIsRunning === true) {
     onePlayerScreen();
     checkOneOver();
+  } else if (twoPlayerIsRunning === true) {
+    twoPlayerScreen();
+    checkTwoOver();
   } else if (state === "oneResult") {
     oneResultScreen();
   }
-}
+} 
 
-function gameMode (){
-if (state === "start" && keyIsPressed && keyCode === DOWN_ARROW){
-  onePlayerIsRunning === true
-  state === "onePlayer"
-}
+function keyPressed() {
+  if (state === "start") {
+    if (keyCode === 49) {
+      // '1' key
+      state = "onePlayer";
+      onePlayerIsRunning = true;
+    } else if (keyCode === 50) {
+      // '2' key
+      state = "twoPlayer";
+      twoPlayerIsRunning = true; 
+    } 
+  }
 }
