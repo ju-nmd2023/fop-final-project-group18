@@ -27,34 +27,36 @@ function menuPage() {
   line(width / 2 - 50, 600, width / 2 + 50, 600);
 }
 
-function onePlayer() {
+function onePlayerScreen() {
   background(0, 255, 0);
 }
-function twoPlayer() {
+function twoPlayerScreen() {
   background(0, 255, 255);
 }
-function resultOne() {
+function resultOneScreen() {
   background(255, 0, 0);
 }
-function resultTwo() {
+function resultTwoScreen() {
   background(255, 0, 0);
 }
 
-let state = menuPage;
+let state = "start";
 let onePlayerIsRunning = true;
 
 function draw() {
-  if (state === menuPage) {
+  if (state === "start") {
     menuPage();
   } else if (onePlayerIsRunning === true) {
-    onePlayer();
+    onePlayerScreen();
     checkOneOver();
   } else if (state === "oneResult") {
-    oneTesult();
+    oneResultScreen();
   }
 }
-function checkOneOver() {
-  if (!onePlayerIsRunning) {
-    state = "resultOne";
-  }
+
+function gameMode (){
+if (state === "start" && keyIsPressed && keyCode === DOWN_ARROW){
+  onePlayerIsRunning === true
+  state === "onePlayer"
+}
 }
