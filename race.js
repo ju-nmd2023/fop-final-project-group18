@@ -4,8 +4,10 @@ function setup() {
 
 let innerWidth = width / 2;
 let innerHeight = height / 2;
+let imgCar = loadImage("img/RaceCar.png");
 
 function menuPage() {
+  push();
   background(23, 59, 109);
   noStroke();
   fill(237, 195, 40);
@@ -15,6 +17,7 @@ function menuPage() {
   text("Fast", 100, 150);
   text("And", 120, 220);
   text("Fantastic", 150, 290);
+  image(imgCar, 100, 100);
 
   fill(0);
   textStyle(BOLD);
@@ -26,12 +29,13 @@ function menuPage() {
   strokeWeight(2);
   line(width / 2 - 50, 540, width / 2 + 50, 540);
   line(width / 2 - 50, 600, width / 2 + 50, 600);
+  pop();
 }
 
 function onePlayer(x, y) {
   background(38, 139, 7);
-  translate(x, y);
   push();
+  translate(x, y);
   fill(102, 102, 95);
   noStroke();
   rect(innerWidth - 150, 0, 300, height);
@@ -57,6 +61,6 @@ function twoPlayer() {}
 function resultOne() {}
 
 function draw() {
-  // menuPage();
-  onePlayer(x, y);
+  menuPage();
+  // onePlayer(0, 0);
 }
