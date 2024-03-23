@@ -28,16 +28,35 @@ function menuPage() {
   line(width / 2 - 50, 600, width / 2 + 50, 600);
 }
 
-function onePlayer() {
+function onePlayer(x, y) {
   background(38, 139, 7);
+  translate(x, y);
+  push();
   fill(102, 102, 95);
   noStroke();
   rect(innerWidth - 150, 0, 300, height);
+  fill(255);
+  rect(innerWidth - 5, 0, 10, 30);
+  rect(innerWidth - 5, 60, 10, 30);
+  rect(innerWidth - 5, 120, 10, 30);
+  rect(innerWidth - 5, 180, 10, 30);
+  rect(innerWidth - 5, 240, 10, 30);
+  rect(innerWidth - 5, 300, 10, 30);
+  rect(innerWidth - 5, 360, 10, 30);
+  rect(innerWidth - 5, 420, 10, 30);
+  rect(innerWidth - 5, 480, 10, 30);
+  rect(innerWidth - 5, 540, 10, 30);
+  rect(innerWidth - 5, 600, 10, 30);
+  rect(innerWidth - 5, 600, 10, 30);
+  rect(innerWidth - 5, 660, 10, 30);
+  rect(innerWidth - 5, 720, 10, 30);
+  rect(innerWidth - 5, 780, 10, 30);
+  pop();
 }
 function twoPlayer() {}
 function resultOne() {}
 
 function draw() {
   // menuPage();
-  onePlayer();
+  onePlayer(x, y);
 }
