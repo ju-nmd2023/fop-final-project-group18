@@ -17,7 +17,7 @@ function menuPage() {
   text("Fast", 100, 150);
   text("And", 120, 220);
   text("Fantastic", 150, 290);
-  image(imgCar, 100, 100);
+  image(imgCar, 0, 0);
 
   fill(0);
   textStyle(BOLD);
