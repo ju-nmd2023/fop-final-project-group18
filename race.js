@@ -52,7 +52,7 @@ function onePlayerScreen(x, y) {
     }
   }
   pop(); 
-}
+} 
 function twoPlayerScreen() {
   background(0, 0, 255);
 }
