@@ -58,9 +58,27 @@ function onePlayer(x, y) {
   pop();
 }
 function twoPlayer() {}
-function resultOne() {}
+function resultOne() {
+  push();
+  background(23, 59, 109);
+  noStroke();
+  fill(237, 195, 40);
+  textStyle(BOLDITALIC);
+  textFont("Verdana");
+  textSize(60);
+  text("Result", innerWidth - 100, 150);
+  textStyle(ITALIC);
+  textSize(20);
+  text("Time:", innerWidth - 100, 250);
+  text("Score:", innerWidth - 100, 350);
+  pop();
+}
+function resultTwo() {
+  background(23, 59, 109);
+}
 
 function draw() {
-  menuPage();
+  // menuPage();
   // onePlayer(0, 0);
+  resultOne();
 }
