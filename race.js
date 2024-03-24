@@ -57,8 +57,10 @@ function onePlayerScreen(x, y) {
   rect(innerWidth - 5, 780, 10, 30);
   pop();
 }
-function twoPlayer() {}
-function resultOne() {
+function twoPlayerScreen() {
+  background(0,0,255);
+}
+function resultOneScreen() {
   push();
   background(23, 59, 109);
   noStroke();
@@ -73,10 +75,10 @@ function resultOne() {
   text("Score:", innerWidth - 100, 350);
   pop();
 }
-function resultTwo() {
+function resultTwoScreen() {
   background(23, 59, 109);
 }
-
+  
 function draw() {
   // menuPage();
   // onePlayer(0, 0);
@@ -86,20 +88,6 @@ function draw() {
 let state = "start";
 let onePlayerIsRunning = true;
 let twoPlayerIsRunning = true;
-
-function draw() {
-  if (state === "start") {
-    menuPage();
-  } else if (state === "onePlayer") {
-    onePlayerScreen();
-  } else if (state === "twoPlayer") {
-    twoPlayerScreen();
-  } else if (state === "resultOne") {
-    resultOneScreen();
-  } else if (state === "resultTwo") {
-    resultTwoScreen();
-  }
-}
 
 function keyPressed() {
   if (state === "start") {
@@ -121,5 +109,23 @@ function keyPressed() {
     // Press any key to show resultTwoScreen after twoPlayerScreen
     state = "resultTwo";
     twoPlayerIsRunning = false;
+  }
+}
+
+function draw() {
+  if (state === "start") {
+    menuPage();
+  } else if (state === "onePlayer") {
+    onePlayerScreen();
+    // Add your one player screen logic here
+  } else if (state === "twoPlayer") {
+    twoPlayerScreen();
+    // Add your two player screen logic here
+  } else if (state === "resultOne") {
+    resultOneScreen();
+    // Add logic for resultOneScreen
+  } else if (state === "resultTwo") {
+    resultTwoScreen();
+    // Add logic for resultTwoScreen
   }
 }
