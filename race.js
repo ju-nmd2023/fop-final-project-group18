@@ -5,14 +5,14 @@ function setup() {
 let innerWidth = width / 2;
 let innerHeight = height / 2;
 let imgCar = loadImage("img/RaceCar.png");
-
+ 
 function menuPage() {
   push();
   background(23, 59, 109);
   noStroke();
   fill(237, 195, 40);
   textStyle(BOLDITALIC);
-  textFont("Verdana");
+  textFont("Verdana"); 
   textSize(60);
   text("Fast", 100, 150);
   text("And", 120, 220);
@@ -32,7 +32,7 @@ function menuPage() {
   pop();
 }
 
-function onePlayer(x, y) {
+function onePlayerScreen(x, y) {
   background(38, 139, 7);
   push();
   translate(x, y);
@@ -57,10 +57,56 @@ function onePlayer(x, y) {
   rect(innerWidth - 5, 780, 10, 30);
   pop();
 }
-function twoPlayer() {}
-function resultOne() {}
+function twoPlayerScreen() {
+  background( 255, 0, 0);
+}
+function resultOneScreen() {
+  background(255, 255, 20);
+}
+function resultTwoScreen() {
+  background(25, 25, 250);
+}
 
 function draw() {
   menuPage();
   // onePlayer(0, 0);
+}
+
+let state = "start";
+let onePlayerIsRunning = true;
+let twoPlayerIsRunning = true;
+
+function draw() {
+  if (state === "start") {
+    menuPage();
+  } else if (state === "onePlayer") {
+    onePlayerScreen();
+  } else if (state === "twoPlayer") {
+    twoPlayerScreen();
+  } else if (state === "resultOne") {
+    resultOneScreen();
+  } else if (state === "resultTwo") {
+    resultTwoScreen();
+  }
+}
+
+function keyPressed() {
+  if (state === "start") {
+    if (keyCode === 49) { // '1' key
+      state = "onePlayer";
+      onePlayerIsRunning = true;
+    } else if (keyCode === 50) { // '2' key
+      state = "twoPlayer";
+      onePlayerIsRunning = false;
+      twoPlayerIsRunning = true;
+    }
+  } else if (state === "onePlayer" && onePlayerIsRunning) {
+    // Press any key to show resultOneScreen after onePlayerScreen
+    state = "resultOne";
+    onePlayerIsRunning = false;
+  } else if (state === "twoPlayer" && twoPlayerIsRunning) {
+    // Press any key to show resultTwoScreen after twoPlayerScreen
+    state = "resultTwo";
+    twoPlayerIsRunning = false;
+  }
 }
