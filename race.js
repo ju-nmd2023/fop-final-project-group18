@@ -39,26 +39,22 @@ function onePlayerScreen(x, y) {
   fill(102, 102, 95);
   noStroke();
   rect(innerWidth - 150, 0, 300, height);
+  //lines
   fill(255);
-  rect(innerWidth - 5, 0, 10, 30);
-  rect(innerWidth - 5, 60, 10, 30);
-  rect(innerWidth - 5, 120, 10, 30);
-  rect(innerWidth - 5, 180, 10, 30);
-  rect(innerWidth - 5, 240, 10, 30);
-  rect(innerWidth - 5, 300, 10, 30);
-  rect(innerWidth - 5, 360, 10, 30);
-  rect(innerWidth - 5, 420, 10, 30);
-  rect(innerWidth - 5, 480, 10, 30);
-  rect(innerWidth - 5, 540, 10, 30);
-  rect(innerWidth - 5, 600, 10, 30);
-  rect(innerWidth - 5, 600, 10, 30);
-  rect(innerWidth - 5, 660, 10, 30);
-  rect(innerWidth - 5, 720, 10, 30);
-  rect(innerWidth - 5, 780, 10, 30);
-  pop();
+  let lineSpacing = 400;
+  let lineX = innerWidth - 5;
+  let startY = (frameCount % 20) * 20;
+
+  for (let i = 0; i < 10; i++) {
+    let lineY = startY - i * lineSpacing;
+    if (lineY < height) {
+      rect(lineX, lineY, 10, 80);
+    }
+  }
+  pop(); 
 }
 function twoPlayerScreen() {
-  background(0,0,255);
+  background(0, 0, 255);
 }
 function resultOneScreen() {
   push();
@@ -78,7 +74,7 @@ function resultOneScreen() {
 function resultTwoScreen() {
   background(23, 59, 109);
 }
-  
+
 function draw() {
   // menuPage();
   // onePlayer(0, 0);
