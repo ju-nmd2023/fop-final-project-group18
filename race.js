@@ -5,6 +5,14 @@ function setup() {
 let innerWidth = width / 2;
 let innerHeight = height / 2;
 let imgCar = loadImage("img/RaceCar.png");
+//Players car
+let playerCarX = 200;
+let playerCarY = 350;
+
+function playercar1(x, y) {
+  fill(20, 20, 250);
+  rect(playerCarX, playerCarY, 80, 90);
+}
 
 function menuPage() {
   push();
@@ -51,8 +59,11 @@ function onePlayerScreen(x, y) {
       rect(lineX, lineY, 10, 80);
     }
   }
-  pop(); 
-} 
+  playercar1();
+  //move car
+
+  pop();
+}
 function twoPlayerScreen() {
   background(0, 0, 255);
 }
@@ -75,12 +86,6 @@ function resultTwoScreen() {
   background(23, 59, 109);
 }
 
-function draw() {
-  // menuPage();
-  // onePlayer(0, 0);
-  resultOne();
-}
-
 let state = "start";
 let onePlayerIsRunning = true;
 let twoPlayerIsRunning = true;
@@ -97,31 +102,35 @@ function keyPressed() {
       onePlayerIsRunning = false;
       twoPlayerIsRunning = true;
     }
-  } else if (state === "onePlayer" && onePlayerIsRunning) {
-    // Press any key to show resultOneScreen after onePlayerScreen
-    state = "resultOne";
-    onePlayerIsRunning = false;
-  } else if (state === "twoPlayer" && twoPlayerIsRunning) {
-    // Press any key to show resultTwoScreen after twoPlayerScreen
-    state = "resultTwo";
-    twoPlayerIsRunning = false;
+   
+    // } else if (state === "onePlayer" && onePlayerIsRunning) {
+    //   // Press any key to show resultOneScreen after onePlayerScreen
+    //   state = "resultOne";
+    //   onePlayerIsRunning = false;
+    // } else if (state === "twoPlayer" && twoPlayerIsRunning) {
+    //   // Press any key to show resultTwoScreen after twoPlayerScreen
+    //   state = "resultTwo";
+    //   twoPlayerIsRunning = false;
+    // }
   }
 }
-
 function draw() {
   if (state === "start") {
     menuPage();
   } else if (state === "onePlayer") {
     onePlayerScreen();
-    // Add your one player screen logic here
+    //Move car
+    if (keyIsDown(RIGHT_ARROW)) {
+      playerCarX += 8; 
+    }
+    if (keyIsDown(LEFT_ARROW)) {
+      playerCarX -= 8; 
+    }
   } else if (state === "twoPlayer") {
     twoPlayerScreen();
-    // Add your two player screen logic here
   } else if (state === "resultOne") {
     resultOneScreen();
-    // Add logic for resultOneScreen
   } else if (state === "resultTwo") {
     resultTwoScreen();
-    // Add logic for resultTwoScreen
   }
 }
