@@ -1,12 +1,14 @@
 function setup() {
-  createCanvas(width, height);
+  createCanvas(windowWidth, windowHeight);
 }
 
 let innerWidth = width / 2;
 let innerHeight = height / 2;
-let imgCar = loadImage("img/RaceCar.png");
+let imgCar;
 
-function menuTitle() {}
+function preload() {
+  imgCar = loadImage("img/RaceCar.png");
+}
 
 function menuPage() {
   push();
@@ -26,8 +28,8 @@ function menuPage() {
   textSize(20);
   fill(237, 195, 40);
   textAlign(CENTER);
-  text("Single Player", innerWidth, 530);
-  text("Double Player", innerWidth, 590);
+  const singlePlayerButton = text("Single Player", innerWidth, 530);
+  const doublePlayerButton = text("Double Player", innerWidth, 590);
   stroke(237, 195, 40);
   strokeWeight(2);
   line(innerWidth - 50, 540, innerWidth + 50, 540);
