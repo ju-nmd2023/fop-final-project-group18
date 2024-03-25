@@ -49,10 +49,10 @@ function menuPage() {
 function onePlayerScreen(x, y) {
   background(38, 139, 7);
   push();
-  translate(x, y);
+  translate(x, y); 
   fill(102, 102, 95);
   noStroke();
-  rect(innerWidth - 150, 0, 300, height);
+  rect(innerWidth -200, 0, 400, height);
   //lines
   fill(255);
   let lineSpacing = 400;
@@ -63,7 +63,7 @@ function onePlayerScreen(x, y) {
     let lineY = startY - i * lineSpacing;
     if (lineY < height) {
       rect(lineX, lineY, 10, 80);
-    }
+    } 
   }
 
   playercar1();
