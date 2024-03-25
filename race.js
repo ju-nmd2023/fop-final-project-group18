@@ -17,7 +17,7 @@ function menuPage() {
   text("Fast", 100, 150);
   text("And", 120, 220);
   text("Fantastic", 150, 290);
-  image(imgCar, 0, 0);
+  image(imgCar, 250, 90, 400, 170);
 
   fill(0);
   textStyle(BOLD);
@@ -51,8 +51,8 @@ function onePlayerScreen(x, y) {
       rect(lineX, lineY, 10, 80);
     }
   }
-  pop(); 
-} 
+  pop();
+}
 function twoPlayerScreen() {
   background(0, 0, 255);
 }
@@ -69,16 +69,24 @@ function resultOneScreen() {
   textSize(20);
   text("Time:", innerWidth - 100, 250);
   text("Score:", innerWidth - 100, 350);
+  image(imgCar, 20, 600, 400, 170);
   pop();
 }
 function resultTwoScreen() {
+  push();
   background(23, 59, 109);
-}
-
-function draw() {
-  // menuPage();
-  // onePlayer(0, 0);
-  resultOne();
+  noStroke();
+  fill(237, 195, 40);
+  textStyle(BOLDITALIC);
+  textFont("Verdana");
+  textSize(60);
+  text("Result", innerWidth - 100, 150);
+  textStyle(ITALIC);
+  textSize(20);
+  text("Player 1", innerWidth - 150, 250);
+  text("Player 2", innerWidth + 100, 250);
+  image(imgCar, 20, 400, 320, 140);
+  pop();
 }
 
 let state = "start";
