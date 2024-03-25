@@ -6,6 +6,15 @@ let innerWidth = width / 2;
 let innerHeight = height / 2;
 let imgCar;
 
+//Players car
+let playerCarX = 200;
+let playerCarY = 350;
+
+function playercar1(x, y) {
+  fill(20, 20, 250);
+  rect(playerCarX, playerCarY, 80, 90);
+}
+
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
 }
