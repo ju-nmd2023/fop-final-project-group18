@@ -14,6 +14,8 @@ function playercar1(x, y) {
   rect(playerCarX, playerCarY, 80, 90);
 }
 
+function menuTitle() {}
+
 function menuPage() {
   push();
   background(23, 59, 109);
@@ -22,21 +24,22 @@ function menuPage() {
   textStyle(BOLDITALIC);
   textFont("Verdana");
   textSize(60);
-  text("Fast", 100, 150);
-  text("And", 120, 220);
-  text("Fantastic", 150, 290);
-  image(imgCar, 0, 0);
+  text("Fast", innerWidth - 250, 150);
+  text("And", innerWidth - 220, 220);
+  text("Fantastic", innerWidth - 190, 290);
+  image(imgCar, innerWidth - 80, 80, 400, 170);
 
   fill(0);
   textStyle(BOLD);
   textSize(20);
   fill(237, 195, 40);
+  textAlign(CENTER);
   text("Single Player", innerWidth, 530);
   text("Double Player", innerWidth, 590);
   stroke(237, 195, 40);
   strokeWeight(2);
-  line(width / 2 - 50, 540, width / 2 + 50, 540);
-  line(width / 2 - 50, 600, width / 2 + 50, 600);
+  line(innerWidth - 50, 540, innerWidth + 50, 540);
+  line(innerWidth - 50, 600, innerWidth + 50, 600);
   pop();
 }
 
@@ -59,8 +62,7 @@ function onePlayerScreen(x, y) {
       rect(lineX, lineY, 10, 80);
     }
   }
-  playercar1();
-  //move car
+
 
   pop();
 }
@@ -80,10 +82,24 @@ function resultOneScreen() {
   textSize(20);
   text("Time:", innerWidth - 100, 250);
   text("Score:", innerWidth - 100, 350);
+  image(imgCar, 20, 600, 400, 170);
   pop();
 }
 function resultTwoScreen() {
+  push();
   background(23, 59, 109);
+  noStroke();
+  fill(237, 195, 40);
+  textStyle(BOLDITALIC);
+  textFont("Verdana");
+  textSize(60);
+  text("Result", innerWidth - 100, 150);
+  textStyle(ITALIC);
+  textSize(20);
+  text("Player 1", innerWidth - 150, 250);
+  text("Player 2", innerWidth + 100, 250);
+  image(imgCar, 20, 400, 320, 140);
+  pop();
 }
 
 let state = "start";
