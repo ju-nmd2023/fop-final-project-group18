@@ -57,6 +57,7 @@ function onePlayerScreen(x, y) {
     }
   }
 
+  playercar1();
   pop();
 }
 function twoPlayerScreen() {
