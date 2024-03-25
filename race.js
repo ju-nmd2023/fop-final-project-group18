@@ -56,6 +56,7 @@ function onePlayerScreen(x, y) {
       rect(lineX, lineY, 10, 80);
     }
   }
+
   pop();
 }
 function twoPlayerScreen() {
@@ -110,31 +111,35 @@ function keyPressed() {
       onePlayerIsRunning = false;
       twoPlayerIsRunning = true;
     }
-  } else if (state === "onePlayer" && onePlayerIsRunning) {
-    // Press any key to show resultOneScreen after onePlayerScreen
-    state = "resultOne";
-    onePlayerIsRunning = false;
-  } else if (state === "twoPlayer" && twoPlayerIsRunning) {
-    // Press any key to show resultTwoScreen after twoPlayerScreen
-    state = "resultTwo";
-    twoPlayerIsRunning = false;
+
+    // } else if (state === "onePlayer" && onePlayerIsRunning) {
+    //   // Press any key to show resultOneScreen after onePlayerScreen
+    //   state = "resultOne";
+    //   onePlayerIsRunning = false;
+    // } else if (state === "twoPlayer" && twoPlayerIsRunning) {
+    //   // Press any key to show resultTwoScreen after twoPlayerScreen
+    //   state = "resultTwo";
+    //   twoPlayerIsRunning = false;
+    // }
   }
 }
-
 function draw() {
   if (state === "start") {
     menuPage();
   } else if (state === "onePlayer") {
     onePlayerScreen();
-    // Add your one player screen logic here
+    //Move car
+    if (keyIsDown(RIGHT_ARROW)) {
+      playerCarX += 8;
+    }
+    if (keyIsDown(LEFT_ARROW)) {
+      playerCarX -= 8;
+    }
   } else if (state === "twoPlayer") {
     twoPlayerScreen();
-    // Add your two player screen logic here
   } else if (state === "resultOne") {
     resultOneScreen();
-    // Add logic for resultOneScreen
   } else if (state === "resultTwo") {
     resultTwoScreen();
-    // Add logic for resultTwoScreen
   }
 }
