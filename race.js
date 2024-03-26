@@ -1,5 +1,6 @@
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES);
 }
 
 let innerWidth = width / 2;
@@ -11,12 +12,16 @@ let playerCarX = 200;
 let playerCarY = 350;
 
 function playercar1(x, y) {
-  fill(20, 20, 250);
-  rect(playerCarX, playerCarY, 80, 90);
+  push();
+
+  image(imgOne, playerCarX, playerCarY, 150, 80);
+  pop();
 }
 
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
+  imgOne = loadImage("img/yellowCar.png");
+  imgtwo = loadImage("img/redCar.png");
 }
 
 function menuPage() {
@@ -28,7 +33,7 @@ function menuPage() {
   textSize(60);
   text("Fast", innerWidth - 250, 150);
   text("And", innerWidth - 220, 220);
-  text("Fantastic", innerWidth - 190, 290);
+  text("Fantastic", innerWidth - 90, 290);
   image(imgCar, innerWidth - 80, 80, 400, 170);
 
   fill(0);
@@ -87,7 +92,10 @@ function onePlayerScreen(x, y) {
   pop();
 }
 function twoPlayerScreen() {
-  background(0, 0, 255);
+  background(38, 139, 7);
+  push();
+  onePlayerScreen(0, 0);
+  pop();
 }
 function resultOneScreen() {
   push();
@@ -139,17 +147,17 @@ let twoPlayerIsRunning = true;
 //       twoPlayerIsRunning = true;
 //     }
 
-    // } else if (state === "onePlayer" && onePlayerIsRunning) {
-    //   // Press any key to show resultOneScreen after onePlayerScreen
-    //   state = "resultOne";
-    //   onePlayerIsRunning = false;
-    // } else if (state === "twoPlayer" && twoPlayerIsRunning) {
-    //   // Press any key to show resultTwoScreen after twoPlayerScreen
-    //   state = "resultTwo";
-    //   twoPlayerIsRunning = false;
-    // }
-  }
-}
+// } else if (state === "onePlayer" && onePlayerIsRunning) {
+//   // Press any key to show resultOneScreen after onePlayerScreen
+//   state = "resultOne";
+//   onePlayerIsRunning = false;
+// } else if (state === "twoPlayer" && twoPlayerIsRunning) {
+//   // Press any key to show resultTwoScreen after twoPlayerScreen
+//   state = "resultTwo";
+//   twoPlayerIsRunning = false;
+// }
+//   }
+// }
 function draw() {
   if (state === "start") {
     menuPage();
