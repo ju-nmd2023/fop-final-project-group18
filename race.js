@@ -1,5 +1,11 @@
 function setup() {
   createCanvas(windowWidth, windowHeight);
+//trafic cars being positiond
+  for (let i = 0; i < numcars; i++) {
+    let x = random(130, 530); // Slumpmässig x-koordinat
+    let y = random(-500, 0); // Slumpmässig y-koordinat ovanför canvasen
+    cars.push(new redcar(x, y, carszise)); // Skapa en kvadrat och lägg till den i arrayen
+  }
 }
 
 let innerWidth = width / 2;
@@ -14,6 +20,12 @@ function playercar1(x, y) {
   fill(20, 20, 250);
   rect(playerCarX, playerCarY, 80, 90);
 }
+
+//trafic cars
+let cars = []; 
+let carszise = (70, 80); // Storleken på kvadraterna
+let numcars = 3; // Antal kvadrater
+let traficspeed = 6; // Fallhastighet för kvadraterna
 
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
@@ -69,7 +81,11 @@ function onePlayerScreen(x, y) {
   translate(x, y);
   fill(102, 102, 95);
   noStroke();
+<<<<<<< Updated upstream
   rect(innerWidth - 150, 0, 300, height);
+=======
+  rect(innerWidth - 200, 0, 400, height);
+>>>>>>> Stashed changes
   //lines
   fill(255);
   let lineSpacing = 400;
@@ -84,8 +100,13 @@ function onePlayerScreen(x, y) {
   }
 
   playercar1();
+  for (let i = 0; i < cars.length; i++) {
+    cars[i].fall(); // Uppdatera positionen och rita varje kvadrat
+    cars[i].display();
+  }
   pop();
 }
+
 function twoPlayerScreen() {
   background(0, 0, 255);
 }
@@ -120,6 +141,30 @@ function resultTwoScreen() {
   text("Player 2", innerWidth + 100, 250);
   image(imgCar, 20, 400, 320, 140);
   pop();
+}
+
+//Trafic cars being made and moving
+class redcar {
+  constructor(x, y, side) {
+    this.x = x;
+    this.y = y;
+    this.side = side;
+  }
+
+  // Method to change positon
+  fall() {
+    this.y += traficspeed;
+    if (this.y > height) {
+      this.y = random(-500, 0);
+    }
+  }
+
+  // Method to draw the cars
+  display() {
+    rectMode(CENTER);
+    fill(255, 0, 0); // Röd färg för kvadraten
+    rect(this.x, this.y, this.side, this.side);
+  }
 }
 
 let state = "start";
