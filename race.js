@@ -81,11 +81,9 @@ function onePlayerScreen(x, y) {
   translate(x, y);
   fill(102, 102, 95);
   noStroke();
-<<<<<<< Updated upstream
   rect(innerWidth - 150, 0, 300, height);
-=======
   rect(innerWidth - 200, 0, 400, height);
->>>>>>> Stashed changes
+
   //lines
   fill(255);
   let lineSpacing = 400;
@@ -193,8 +191,8 @@ let twoPlayerIsRunning = true;
     //   state = "resultTwo";
     //   twoPlayerIsRunning = false;
     // }
-  }
-}
+  //}
+//}
 function draw() {
   if (state === "start") {
     menuPage();
