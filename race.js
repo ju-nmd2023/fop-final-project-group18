@@ -1,16 +1,16 @@
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-//trafic cars being positiond
+  createCanvas(660, 800); 
+//trafic cars being positiond 
   for (let i = 0; i < numcars; i++) {
-    let x = random(130, 530); // Slumpmässig x-koordinat
-    let y = random(-500, 0); // Slumpmässig y-koordinat ovanför canvasen
-    cars.push(new redcar(x, y, carszise)); // Skapa en kvadrat och lägg till den i arrayen
+    let x = random(130, 530); 
+    let y = random(-500, 0); 
+    cars.push(new redcar(x, y, carszise)); 
   }
 }
 
 let innerWidth = width / 2;
 let innerHeight = height / 2;
-let imgCar;
+let imgCar; 
 
 //Players car
 let playerCarX = 200;
@@ -23,9 +23,9 @@ function playercar1(x, y) {
 
 //trafic cars
 let cars = []; 
-let carszise = (70, 80); // Storleken på kvadraterna
-let numcars = 3; // Antal kvadrater
-let traficspeed = 6; // Fallhastighet för kvadraterna
+let carszise = (70, 80); 
+let numcars = 3; 
+let traficspeed = 6; 
 
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
@@ -98,8 +98,9 @@ function onePlayerScreen(x, y) {
   }
 
   playercar1();
+  //trafic loop
   for (let i = 0; i < cars.length; i++) {
-    cars[i].fall(); // Uppdatera positionen och rita varje kvadrat
+    cars[i].fall();
     cars[i].display();
   }
   pop();
@@ -160,7 +161,7 @@ class redcar {
   // Method to draw the cars
   display() {
     rectMode(CENTER);
-    fill(255, 0, 0); // Röd färg för kvadraten
+    fill(255, 0, 0); 
     rect(this.x, this.y, this.side, this.side);
   }
 }
