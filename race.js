@@ -20,7 +20,6 @@ function preload() {
 }
 
 function menuPage() {
-  push();
   background(23, 59, 109);
   noStroke();
   fill(237, 195, 40);
@@ -43,16 +42,34 @@ function menuPage() {
   strokeWeight(2);
   line(innerWidth - 50, 540, innerWidth + 50, 540);
   line(innerWidth - 50, 600, innerWidth + 50, 600);
-  pop();
+
+  if (
+    mouseX > innerWidth - 100 &&
+    mouseX < innerWidth + 100 &&
+    mouseY > 515 &&
+    mouseY < 545 &&
+    mouseIsPressed
+  ) {
+    state = "onePlayer";
+  }
+  if (
+    mouseX > innerWidth - 100 &&
+    mouseX < innerWidth + 100 &&
+    mouseY > 570 &&
+    mouseY < 610 &&
+    mouseIsPressed
+  ) {
+    state = "twoPlayer";
+  }
 }
 
 function onePlayerScreen(x, y) {
   background(38, 139, 7);
   push();
-  translate(x, y); 
+  translate(x, y);
   fill(102, 102, 95);
   noStroke();
-  rect(innerWidth -200, 0, 400, height);
+  rect(innerWidth - 150, 0, 300, height);
   //lines
   fill(255);
   let lineSpacing = 400;
@@ -63,7 +80,7 @@ function onePlayerScreen(x, y) {
     let lineY = startY - i * lineSpacing;
     if (lineY < height) {
       rect(lineX, lineY, 10, 80);
-    } 
+    }
   }
 
   playercar1();
@@ -109,18 +126,18 @@ let state = "start";
 let onePlayerIsRunning = true;
 let twoPlayerIsRunning = true;
 
-function keyPressed() {
-  if (state === "start") {
-    if (keyCode === 49) {
-      // '1' key
-      state = "onePlayer";
-      onePlayerIsRunning = true;
-    } else if (keyCode === 50) {
-      // '2' key
-      state = "twoPlayer";
-      onePlayerIsRunning = false;
-      twoPlayerIsRunning = true;
-    }
+// function keyPressed() {
+//   if (state === "start") {
+//     if (keyCode === 49) {
+//       // '1' key
+//       state = "onePlayer";
+//       onePlayerIsRunning = true;
+//     } else if (keyCode === 50) {
+//       // '2' key
+//       state = "twoPlayer";
+//       onePlayerIsRunning = false;
+//       twoPlayerIsRunning = true;
+//     }
 
     // } else if (state === "onePlayer" && onePlayerIsRunning) {
     //   // Press any key to show resultOneScreen after onePlayerScreen
