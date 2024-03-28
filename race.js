@@ -127,7 +127,6 @@ function playercar2(x2, y2) {
 }
 
 //trafic cars
-
 let cars = [];
 let carSize = (70, 80);
 let numcars = 3;
@@ -136,7 +135,7 @@ let traficspeed = 6;
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
 }
-
+//Menu
 function menuPage() {
   background(37, 60, 129);
   noStroke();
@@ -178,7 +177,7 @@ function menuPage() {
     state = "twoPlayer";
   }
 }
-
+//One player mode
 function onePlayerScreen(x, y) {
   background(38, 139, 7);
   push();
@@ -202,7 +201,8 @@ function onePlayerScreen(x, y) {
   }
 
   playercar1();
-  //trafic loop
+
+  //trafic loop, more kode on line 163
   for (let i = 0; i < cars.length; i++) {
     cars[i].fall();
     cars[i].display();
@@ -302,7 +302,7 @@ let twoPlayerIsRunning = true;
 // }
 //}
 //}
-/*<-- The following 20 lines were inspierd from lunar lander -->*/
+/*<-- The following 20 lines were inspierd from the lunar lander game -->*/
 function draw() {
   if (state === "start") {
     menuPage();
