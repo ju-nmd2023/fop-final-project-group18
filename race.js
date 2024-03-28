@@ -22,20 +22,20 @@ function playercar1(x, y) {
   push();
 
   image(imgOne, playerCarX, playerCarY, 150, 80);
-  pop();
+  pop(); 
 }
 
 //trafic cars
 
-let cars = []; 
+let cars = [];  
 let carszise = (70, 80); 
 let numcars = 3; 
-let traficspeed = 6; 
+let traficspeed = 6;  
 
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
   imgOne = loadImage("img/yellowCar.png");
-  imgtwo = loadImage("img/redCar.png");
+  imgtwo = loadImage("img/redCar.png"); 
 }
 
 function menuPage() {
@@ -220,7 +220,7 @@ function draw() {
     twoPlayerScreen();
   } else if (state === "resultOne") {
     resultOneScreen();
-  } else if (state === "resultTwo") {
+  } else if (state === "resultTwo") { 
     resultTwoScreen();
   }
 }
