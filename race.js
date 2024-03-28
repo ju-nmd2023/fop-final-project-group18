@@ -1,9 +1,13 @@
 function setup() {
+<<<<<<< Updated upstream
   createCanvas(innerWidth, innerHeight);
+=======
+  createCanvas(600, 650);
+>>>>>>> Stashed changes
   angleMode(DEGREES);
   //trafic cars being positiond
   for (let i = 0; i < numcars; i++) {
-    let x = random(130, 530);
+    let x = random(160, 530);
     let y = random(-500, 0);
     cars.push(new redcar(x, y, carSize));
   }
@@ -15,17 +19,28 @@ function setup() {
 // let innerHeight;
 let imgCar;
 
+<<<<<<< Updated upstream
 //Player1 car coordinates
 let playerCarX1 = 200;
 let playerCarX2 = 400;
 let playerCarY = 450;
+=======
+//Player1 car coordinates 
+let playerCarX = 200;
+let playerCarY = 450; 
+>>>>>>> Stashed changes
 
 function playercar1(x1, y1) {
   push();
+<<<<<<< Updated upstream
   translate(x1, y1);
 
+=======
+  translate(x, y);
+ 
+>>>>>>> Stashed changes
   // Player ones car
-  fill(255, 194, 1);
+  fill(255, 194, 1); 
   noStroke();
   rect(playerCarX1, playerCarY, 70, 115, 10);
   ellipse(playerCarX1 + 35, playerCarY + 10, 75, 65);
