@@ -1,5 +1,5 @@
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(width, height);
   angleMode(DEGREES);
   //trafic cars being positiond
   for (let i = 0; i < numcars; i++) {
@@ -55,7 +55,7 @@ function menuPage() {
   textSize(60);
   text("Fast", innerWidth - 250, 150);
   text("And", innerWidth - 220, 220);
-  text("Fantastic", innerWidth - 190, 290);
+  text("Fantastic", innerWidth - 100, 290);
   image(imgCar, innerWidth - 80, 80, 400, 170);
 
   textStyle(BOLD);
