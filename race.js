@@ -1,6 +1,5 @@
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  angleMode(DEGREES);
   //trafic cars being positiond
   for (let i = 0; i < numcars; i++) {
     let x = random(130, 530); // Slumpmässig x-koordinat
@@ -19,8 +18,16 @@ let playerCarY = 350;
 
 function playercar1(x, y) {
   push();
+  fill(255, 194, 1);
+  noStroke();
+  rect(playerCarX, playerCarY, 70, 115, 10);
+  ellipse(playerCarX + 35, playerCarY + 10, 75, 65);
 
-  image(imgOne, playerCarX, playerCarY, 150, 80);
+  fill(0);
+  quad(210, 430, 260, 430, 257, 450, 213, 450);
+  ellipse(235, 450, 43, 10);
+  quad(205, 375, 265, 375, 260, 405, 210, 405);
+  ellipse(235, 375, 60, 15);
   pop();
 }
 
@@ -32,26 +39,22 @@ let traficspeed = 6; // Fallhastighet för kvadraterna
 
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
-  imgOne = loadImage("img/yellowCar.png");
-  imgtwo = loadImage("img/redCar.png");
 }
 
 function menuPage() {
-  background(23, 59, 109);
+  background(37, 60, 129);
   noStroke();
-  fill(237, 195, 40);
+  fill(255, 194, 1);
   textStyle(BOLDITALIC);
   textFont("Verdana");
   textSize(60);
   text("Fast", innerWidth - 250, 150);
   text("And", innerWidth - 220, 220);
-  text("Fantastic", innerWidth - 90, 290);
+  text("Fantastic", innerWidth - 190, 290);
   image(imgCar, innerWidth - 80, 80, 400, 170);
 
-  fill(0);
   textStyle(BOLD);
   textSize(20);
-  fill(237, 195, 40);
   textAlign(CENTER);
   const singlePlayerButton = text("Single Player", innerWidth, 530);
   const doublePlayerButton = text("Double Player", innerWidth, 590);
@@ -111,16 +114,13 @@ function onePlayerScreen(x, y) {
 }
 
 function twoPlayerScreen() {
-  background(38, 139, 7);
-  push();
-  onePlayerScreen(0, 0);
-  pop();
+  background(0, 0, 255);
 }
 function resultOneScreen() {
   push();
-  background(23, 59, 109);
+  background(37, 60, 129);
   noStroke();
-  fill(237, 195, 40);
+  fill(255, 194, 1);
   textStyle(BOLDITALIC);
   textFont("Verdana");
   textSize(60);
@@ -134,7 +134,7 @@ function resultOneScreen() {
 }
 function resultTwoScreen() {
   push();
-  background(23, 59, 109);
+  background(37, 60, 129);
   noStroke();
   fill(237, 195, 40);
   textStyle(BOLDITALIC);
@@ -220,4 +220,5 @@ function draw() {
   } else if (state === "resultTwo") {
     resultTwoScreen();
   }
+  // playercar1(100, 100);
 }
