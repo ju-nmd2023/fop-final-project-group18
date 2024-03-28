@@ -20,7 +20,7 @@ let playerCarX1 = 200;
 let playerCarX2 = 400;
 let playerCarY = 450;
 
-function playercar1(x1, y1) {
+function onePlayerCar(x1, y1) {
   push();
   translate(x1, y1);
 
@@ -73,7 +73,7 @@ function playercar1(x1, y1) {
   pop();
 }
 
-function playercar2(x2, y2) {
+function twoPlayerCar(x2, y2) {
   push();
   translate(x2, y2);
 
@@ -135,7 +135,7 @@ let traficspeed = 6;
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
 }
-//Menu
+
 function menuPage() {
   background(37, 60, 129);
   noStroke();
@@ -177,6 +177,8 @@ function menuPage() {
     state = "twoPlayer";
   }
 }
+
+function gameBackground() {}
 //One player mode
 function onePlayerScreen(x, y) {
   background(38, 139, 7);
@@ -200,7 +202,7 @@ function onePlayerScreen(x, y) {
     }
   }
 
-  playercar1();
+  onePlayerCar();
 
   //trafic loop, more kode on line 163
   for (let i = 0; i < cars.length; i++) {
@@ -209,12 +211,11 @@ function onePlayerScreen(x, y) {
   }
   pop();
 }
-
-function twoPlayerScreen() {
+function twoPlayerScreen(x, y) {
   background(38, 139, 7);
   push();
   onePlayerScreen(0, 0);
-  playercar2(0, 0);
+  twoPlayerCar(0, 0);
   pop();
 }
 function resultOneScreen() {
@@ -317,6 +318,9 @@ function draw() {
     }
   } else if (state === "twoPlayer") {
     twoPlayerScreen();
+    if (keyIsDown(A)) {
+      playerCarX2 -= 8;
+    }
   } else if (state === "resultOne") {
     resultOneScreen();
   } else if (state === "resultTwo") {
