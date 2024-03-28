@@ -1,5 +1,5 @@
 function setup() {
-  createCanvas(width, height);
+  createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
   //trafic cars being positiond
   for (let i = 0; i < numcars; i++) {
@@ -7,64 +7,120 @@ function setup() {
     let y = random(-500, 0);
     cars.push(new redcar(x, y, carSize));
   }
+  innerWidth = width / 2;
+  innerHeight = height / 2;
 }
 
-let innerWidth = width / 2;
-let innerHeight = height / 2;
+// let innerWidth;
+// let innerHeight;
 let imgCar;
 
 //Player1 car coordinates
-let playerCarX = 200;
-let playerCarY = 500;
+let playerCarX1 = 200;
+let playerCarX2 = 400;
+let playerCarY = 450;
 
-function playercar1(x, y) {
+function playercar1(x1, y1) {
   push();
-  translate(x, y);
+  translate(x1, y1);
 
   // Player ones car
   fill(255, 194, 1);
   noStroke();
-  rect(playerCarX, playerCarY, 70, 115, 10);
-  ellipse(playerCarX + 35, playerCarY + 10, 75, 65);
+  rect(playerCarX1, playerCarY, 70, 115, 10);
+  ellipse(playerCarX1 + 35, playerCarY + 10, 75, 65);
 
   // Car windows
   fill(0);
   quad(
-    playerCarX + 10,
+    playerCarX1 + 10,
     playerCarY + 80,
-    playerCarX + 60,
+    playerCarX1 + 60,
     playerCarY + 80,
-    playerCarX + 57,
+    playerCarX1 + 57,
     playerCarY + 100,
-    playerCarX + 13,
+    playerCarX1 + 13,
     playerCarY + 100
   );
-  ellipse(playerCarX + 35, playerCarY + 100, 43, 10);
+  ellipse(playerCarX1 + 35, playerCarY + 100, 43, 10);
   quad(
-    playerCarX + 5,
+    playerCarX1 + 5,
     playerCarY + 25,
-    playerCarX + 65,
+    playerCarX1 + 65,
     playerCarY + 25,
-    playerCarX + 60,
+    playerCarX1 + 60,
     playerCarY + 55,
-    playerCarX + 10,
+    playerCarX1 + 10,
     playerCarY + 55
   );
-  ellipse(playerCarX + 35, playerCarY + 25, 60, 15);
+  ellipse(playerCarX1 + 35, playerCarY + 25, 60, 15);
   triangle(
-    playerCarX + 3,
+    playerCarX1 + 3,
     playerCarY + 40,
-    playerCarX + 10,
+    playerCarX1 + 10,
     playerCarY + 75,
-    playerCarX + 3,
+    playerCarX1 + 3,
     playerCarY + 75
   );
   triangle(
-    playerCarX + 68,
+    playerCarX1 + 68,
     playerCarY + 40,
-    playerCarX + 68,
+    playerCarX1 + 68,
     playerCarY + 75,
-    playerCarX + 60,
+    playerCarX1 + 60,
+    playerCarY + 75
+  );
+  pop();
+}
+
+function playercar2(x2, y2) {
+  push();
+  translate(x2, y2);
+
+  // Player ones car
+  fill(205, 52, 52);
+  noStroke();
+  rect(playerCarX2, playerCarY, 70, 115, 10);
+  ellipse(playerCarX2 + 35, playerCarY + 10, 75, 65);
+
+  // Car windows
+  fill(0);
+  quad(
+    playerCarX2 + 10,
+    playerCarY + 80,
+    playerCarX2 + 60,
+    playerCarY + 80,
+    playerCarX2 + 57,
+    playerCarY + 100,
+    playerCarX2 + 13,
+    playerCarY + 100
+  );
+  ellipse(playerCarX2 + 35, playerCarY + 100, 43, 10);
+  quad(
+    playerCarX2 + 5,
+    playerCarY + 25,
+    playerCarX2 + 65,
+    playerCarY + 25,
+    playerCarX2 + 60,
+    playerCarY + 55,
+    playerCarX2 + 10,
+    playerCarY + 55
+  );
+  ellipse(playerCarX2 + 35, playerCarY + 25, 60, 15);
+  triangle(
+    playerCarX2 + 3,
+    playerCarY + 40,
+    playerCarX2 + 10,
+    playerCarY + 75,
+    playerCarX2 + 3,
+    playerCarY + 75
+  );
+  triangle(
+    playerCarX2 + 68,
+    playerCarY + 40,
+    playerCarX2 + 68,
+    playerCarY + 75,
+    playerCarX2 + 60,
     playerCarY + 75
   );
   pop();
@@ -79,8 +135,6 @@ let traficspeed = 6;
 
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
-  imgOne = loadImage("img/yellowCar.png");
-  imgtwo = loadImage("img/redCar.png");
 }
 
 function menuPage() {
@@ -160,6 +214,7 @@ function twoPlayerScreen() {
   background(38, 139, 7);
   push();
   onePlayerScreen(0, 0);
+  playercar2(0, 0);
   pop();
 }
 function resultOneScreen() {
@@ -255,10 +310,10 @@ function draw() {
     onePlayerScreen();
     //Move car
     if (keyIsDown(RIGHT_ARROW)) {
-      playerCarX += 8;
+      playerCarX1 += 8;
     }
     if (keyIsDown(LEFT_ARROW)) {
-      playerCarX -= 8;
+      playerCarX1 -= 8;
     }
   } else if (state === "twoPlayer") {
     twoPlayerScreen();
