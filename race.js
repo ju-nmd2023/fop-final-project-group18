@@ -3,7 +3,6 @@ let cars = [];
 let carszise = (70, 80);
 
 function setup() {
-
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   //trafic cars being positiond
@@ -24,9 +23,18 @@ let playerCarY = 350;
 
 function playercar1(x, y) {
   push();
+  fill(255, 194, 1);
+  noStroke();
+  rect(playerCarX, playerCarY, 70, 115, 10);
+  ellipse(playerCarX + 35, playerCarY + 10, 75, 65);
 
   image(imgOne, playerCarX, playerCarY, 150, 80);
-  pop(); 
+  fill(0);
+  quad(210, 430, 260, 430, 257, 450, 213, 450);
+  ellipse(235, 450, 43, 10);
+  quad(205, 375, 265, 375, 260, 405, 210, 405);
+  ellipse(235, 375, 60, 15);
+  pop();
 }
 
 //trafic cars
@@ -138,7 +146,7 @@ function resultTwoScreen() {
   noStroke();
   fill(237, 195, 40);
   textStyle(BOLDITALIC);
-  textFont("Verdana");
+  textFont("Verdana") ;
   textSize(60);
   text("Result", innerWidth - 100, 150);
   textStyle(ITALIC);
