@@ -1,7 +1,3 @@
-let numcars = 3;
-let cars = [];
-let carszise = (70, 80);
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
@@ -9,7 +5,7 @@ function setup() {
   for (let i = 0; i < numcars; i++) {
     let x = random(130, 530);
     let y = random(-500, 0);
-    cars.push(new redcar(x, y, carszise));
+    cars.push(new redcar(x, y, carSize));
   }
 }
 
@@ -23,12 +19,12 @@ let playerCarY = 350;
 
 function playercar1(x, y) {
   push();
+  translate(x, y);
   fill(255, 194, 1);
   noStroke();
   rect(playerCarX, playerCarY, 70, 115, 10);
   ellipse(playerCarX + 35, playerCarY + 10, 75, 65);
 
-  image(imgOne, playerCarX, playerCarY, 150, 80);
   fill(0);
   quad(210, 430, 260, 430, 257, 450, 213, 450);
   ellipse(235, 450, 43, 10);
@@ -40,7 +36,7 @@ function playercar1(x, y) {
 //trafic cars
 
 let cars = [];
-let carszise = (70, 80);
+let carSize = (70, 80);
 let numcars = 3;
 let traficspeed = 6;
 
