@@ -1,18 +1,22 @@
-function setup() {
+let numcars = 3;
+let cars = [];
+let carszise = (70, 80);
 
-  createCanvas(windowWidth, windowHeight);
+function setup() {
+  createCanvas(600, 700);
+
   angleMode(DEGREES);
   //trafic cars being positiond
   for (let i = 0; i < numcars; i++) {
-    let x = random(130, 530); 
-    let y = random(-500, 0); 
-    cars.push(new redcar(x, y, carszise)); 
+    let x = random(130, 530);
+    let y = random(-500, 0);
+    cars.push(new redcar(x, y, carszise));
   }
 }
 
 let innerWidth = width / 2;
 let innerHeight = height / 2;
-let imgCar; 
+let imgCar;
 
 //Players car
 let playerCarX = 200;
@@ -22,20 +26,17 @@ function playercar1(x, y) {
   push();
 
   image(imgOne, playerCarX, playerCarY, 150, 80);
-  pop(); 
+  pop();
 }
 
 //trafic cars
 
-let cars = [];  
-let carszise = (70, 80); 
-let numcars = 3; 
-let traficspeed = 6;  
+let traficspeed = 6;
 
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
   imgOne = loadImage("img/yellowCar.png");
-  imgtwo = loadImage("img/redCar.png"); 
+  imgtwo = loadImage("img/redCar.png");
 }
 
 function menuPage() {
@@ -61,7 +62,7 @@ function menuPage() {
   strokeWeight(2);
   line(innerWidth - 50, 540, innerWidth + 50, 540);
   line(innerWidth - 50, 600, innerWidth + 50, 600);
-
+  //Game mode
   if (
     mouseX > innerWidth - 100 &&
     mouseX < innerWidth + 100 &&
@@ -113,10 +114,10 @@ function onePlayerScreen(x, y) {
   pop();
 }
 
-function twoPlayerScreen() {
+function twoPlayerScreen() { 
   background(38, 139, 7);
   push();
-  onePlayerScreen(0, 0);
+ 
   pop();
 }
 function resultOneScreen() {
@@ -171,7 +172,7 @@ class redcar {
   // Method to draw the cars
   display() {
     rectMode(CENTER);
-    fill(255, 0, 0); 
+    fill(255, 0, 0);
     rect(this.x, this.y, this.side, this.side);
   }
 }
@@ -204,6 +205,7 @@ let twoPlayerIsRunning = true;
 // }
 //}
 //}
+/*<-- The following 20 lines were inspierd from lunar lander -->*/
 function draw() {
   if (state === "start") {
     menuPage();
@@ -220,7 +222,7 @@ function draw() {
     twoPlayerScreen();
   } else if (state === "resultOne") {
     resultOneScreen();
-  } else if (state === "resultTwo") { 
+  } else if (state === "resultTwo") {
     resultTwoScreen();
   }
 }
