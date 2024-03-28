@@ -15,11 +15,11 @@ let imgCar;
 
 //Players car
 let playerCarX = 200;
-let playerCarY = 350;
+let playerCarY = 350; 
 
-function playercar1(x, y) {
+function playercar1(x, y) { 
   push();
-  translate(x, y);
+  translate(x, y); 
   fill(255, 194, 1);
   noStroke();
   rect(playerCarX, playerCarY, 70, 115, 10);
@@ -31,10 +31,10 @@ function playercar1(x, y) {
   quad(205, 375, 265, 375, 260, 405, 210, 405);
   ellipse(235, 375, 60, 15);
   pop();
+  
 }
 
 //trafic cars
-
 let cars = [];
 let carSize = (70, 80);
 let numcars = 3;
@@ -45,7 +45,7 @@ function preload() {
   imgOne = loadImage("img/yellowCar.png");
   imgtwo = loadImage("img/redCar.png");
 }
-
+//Menu
 function menuPage() {
   background(37, 60, 129);
   noStroke();
@@ -87,7 +87,7 @@ function menuPage() {
     state = "twoPlayer";
   }
 }
-
+//One player mode
 function onePlayerScreen(x, y) {
   background(38, 139, 7);
   push();
@@ -106,12 +106,13 @@ function onePlayerScreen(x, y) {
   for (let i = 0; i < 10; i++) {
     let lineY = startY - i * lineSpacing;
     if (lineY < height) {
-      rect(lineX, lineY, 10, 80);
+      rect(lineX, lineY, 10, 80); 
     }
-  }
+  } 
 
   playercar1();
-  //trafic loop
+
+  //trafic loop, more kode on line 163
   for (let i = 0; i < cars.length; i++) {
     cars[i].fall();
     cars[i].display();
@@ -210,7 +211,7 @@ let twoPlayerIsRunning = true;
 // }
 //}
 //}
-/*<-- The following 20 lines were inspierd from lunar lander -->*/
+/*<-- The following 20 lines were inspierd from the lunar lander game -->*/
 function draw() {
   if (state === "start") {
     menuPage();
