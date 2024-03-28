@@ -31,11 +31,6 @@ function playercar1(x, y) {
 
 //trafic cars
 
-let cars = [];  
-let carszise = (70, 80); 
-let numcars = 3; 
-let traficspeed = 6;  
-
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
   imgOne = loadImage("img/yellowCar.png");
