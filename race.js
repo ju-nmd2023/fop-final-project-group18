@@ -13,23 +13,60 @@ let innerWidth = width / 2;
 let innerHeight = height / 2;
 let imgCar;
 
-//Players car
+//Player1 car coordinates
 let playerCarX = 200;
-let playerCarY = 350;
+let playerCarY = 500;
 
 function playercar1(x, y) {
   push();
   translate(x, y);
+
+  // Player ones car
   fill(255, 194, 1);
   noStroke();
   rect(playerCarX, playerCarY, 70, 115, 10);
   ellipse(playerCarX + 35, playerCarY + 10, 75, 65);
 
+  // Car windows
   fill(0);
-  quad(210, 430, 260, 430, 257, 450, 213, 450);
-  ellipse(235, 450, 43, 10);
-  quad(205, 375, 265, 375, 260, 405, 210, 405);
-  ellipse(235, 375, 60, 15);
+  quad(
+    playerCarX + 10,
+    playerCarY + 80,
+    playerCarX + 60,
+    playerCarY + 80,
+    playerCarX + 57,
+    playerCarY + 100,
+    playerCarX + 13,
+    playerCarY + 100
+  );
+  ellipse(playerCarX + 35, playerCarY + 100, 43, 10);
+  quad(
+    playerCarX + 5,
+    playerCarY + 25,
+    playerCarX + 65,
+    playerCarY + 25,
+    playerCarX + 60,
+    playerCarY + 55,
+    playerCarX + 10,
+    playerCarY + 55
+  );
+  ellipse(playerCarX + 35, playerCarY + 25, 60, 15);
+  triangle(
+    playerCarX + 3,
+    playerCarY + 40,
+    playerCarX + 10,
+    playerCarY + 75,
+    playerCarX + 3,
+    playerCarY + 75
+  );
+  triangle(
+    playerCarX + 68,
+    playerCarY + 40,
+    playerCarX + 68,
+    playerCarY + 75,
+    playerCarX + 60,
+    playerCarY + 75
+  );
   pop();
 }
 
