@@ -178,7 +178,6 @@ function menuPage() {
   }
 }
 
-function gameBackground() {}
 //One player mode
 function onePlayerScreen(x, y) {
   background(38, 139, 7);
@@ -214,8 +213,26 @@ function onePlayerScreen(x, y) {
 function twoPlayerScreen(x, y) {
   background(38, 139, 7);
   push();
-  onePlayerScreen(0, 0);
-  twoPlayerCar(0, 0);
+  translate(x, y);
+  fill(102, 102, 95);
+  noStroke();
+  rect(innerWidth / 2 - 150, 0, 300, height);
+  rect(innerWidth * 1.5 - 150, 0, 300, height);
+  onePlayerCar(innerWidth / 2 - 150, 0);
+  twoPlayerCar(innerWidth, 0);
+
+  fill(255);
+  let lineSpacing = 400;
+  let lineX = innerWidth - 5;
+  let startY = (frameCount % 20) * 20;
+
+  for (let i = 0; i < 10; i++) {
+    let lineY = startY - i * lineSpacing;
+    if (lineY < height) {
+      rect(lineX, lineY, 10, 80);
+    }
+  }
+
   pop();
 }
 function resultOneScreen() {
