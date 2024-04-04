@@ -25,7 +25,7 @@ function onePlayerCar(x1, y1) {
   translate(x1, y1);
 
   // Player ones car
-  fill(255, 194, 1); 
+  fill(255, 194, 1);
   noStroke();
   rect(playerCarX1, playerCarY, 70, 115, 10);
   ellipse(playerCarX1 + 35, playerCarY + 10, 75, 65);
@@ -128,7 +128,7 @@ function twoPlayerCar(x2, y2) {
 
 //trafic cars
 let cars = [];
-let carSize = (70, 80);
+let carSize = (70, 100);
 let numcars = 3;
 let traficspeed = 6;
 
