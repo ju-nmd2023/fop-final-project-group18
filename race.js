@@ -20,12 +20,12 @@ let playerCarX1 = 200;
 let playerCarX2 = 400;
 let playerCarY = 450;
 
-function playercar1(x1, y1) {
+function onePlayerCar(x1, y1) {
   push();
   translate(x1, y1);
 
-  // Player ones car 
-  fill(255, 194, 1); 
+  // Player ones car
+  fill(255, 194, 1);
   noStroke();
   rect(playerCarX1, playerCarY, 70, 115, 10);
   ellipse(playerCarX1 + 35, playerCarY + 10, 75, 65);
@@ -38,7 +38,7 @@ function playercar1(x1, y1) {
     playerCarX1 + 60,
     playerCarY + 80,
     playerCarX1 + 57,
-    playerCarY + 100,
+    playerCarY + 100, 
     playerCarX1 + 13,
     playerCarY + 100
   );
@@ -73,7 +73,7 @@ function playercar1(x1, y1) {
   pop();
 }
 
-function playercar2(x2, y2) {
+function twoPlayerCar(x2, y2) {
   push();
   translate(x2, y2);
 
@@ -128,14 +128,14 @@ function playercar2(x2, y2) {
 
 //trafic cars
 let cars = [];
-let carSize = (70, 80);
+let carSize = (70, 100);
 let numcars = 3;
 let traficspeed = 6;
 
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
 }
-//Menu
+
 function menuPage() {
   background(37, 60, 129);
   noStroke();
@@ -177,6 +177,7 @@ function menuPage() {
     state = "twoPlayer";
   }
 }
+
 //One player mode
 function onePlayerScreen(x, y) {
   background(38, 139, 7);
@@ -200,7 +201,7 @@ function onePlayerScreen(x, y) {
     }
   }
 
-  playercar1();
+  onePlayerCar();
 
   //trafic loop, more kode on line 163
   for (let i = 0; i < cars.length; i++) {
@@ -214,12 +215,29 @@ function onePlayerScreen(x, y) {
   }
   pop();
 }
-
-function twoPlayerScreen() {
+function twoPlayerScreen(x, y) {
   background(38, 139, 7);
   push();
-  onePlayerScreen(0, 0);
-  playercar2(0, 0);
+  translate(x, y);
+  fill(102, 102, 95);
+  noStroke();
+  rect(innerWidth / 2 - 150, 0, 300, height);
+  rect(innerWidth * 1.5 - 150, 0, 300, height);
+  onePlayerCar(innerWidth / 2 - 150, 0);
+  twoPlayerCar(innerWidth, 0);
+
+  fill(255);
+  let lineSpacing = 400;
+  let lineX = innerWidth - 5;
+  let startY = (frameCount % 20) * 20;
+
+  for (let i = 0; i < 10; i++) {
+    let lineY = startY - i * lineSpacing;
+    if (lineY < height) {
+      rect(lineX, lineY, 10, 80);
+    }
+  }
+
   pop();
 }
 function resultOneScreen() {
@@ -308,6 +326,9 @@ function draw() {
     }
   } else if (state === "twoPlayer") {
     twoPlayerScreen();
+    if (keyIsDown(A)) {
+      playerCarX2 -= 8;
+    }
   } else if (state === "resultOne") {
     resultOneScreen();
   } else if (state === "resultTwo") {
