@@ -24,7 +24,7 @@ function playercar1(x1, y1) {
   push();
   translate(x1, y1);
 
-  // Player ones car
+  // Player ones car 
   fill(255, 194, 1); 
   noStroke();
   rect(playerCarX1, playerCarY, 70, 115, 10);
@@ -206,6 +206,11 @@ function onePlayerScreen(x, y) {
   for (let i = 0; i < cars.length; i++) {
     cars[i].fall();
     cars[i].display();
+    
+    // Check collision
+    if (collision(playerCarX1, playerCarY, 70, 115, cars[i].x, cars[i].y, carSize, carSize)) {
+      state = "resultOne";
+    }
   }
   pop();
 }
@@ -266,7 +271,7 @@ class redcar {
     }
   }
 
-  // Method to draw the cars
+  // Method to display the red car
   display() {
     rectMode(CENTER);
     fill(255, 0, 0);
@@ -274,34 +279,20 @@ class redcar {
   }
 }
 
+// Function to check collision between two rectangles
+function collision(x1, y1, w1, h1, x2, y2, w2, h2) {
+  return (
+    x1 < x2 + w2 &&
+    x1 + w1 > x2 &&
+    y1 < y2 + h2 &&
+    y1 + h1 > y2
+  ); 
+}
+
 let state = "start";
 let onePlayerIsRunning = true;
 let twoPlayerIsRunning = true;
 
-// function keyPressed() {
-//   if (state === "start") {
-//     if (keyCode === 49) {
-//       // '1' key
-//       state = "onePlayer";
-//       onePlayerIsRunning = true;
-//     } else if (keyCode === 50) {
-//       // '2' key
-//       state = "twoPlayer";
-//       onePlayerIsRunning = false;
-//       twoPlayerIsRunning = true;
-//     }
-
-// } else if (state === "onePlayer" && onePlayerIsRunning) {
-//   // Press any key to show resultOneScreen after onePlayerScreen
-//   state = "resultOne";
-//   onePlayerIsRunning = false;
-// } else if (state === "twoPlayer" && twoPlayerIsRunning) {
-//   // Press any key to show resultTwoScreen after twoPlayerScreen
-//   state = "resultTwo";
-//   twoPlayerIsRunning = false;
-// }
-//}
-//}
 /*<-- The following 20 lines were inspierd from the lunar lander game -->*/
 function draw() {
   if (state === "start") {
@@ -322,5 +313,6 @@ function draw() {
   } else if (state === "resultTwo") {
     resultTwoScreen();
   }
-  // playercar1(100, 100);
+  // playercar1(100, 100); 
 }
+   
