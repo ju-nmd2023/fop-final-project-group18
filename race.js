@@ -1,11 +1,17 @@
 function setup() {
   createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
-  //trafic cars being positiond
+  //trafic cars left being positiond
   for (let i = 0; i < numcars; i++) {
-    let x = random(160, 530);
+    let x = random(130, 300);
     let y = random(-500, 0);
     cars.push(new redcar(x, y, carSize));
+  }
+  //trafic cars right being positiond
+  for (let i = 0; i < numcars; i++) {
+    let x = random(300, 532);
+    let y = random(-500, 0);
+    carsright.push(new redcar(x, y, carSize));
   }
   innerWidth = width / 2;
   innerHeight = height / 2;
@@ -15,12 +21,12 @@ function setup() {
 // let innerHeight;
 let imgCar;
 
-//Player1 car coordinates
+//Player1 car coordinates 
 let playerCarX1 = 200;
 let playerCarX2 = 400;
 let playerCarY = 450;
 
-function onePlayerCar(x1, y1) {
+function onePlayerCar(x1, y1) { 
   push();
   translate(x1, y1);
 
@@ -38,7 +44,7 @@ function onePlayerCar(x1, y1) {
     playerCarX1 + 60,
     playerCarY + 80,
     playerCarX1 + 57,
-    playerCarY + 100, 
+    playerCarY + 100,
     playerCarX1 + 13,
     playerCarY + 100
   );
@@ -128,9 +134,11 @@ function twoPlayerCar(x2, y2) {
 
 //trafic cars
 let cars = [];
-let carSize = (70, 100);
-let numcars = 3;
+let carsright = [];
+let carSize = (40, 70);
+let numcars = 2;
 let traficspeed = 6;
+let traficspeedright = 3;
 
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
@@ -203,13 +211,37 @@ function onePlayerScreen(x, y) {
 
   onePlayerCar();
 
-  //trafic loop, more kode on line 163
+  //trafic loop, more code
   for (let i = 0; i < cars.length; i++) {
     cars[i].fall();
     cars[i].display();
-    
+
+    carsright[i].fall();
+    carsright[i].display();
+
     // Check collision
-    if (collision(playerCarX1, playerCarY, 70, 115, cars[i].x, cars[i].y, carSize, carSize)) {
+    if (
+      collision(
+        playerCarX1,
+        playerCarY,
+        70,
+        115,
+        cars[i].x,
+        cars[i].y,
+        carSize,
+        carSize
+      ) ||
+      collision(
+        playerCarX1,
+        playerCarY,
+        70,
+        115,
+        carsright[i].x,
+        carsright[i].y,
+        carSize,
+        carSize
+      )
+    ) {
       state = "resultOne";
     }
   }
@@ -299,12 +331,7 @@ class redcar {
 
 // Function to check collision between two rectangles
 function collision(x1, y1, w1, h1, x2, y2, w2, h2) {
-  return (
-    x1 < x2 + w2 &&
-    x1 + w1 > x2 &&
-    y1 < y2 + h2 &&
-    y1 + h1 > y2
-  ); 
+  return x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h2 && y1 + h1 > y2;
 }
 
 let state = "start";
@@ -334,6 +361,5 @@ function draw() {
   } else if (state === "resultTwo") {
     resultTwoScreen();
   }
-  // playercar1(100, 100); 
+  // playercar1(100, 100);
 }
-   
