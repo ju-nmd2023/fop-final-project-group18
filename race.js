@@ -1,13 +1,13 @@
 function setup() {
   createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
-  //trafic cars left being positiond
+  //trafic cars left being positioned
   for (let i = 0; i < numcars; i++) {
     let x = random(130, 300);
     let y = random(-500, 0); 
     cars.push(new redcar(x, y, carSize));
   }
-  //trafic cars right being positiond
+  //trafic cars right being positioned
   for (let i = 0; i < numcars; i++) {
     let x = random(300, 532);
     let y = random(-500, 0);
@@ -21,12 +21,12 @@ function setup() {
 // let innerHeight; 
 let imgCar;
 
-//Player1 car coordinates 
+//Player1 car coordinates
 let playerCarX1 = 200;
 let playerCarX2 = 400;  
 let playerCarY = 450; 
 
-function onePlayerCar(x1, y1) {  
+function onePlayerCar(x1, y1) {
   push();
   translate(x1, y1);
 
