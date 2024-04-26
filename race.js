@@ -1,4 +1,4 @@
-import { RedCar } from './traffic.js';
+import { RedCar } from "./traffic.js";
 
 function setup() {
   createCanvas(innerWidth, innerHeight);
@@ -6,7 +6,7 @@ function setup() {
   //trafic cars left being positioned
   for (let i = 0; i < numcars; i++) {
     let x = random(130, 300);
-    let y = random(-500, 0); 
+    let y = random(-500, 0);
     cars.push(new RedCar(x, y, carSize));
   }
   //trafic cars right being positioned
@@ -20,14 +20,14 @@ function setup() {
 }
 
 // let innerWidth;
-// let innerHeight; 
-let imgCar; 
+// let innerHeight;
+let imgCar;
 
 //Player1 car coordinates
 let playerCarX1 = 200;
-let playerCarX2 = 400;  
-let playerCarY = 450;  
- 
+let playerCarX2 = 400;
+let playerCarY = 450;
+
 function onePlayerCar(x1, y1) {
   push();
   translate(x1, y1);
@@ -45,9 +45,9 @@ function onePlayerCar(x1, y1) {
     playerCarY + 80,
     playerCarX1 + 60,
     playerCarY + 80,
-    playerCarX1 + 57, 
+    playerCarX1 + 57,
     playerCarY + 100,
-    playerCarX1 + 13, 
+    playerCarX1 + 13,
     playerCarY + 100
   );
   ellipse(playerCarX1 + 35, playerCarY + 100, 43, 10);
@@ -73,8 +73,8 @@ function onePlayerCar(x1, y1) {
   triangle(
     playerCarX1 + 68,
     playerCarY + 40,
-    playerCarX1 + 68, 
-    playerCarY + 75, 
+    playerCarX1 + 68,
+    playerCarY + 75,
     playerCarX1 + 60,
     playerCarY + 75
   );
@@ -309,13 +309,13 @@ function resultTwoScreen() {
 
 // Function to check collision between two rectangles
 //<-- The following 2 lines were inspierd from the p5.js site 14-04-2024, https://editor.p5js.org/dfeusse/sketches/H1vD7NQjb -->
-function collision(x1, y1, w1, h1, x2, y2, w2, h2) { 
+function collision(x1, y1, w1, h1, x2, y2, w2, h2) {
   return x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h2 && y1 + h1 > y2;
-} 
+}
 
 let state = "start";
 let onePlayerIsRunning = true;
-let twoPlayerIsRunning = true; 
+let twoPlayerIsRunning = true;
 
 /*<-- The following 20 lines were inspierd from the lunar lander game -->*/
 function draw() {
