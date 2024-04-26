@@ -1,3 +1,5 @@
+import { RedCar } from './traffic.js';
+
 function setup() {
   createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
@@ -5,13 +7,13 @@ function setup() {
   for (let i = 0; i < numcars; i++) {
     let x = random(130, 300);
     let y = random(-500, 0); 
-    cars.push(new redcar(x, y, carSize));
+    cars.push(new RedCar(x, y, carSize));
   }
   //trafic cars right being positioned
   for (let i = 0; i < numcars; i++) {
     let x = random(300, 532);
     let y = random(-500, 0);
-    carsright.push(new redcar(x, y, carSize));
+    carsright.push(new RedCar(x, y, carSize));
   }
   innerWidth = width / 2;
   innerHeight = height / 2;
@@ -19,13 +21,13 @@ function setup() {
 
 // let innerWidth;
 // let innerHeight; 
-let imgCar;
+let imgCar; 
 
 //Player1 car coordinates
 let playerCarX1 = 200;
 let playerCarX2 = 400;  
-let playerCarY = 450; 
-
+let playerCarY = 450;  
+ 
 function onePlayerCar(x1, y1) {
   push();
   translate(x1, y1);
@@ -303,30 +305,6 @@ function resultTwoScreen() {
   text("Player 2", innerWidth + 100, 250);
   image(imgCar, 20, 400, 320, 140);
   pop();
-}
-
-//Trafic cars being made and moving
-class redcar {
-  constructor(x, y, side) {
-    this.x = x;
-    this.y = y;
-    this.side = side;
-  }
-
-  // Method to change positon
-  fall() {
-    this.y += traficspeed;
-    if (this.y > height) {
-      this.y = random(-500, 0);
-    }
-  }
-
-  // Method to display the red car
-  display() {
-    rectMode(CENTER);
-    fill(255, 0, 0);
-    rect(this.x, this.y, this.side, this.side);
-  }
 }
 
 // Function to check collision between two rectangles
