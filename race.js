@@ -4,27 +4,28 @@ function setup() {
   createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
   //trafic cars left being positioned
+  let spacing = 450; // Adjust this value to increase or decrease space between cars
   for (let i = 0; i < numcars; i++) {
     let x = random(130, 300);
-    let y = random(-500, 0);
+    let y = random(-500, 0) - i * spacing; // Add spacing between cars
     cars.push(new RedCar(x, y, carSize));
   }
   //trafic cars right being positioned
   for (let i = 0; i < numcars; i++) {
     let x = random(300, 532);
-    let y = random(-500, 0);
+    let y = random(-500, 0) - i * spacing; // Add spacing between cars
     carsright.push(new RedCar(x, y, carSize));
   }
   innerWidth = width / 2;
   innerHeight = height / 2;
 }
 
-// let innerWidth;
-// let innerHeight;
-let imgCar;
-
-//Player1 car coordinates
-let playerCarX1 = 200;
+// let innerWidth; 
+// let innerHeight; 
+let imgCar; 
+  
+//Player1 car coordinates 
+let playerCarX1 = 200; 
 let playerCarX2 = 400;
 let playerCarY = 450;
 
