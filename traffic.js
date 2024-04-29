@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 // traffic.js
 export class RedCar {
     constructor(x, y, size) {
@@ -67,3 +68,31 @@ export class RedCar {
     }
   }
   
+=======
+class RedCar {
+  constructor(x, y, side) {
+    this.x = x;
+    this.y = y;
+    this.side = side;
+  }
+
+  fall() {
+    this.y += traficspeed;
+    if (this.y > height) {
+      this.y = random(-500, 0);
+    }
+  }
+
+  display() {
+    r = random(255);
+    g = random(255);
+    b = random(255);
+
+    rectMode(CENTER);
+    fill(r, g, b);
+    rect(this.x, this.y, this.side, this.side);
+  }
+}
+
+export { RedCar };
+>>>>>>> Stashed changes
