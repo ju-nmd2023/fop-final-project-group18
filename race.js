@@ -1,15 +1,24 @@
-import { RedCar } from "./traffic.js";
+import { RedCar } from "traffic.js";
 
+
+//trafic cars
+let cars = [];
+let carsright = [];
+let carSize = (40, 70);
+let numcars = 2;
+let traficspeed = 6;
+let traficspeedright = 3;
+  
 function setup() {
   createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
   //trafic cars left being positioned
-  let spacing = 450; // Adjust this value to increase or decrease space between cars
+  let spacing = 950; // Adjust this value to increase or decrease space between cars
   for (let i = 0; i < numcars; i++) {
     let x = random(130, 300);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     cars.push(new RedCar(x, y, carSize));
-  }
+  } 
   //trafic cars right being positioned
   for (let i = 0; i < numcars; i++) {
     let x = random(300, 532);
@@ -20,16 +29,16 @@ function setup() {
   innerHeight = height / 2;
 }
 
-// let innerWidth; 
-// let innerHeight; 
-let imgCar; 
-  
-//Player1 car coordinates 
-let playerCarX1 = 200; 
+// let innerWidth;
+// let innerHeight;
+let imgCar;
+
+//Player1 car coordinates
+let playerCarX1 = 200;
 let playerCarX2 = 400;
 let playerCarY = 450;
 
-function onePlayerCar(x1, y1) {
+function onePlayerCar(x1, y1) { 
   push();
   translate(x1, y1);
 
@@ -135,14 +144,6 @@ function twoPlayerCar(x2, y2) {
   pop();
 }
 
-//trafic cars
-let cars = [];
-let carsright = [];
-let carSize = (40, 70);
-let numcars = 2;
-let traficspeed = 6;
-let traficspeedright = 3;
-
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
 }
@@ -198,6 +199,10 @@ function onePlayerScreen(x, y) {
   noStroke();
   rect(innerWidth - 150, 0, 300, height);
   rect(innerWidth - 200, 0, 400, height);
+  fill(0);
+  textSize(15);
+  text("Speed", innerWidth - 270, 50);
+  text("Speed", innerWidth - 270, 50);
 
   //lines
   fill(255);
