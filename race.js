@@ -1,6 +1,5 @@
 import { RedCar } from "traffic.js";
 
-
 //trafic cars
 let cars = [];
 let carsright = [];
@@ -8,7 +7,7 @@ let carSize = (40, 70);
 let numcars = 2;
 let traficspeed = 6;
 let traficspeedright = 3;
-  
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
@@ -18,7 +17,7 @@ function setup() {
     let x = random(130, 300);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     cars.push(new RedCar(x, y, carSize));
-  } 
+  }
   //trafic cars right being positioned
   for (let i = 0; i < numcars; i++) {
     let x = random(300, 532);
@@ -38,7 +37,7 @@ let playerCarX1 = 200;
 let playerCarX2 = 400;
 let playerCarY = 450;
 
-function onePlayerCar(x1, y1) { 
+function onePlayerCar(x1, y1) {
   push();
   translate(x1, y1);
 
