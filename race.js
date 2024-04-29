@@ -27,7 +27,7 @@ function setup() {
   }
   innerWidth = width / 2;
   innerHeight = height / 2;
-}
+} 
 
 let imgCar;
 
