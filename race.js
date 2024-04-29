@@ -8,6 +8,7 @@ let numcars = 2;
 let traficspeed = 6;
 let traficspeedright = 3;
 
+
 function setup() {
   createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
@@ -344,3 +345,4 @@ function draw() {
     resultTwoScreen();
   }
 }
+ 

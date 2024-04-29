@@ -11,7 +11,7 @@ export class RedCar {
     translate(this.x, this.y);
 
     // Red car
-    fill(255, 0, 0); // Change color to red
+    fill(205, 52, 52); // Change color to red
     noStroke();
     rect(0, 0, this.size, this.size * 1.6, 10); // Adjust size based on carSize
     ellipse(this.size / 2, 10, this.size * 1.07, this.size * 0.92); // Adjust position and size of ellipse
