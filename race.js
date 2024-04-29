@@ -9,7 +9,7 @@ let traficspeed = 6;
 let traficspeedright = 3;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
   //trafic cars left being positioned
   let spacing = 950; // Adjust this value to increase or decrease space between cars
@@ -24,12 +24,10 @@ function setup() {
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     carsright.push(new RedCar(x, y, carSize));
   }
-  innerWidth = windowWidth / 2;
-  innerHeight = windowHeight / 2;
+  innerWidth = width / 2;
+  innerHeight = height / 2;
 }
 
-// let innerWidth;
-// let innerHeight;
 let imgCar;
 
 //Player1 car coordinates
