@@ -27,6 +27,7 @@ function setup() {
   } 
   innerWidth = width / 2;
   innerHeight = height / 2;
+
 } 
 
 let imgCar;
@@ -188,6 +189,7 @@ function menuPage() {
   }
 }
 
+
 //One player mode
 function onePlayerScreen(x, y) {
   background(38, 139, 7);
@@ -200,7 +202,9 @@ function onePlayerScreen(x, y) {
   fill(0);
   textSize(15);
   text("Speed", innerWidth - 270, 50);
-  text("Speed", innerWidth - 270, 50);
+  
+  // Variable to store the score
+  let score = 1;
 
   //lines
   fill(255);
@@ -217,7 +221,7 @@ function onePlayerScreen(x, y) {
 
   onePlayerCar();
 
-  //trafic loop, more code
+  // Traffic loop, more code exsists 
   for (let i = 0; i < cars.length; i++) {
     cars[i].fall();
     cars[i].display();
@@ -239,18 +243,28 @@ function onePlayerScreen(x, y) {
       ) ||
       collision(
         playerCarX1,
-        playerCarY,
+        playerCarY, 
         70,
         115,
         carsright[i].x,
         carsright[i].y,
         carSize,
         carSize
-      )
+      ) 
     ) {
       state = "resultOne";
+    } else {
+      // Check if a red car falls past the player car
+      if (cars[i].y > 400 && !cars[i].scored) {
+        score++; // Increment the score
+        cars[i].scored = true; // Mark the car as scored
+      }
     }
   }
+   
+  // Display score
+  text("Score: " + score, innerWidth - 270, 90);
+
   pop();
 }
 function twoPlayerScreen(x, y) {
