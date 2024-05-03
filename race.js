@@ -29,6 +29,7 @@ class PlayerCar {
   }
 }
 
+let singlePlayer = new PlayerCar(innerWidth / 2, 200, [255, 194, 1]);
 let player1 = new PlayerCar(100, 200, [255, 194, 1]);
 let player2 = new PlayerCar(300, 200, [205, 52, 52]);
 
@@ -249,7 +250,7 @@ function onePlayerScreen(x, y) {
     }
   }
 
-  player1.displayCar();
+  singlePlayer.displayCar();
 
   // Traffic loop, more code exsists
   for (let i = 0; i < cars.length; i++) {
@@ -262,8 +263,8 @@ function onePlayerScreen(x, y) {
     // Check collision
     if (
       collision(
-        player1.x,
-        player1.y,
+        singlePlayer.x,
+        singlePlayer.y,
         70,
         115,
         cars[i].x,
@@ -272,7 +273,7 @@ function onePlayerScreen(x, y) {
         carSize
       ) ||
       collision(
-        player1.x,
+        singlePlayer.x,
         playerCarY,
         70,
         115,
@@ -305,8 +306,8 @@ function twoPlayerScreen(x, y) {
   noStroke();
   rect(innerWidth / 2 - 150, 0, 300, height);
   rect(innerWidth * 1.5 - 150, 0, 300, height);
-  onePlayerCar(innerWidth / 2 - 150, 0);
-  twoPlayerCar(innerWidth, 0);
+  player1.displayCar();
+  player2.displayCar();
 
   fill(255);
   let lineSpacing = 400;
@@ -373,10 +374,10 @@ function draw() {
     onePlayerScreen();
     //Move car
     if (keyIsDown(RIGHT_ARROW)) {
-      player1.x += 8;
+      singlePlayer.x += 8;
     }
     if (keyIsDown(LEFT_ARROW)) {
-      player1.x -= 8;
+      singlePlayer.x -= 8;
     }
   } else if (state === "twoPlayer") {
     twoPlayerScreen();
