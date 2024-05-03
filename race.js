@@ -235,7 +235,7 @@ function onePlayerScreen(x, y) {
   text("Speed", innerWidth - 270, 50);
 
   // Variable to store the score
-  let score = 1;
+  let score = 0;
 
   //lines
   fill(255);
@@ -286,7 +286,7 @@ function onePlayerScreen(x, y) {
       state = "resultOne";
     } else {
       // Check if a red car falls past the player car
-      if (cars[i].y > 400 && !cars[i].scored) {
+      if (cars[i].y > 200 && !cars[i].scored) {
         score++; // Increment the score
         cars[i].scored = true; // Mark the car as scored
       }
