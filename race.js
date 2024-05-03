@@ -1,5 +1,37 @@
 import { RedCar } from "traffic.js";
 
+class PlayerCar {
+  constructor(x, y, color) {
+    this.x = x;
+    this.y = y;
+    this.color = color;
+  }
+
+  displayCar() {
+    push();
+    translate(this.x, this.y);
+
+    // Player ones car
+    fill(this.color);
+    noStroke();
+    rect(0, 0, 70, 115, 10);
+    ellipse(35, 10, 75, 65);
+
+    // Car windows
+    fill(0);
+    quad(10, 80, 60, 80, 57, 100, 13, 100);
+    ellipse(35, 100, 43, 10);
+    quad(5, 25, 65, 25, 60, 55, 10, 55);
+    ellipse(35, 25, 60, 15);
+    triangle(3, 40, 10, 75, 3, 75);
+    triangle(68, 40, 68, 75, 60, 75);
+    pop();
+  }
+}
+
+let player1 = new PlayerCar(100, 200, [255, 194, 1]);
+let player2 = new PlayerCar(300, 200, [205, 52, 52]);
+
 //trafic cars
 let cars = [];
 let carsright = [];
@@ -13,7 +45,7 @@ function setup() {
   createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
   //trafic cars left being positioned
- 
+
   for (let i = 0; i < numcars; i++) {
     let x = random(130, 300);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
@@ -24,11 +56,10 @@ function setup() {
     let x = random(300, 532);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     carsright.push(new RedCar(x, y, carSize));
-  } 
+  }
   innerWidth = width / 2;
   innerHeight = height / 2;
-
-} 
+}
 
 let imgCar;
 
@@ -37,111 +68,111 @@ let playerCarX1 = 200;
 let playerCarX2 = 400;
 let playerCarY = 450;
 
-function onePlayerCar(x1, y1) {
-  push();
-  translate(x1, y1);
+// function onePlayerCar(x1, y1) {
+//   push();
+//   translate(x1, y1);
 
-  // Player ones car
-  fill(255, 194, 1);
-  noStroke();
-  rect(playerCarX1, playerCarY, 70, 115, 10);
-  ellipse(playerCarX1 + 35, playerCarY + 10, 75, 65);
+//   // Player ones car
+//   fill(255, 194, 1);
+//   noStroke();
+//   rect(playerCarX1, playerCarY, 70, 115, 10);
+//   ellipse(playerCarX1 + 35, playerCarY + 10, 75, 65);
 
-  // Car windows
-  fill(0);
-  quad(
-    playerCarX1 + 10,
-    playerCarY + 80,
-    playerCarX1 + 60,
-    playerCarY + 80,
-    playerCarX1 + 57,
-    playerCarY + 100,
-    playerCarX1 + 13,
-    playerCarY + 100
-  );
-  ellipse(playerCarX1 + 35, playerCarY + 100, 43, 10);
-  quad(
-    playerCarX1 + 5,
-    playerCarY + 25,
-    playerCarX1 + 65,
-    playerCarY + 25,
-    playerCarX1 + 60,
-    playerCarY + 55,
-    playerCarX1 + 10,
-    playerCarY + 55
-  );
-  ellipse(playerCarX1 + 35, playerCarY + 25, 60, 15);
-  triangle(
-    playerCarX1 + 3,
-    playerCarY + 40,
-    playerCarX1 + 10,
-    playerCarY + 75,
-    playerCarX1 + 3,
-    playerCarY + 75
-  );
-  triangle(
-    playerCarX1 + 68,
-    playerCarY + 40,
-    playerCarX1 + 68,
-    playerCarY + 75,
-    playerCarX1 + 60,
-    playerCarY + 75
-  );
-  pop();
-}
+//   // Car windows
+//   fill(0);
+//   quad(
+//     playerCarX1 + 10,
+//     playerCarY + 80,
+//     playerCarX1 + 60,
+//     playerCarY + 80,
+//     playerCarX1 + 57,
+//     playerCarY + 100,
+//     playerCarX1 + 13,
+//     playerCarY + 100
+//   );
+//   ellipse(playerCarX1 + 35, playerCarY + 100, 43, 10);
+//   quad(
+//     playerCarX1 + 5,
+//     playerCarY + 25,
+//     playerCarX1 + 65,
+//     playerCarY + 25,
+//     playerCarX1 + 60,
+//     playerCarY + 55,
+//     playerCarX1 + 10,
+//     playerCarY + 55
+//   );
+//   ellipse(playerCarX1 + 35, playerCarY + 25, 60, 15);
+//   triangle(
+//     playerCarX1 + 3,
+//     playerCarY + 40,
+//     playerCarX1 + 10,
+//     playerCarY + 75,
+//     playerCarX1 + 3,
+//     playerCarY + 75
+//   );
+//   triangle(
+//     playerCarX1 + 68,
+//     playerCarY + 40,
+//     playerCarX1 + 68,
+//     playerCarY + 75,
+//     playerCarX1 + 60,
+//     playerCarY + 75
+//   );
+//   pop();
+// }
 
-function twoPlayerCar(x2, y2) {
-  push();
-  translate(x2, y2);
+// function twoPlayerCar(x2, y2) {
+//   push();
+//   translate(x2, y2);
 
-  // Player ones car
-  fill(205, 52, 52);
-  noStroke();
-  rect(playerCarX2, playerCarY, 70, 115, 10);
-  ellipse(playerCarX2 + 35, playerCarY + 10, 75, 65);
+//   // Player ones car
+//   fill(205, 52, 52);
+//   noStroke();
+//   rect(playerCarX2, playerCarY, 70, 115, 10);
+//   ellipse(playerCarX2 + 35, playerCarY + 10, 75, 65);
 
-  // Car windows
-  fill(0);
-  quad(
-    playerCarX2 + 10,
-    playerCarY + 80,
-    playerCarX2 + 60,
-    playerCarY + 80,
-    playerCarX2 + 57,
-    playerCarY + 100,
-    playerCarX2 + 13,
-    playerCarY + 100
-  );
-  ellipse(playerCarX2 + 35, playerCarY + 100, 43, 10);
-  quad(
-    playerCarX2 + 5,
-    playerCarY + 25,
-    playerCarX2 + 65,
-    playerCarY + 25,
-    playerCarX2 + 60,
-    playerCarY + 55,
-    playerCarX2 + 10,
-    playerCarY + 55
-  );
-  ellipse(playerCarX2 + 35, playerCarY + 25, 60, 15);
-  triangle(
-    playerCarX2 + 3,
-    playerCarY + 40,
-    playerCarX2 + 10,
-    playerCarY + 75,
-    playerCarX2 + 3,
-    playerCarY + 75
-  );
-  triangle(
-    playerCarX2 + 68,
-    playerCarY + 40,
-    playerCarX2 + 68,
-    playerCarY + 75,
-    playerCarX2 + 60,
-    playerCarY + 75
-  );
-  pop();
-}
+//   // Car windows
+//   fill(0);
+//   quad(
+//     playerCarX2 + 10,
+//     playerCarY + 80,
+//     playerCarX2 + 60,
+//     playerCarY + 80,
+//     playerCarX2 + 57,
+//     playerCarY + 100,
+//     playerCarX2 + 13,
+//     playerCarY + 100
+//   );
+//   ellipse(playerCarX2 + 35, playerCarY + 100, 43, 10);
+//   quad(
+//     playerCarX2 + 5,
+//     playerCarY + 25,
+//     playerCarX2 + 65,
+//     playerCarY + 25,
+//     playerCarX2 + 60,
+//     playerCarY + 55,
+//     playerCarX2 + 10,
+//     playerCarY + 55
+//   );
+//   ellipse(playerCarX2 + 35, playerCarY + 25, 60, 15);
+//   triangle(
+//     playerCarX2 + 3,
+//     playerCarY + 40,
+//     playerCarX2 + 10,
+//     playerCarY + 75,
+//     playerCarX2 + 3,
+//     playerCarY + 75
+//   );
+//   triangle(
+//     playerCarX2 + 68,
+//     playerCarY + 40,
+//     playerCarX2 + 68,
+//     playerCarY + 75,
+//     playerCarX2 + 60,
+//     playerCarY + 75
+//   );
+//   pop();
+// }
 
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
@@ -189,7 +220,6 @@ function menuPage() {
   }
 }
 
-
 //One player mode
 function onePlayerScreen(x, y) {
   background(38, 139, 7);
@@ -202,7 +232,7 @@ function onePlayerScreen(x, y) {
   fill(0);
   textSize(15);
   text("Speed", innerWidth - 270, 50);
-  
+
   // Variable to store the score
   let score = 1;
 
@@ -219,9 +249,9 @@ function onePlayerScreen(x, y) {
     }
   }
 
-  onePlayerCar();
+  player1.displayCar();
 
-  // Traffic loop, more code exsists 
+  // Traffic loop, more code exsists
   for (let i = 0; i < cars.length; i++) {
     cars[i].fall();
     cars[i].display();
@@ -232,8 +262,8 @@ function onePlayerScreen(x, y) {
     // Check collision
     if (
       collision(
-        playerCarX1,
-        playerCarY,
+        player1.x,
+        player1.y,
         70,
         115,
         cars[i].x,
@@ -242,15 +272,15 @@ function onePlayerScreen(x, y) {
         carSize
       ) ||
       collision(
-        playerCarX1,
-        playerCarY, 
+        player1.x,
+        playerCarY,
         70,
         115,
         carsright[i].x,
         carsright[i].y,
         carSize,
         carSize
-      ) 
+      )
     ) {
       state = "resultOne";
     } else {
@@ -261,7 +291,7 @@ function onePlayerScreen(x, y) {
       }
     }
   }
-   
+
   // Display score
   text("Score: " + score, innerWidth - 270, 90);
 
@@ -343,10 +373,10 @@ function draw() {
     onePlayerScreen();
     //Move car
     if (keyIsDown(RIGHT_ARROW)) {
-      playerCarX1 += 8;
+      player1.x += 8;
     }
     if (keyIsDown(LEFT_ARROW)) {
-      playerCarX1 -= 8;
+      player1.x -= 8;
     }
   } else if (state === "twoPlayer") {
     twoPlayerScreen();
@@ -359,4 +389,3 @@ function draw() {
     resultTwoScreen();
   }
 }
- 
