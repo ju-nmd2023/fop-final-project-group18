@@ -29,9 +29,9 @@ class PlayerCar {
   }
 }
 
-let singlePlayer = new PlayerCar(innerWidth / 2, 200, [255, 194, 1]);
-let player1 = new PlayerCar(100, 200, [255, 194, 1]);
-let player2 = new PlayerCar(300, 200, [205, 52, 52]);
+let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
+let player1 = new PlayerCar(100, 550, [255, 194, 1]);
+let player2 = new PlayerCar(300, 550, [205, 52, 52]);
 
 //trafic cars
 let cars = [];
@@ -381,8 +381,15 @@ function draw() {
     }
   } else if (state === "twoPlayer") {
     twoPlayerScreen();
-    if (keyIsDown(A)) {
-      playerCarX2 -= 8;
+    if (keyIsDown(UP_ARROW)) {
+      player1.x -= 8;
+    } else if (keyIsDown(DOWN_ARROW)) {
+      player1.x += 8;
+    }
+    if (keyIsDown(LEFT_ARROW)) {
+      player2.x -= 8;
+    } else if (keyIsDown(RIGHT_ARROW)) {
+      player2.x += 8;
     }
   } else if (state === "resultOne") {
     resultOneScreen();
