@@ -58,122 +58,16 @@ function setup() {
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     carsright.push(new RedCar(x, y, carSize));
   }
-  innerWidth = width / 2;
-  innerHeight = height / 2;
 }
 
+let middleWidth = innerWidth / 2;
+let middleHeight = innerHeight / 2;
 let imgCar;
 
 //Player1 car coordinates
 let playerCarX1 = 200;
 let playerCarX2 = 400;
 let playerCarY = 450;
-
-// function onePlayerCar(x1, y1) {
-//   push();
-//   translate(x1, y1);
-
-//   // Player ones car
-//   fill(255, 194, 1);
-//   noStroke();
-//   rect(playerCarX1, playerCarY, 70, 115, 10);
-//   ellipse(playerCarX1 + 35, playerCarY + 10, 75, 65);
-
-//   // Car windows
-//   fill(0);
-//   quad(
-//     playerCarX1 + 10,
-//     playerCarY + 80,
-//     playerCarX1 + 60,
-//     playerCarY + 80,
-//     playerCarX1 + 57,
-//     playerCarY + 100,
-//     playerCarX1 + 13,
-//     playerCarY + 100
-//   );
-//   ellipse(playerCarX1 + 35, playerCarY + 100, 43, 10);
-//   quad(
-//     playerCarX1 + 5,
-//     playerCarY + 25,
-//     playerCarX1 + 65,
-//     playerCarY + 25,
-//     playerCarX1 + 60,
-//     playerCarY + 55,
-//     playerCarX1 + 10,
-//     playerCarY + 55
-//   );
-//   ellipse(playerCarX1 + 35, playerCarY + 25, 60, 15);
-//   triangle(
-//     playerCarX1 + 3,
-//     playerCarY + 40,
-//     playerCarX1 + 10,
-//     playerCarY + 75,
-//     playerCarX1 + 3,
-//     playerCarY + 75
-//   );
-//   triangle(
-//     playerCarX1 + 68,
-//     playerCarY + 40,
-//     playerCarX1 + 68,
-//     playerCarY + 75,
-//     playerCarX1 + 60,
-//     playerCarY + 75
-//   );
-//   pop();
-// }
-
-// function twoPlayerCar(x2, y2) {
-//   push();
-//   translate(x2, y2);
-
-//   // Player ones car
-//   fill(205, 52, 52);
-//   noStroke();
-//   rect(playerCarX2, playerCarY, 70, 115, 10);
-//   ellipse(playerCarX2 + 35, playerCarY + 10, 75, 65);
-
-//   // Car windows
-//   fill(0);
-//   quad(
-//     playerCarX2 + 10,
-//     playerCarY + 80,
-//     playerCarX2 + 60,
-//     playerCarY + 80,
-//     playerCarX2 + 57,
-//     playerCarY + 100,
-//     playerCarX2 + 13,
-//     playerCarY + 100
-//   );
-//   ellipse(playerCarX2 + 35, playerCarY + 100, 43, 10);
-//   quad(
-//     playerCarX2 + 5,
-//     playerCarY + 25,
-//     playerCarX2 + 65,
-//     playerCarY + 25,
-//     playerCarX2 + 60,
-//     playerCarY + 55,
-//     playerCarX2 + 10,
-//     playerCarY + 55
-//   );
-//   ellipse(playerCarX2 + 35, playerCarY + 25, 60, 15);
-//   triangle(
-//     playerCarX2 + 3,
-//     playerCarY + 40,
-//     playerCarX2 + 10,
-//     playerCarY + 75,
-//     playerCarX2 + 3,
-//     playerCarY + 75
-//   );
-//   triangle(
-//     playerCarX2 + 68,
-//     playerCarY + 40,
-//     playerCarX2 + 68,
-//     playerCarY + 75,
-//     playerCarX2 + 60,
-//     playerCarY + 75
-//   );
-//   pop();
-// }
 
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
@@ -186,33 +80,34 @@ function menuPage() {
   textStyle(BOLDITALIC);
   textFont("Verdana");
   textSize(60);
-  text("Fast", innerWidth - 250, 150);
-  text("And", innerWidth - 220, 220);
-  text("Fantastic", innerWidth - 100, 290);
-  image(imgCar, innerWidth - 80, 80, 400, 170);
+  text("Fast", middleWidth - 250, 150);
+  text("And", middleWidth - 220, 220);
+  text("Fantastic", middleWidth - 100, 290);
+  image(imgCar, middleWidth - 80, 80, 400, 170);
 
   textStyle(BOLD);
   textSize(20);
   textAlign(CENTER);
-  const singlePlayerButton = text("Single Player", innerWidth, 530);
-  const doublePlayerButton = text("Double Player", innerWidth, 590);
+  text("Single Player", middleWidth, 530);
+  text("Double Player", middleWidth, 590);
   stroke(237, 195, 40);
   strokeWeight(2);
-  line(innerWidth - 50, 540, innerWidth + 50, 540);
-  line(innerWidth - 50, 600, innerWidth + 50, 600);
+  line(middleWidth - 50, 540, middleWidth + 50, 540);
+  line(middleWidth - 50, 600, middleWidth + 50, 600);
   //Game mode
   if (
-    mouseX > innerWidth - 100 &&
-    mouseX < innerWidth + 100 &&
+    mouseX > middleWidth - 100 &&
+    mouseX < middleWidth + 100 &&
     mouseY > 515 &&
     mouseY < 545 &&
     mouseIsPressed
   ) {
     state = "onePlayer";
+    onePlayerScreen();
   }
   if (
-    mouseX > innerWidth - 100 &&
-    mouseX < innerWidth + 100 &&
+    mouseX > middleWidth - 100 &&
+    mouseX < middleWidth + 100 &&
     mouseY > 570 &&
     mouseY < 610 &&
     mouseIsPressed
@@ -228,11 +123,11 @@ function onePlayerScreen(x, y) {
   translate(x, y);
   fill(102, 102, 95);
   noStroke();
-  rect(innerWidth - 150, 0, 300, height);
-  rect(innerWidth - 200, 0, 400, height);
+  rect(middleWidth - 150, 0, 300, height);
+  rect(middleWidth - 200, 0, 400, height);
   fill(0);
   textSize(15);
-  text("Speed", innerWidth - 270, 50);
+  text("Speed", middleWidth - 270, 50);
 
   // Variable to store the score
   let score = 0;
@@ -240,7 +135,7 @@ function onePlayerScreen(x, y) {
   //lines
   fill(255);
   let lineSpacing = 400;
-  let lineX = innerWidth - 5;
+  let lineX = middleWidth - 5;
   let startY = (frameCount % 20) * 20;
 
   for (let i = 0; i < 10; i++) {
@@ -294,7 +189,7 @@ function onePlayerScreen(x, y) {
   }
 
   // Display score
-  text("Score: " + score, innerWidth - 270, 90);
+  text("Score: " + score, middleWidth - 270, 90);
 
   pop();
 }
@@ -304,14 +199,14 @@ function twoPlayerScreen(x, y) {
   translate(x, y);
   fill(102, 102, 95);
   noStroke();
-  rect(innerWidth / 2 - 150, 0, 300, height);
-  rect(innerWidth * 1.5 - 150, 0, 300, height);
+  rect(middleWidth / 2 - 150, 0, 300, height);
+  rect(middleWidth * 1.5 - 150, 0, 300, height);
   player1.displayCar();
   player2.displayCar();
 
   fill(255);
   let lineSpacing = 400;
-  let lineX = innerWidth - 5;
+  let lineX = middleWidth - 5;
   let startY = (frameCount % 20) * 20;
 
   for (let i = 0; i < 10; i++) {
@@ -324,6 +219,7 @@ function twoPlayerScreen(x, y) {
   pop();
 }
 function resultOneScreen() {
+  onePlayerIsRunning = false;
   push();
   background(37, 60, 129);
   noStroke();
@@ -331,15 +227,41 @@ function resultOneScreen() {
   textStyle(BOLDITALIC);
   textFont("Verdana");
   textSize(60);
-  text("Result", innerWidth - 100, 150);
+  text("Result", middleWidth - 100, 150);
   textStyle(ITALIC);
   textSize(20);
-  text("Time:", innerWidth - 100, 250);
-  text("Score:", innerWidth - 100, 350);
+  text("Time:", middleWidth - 100, 250);
+  text("Score:", middleWidth - 100, 350);
   image(imgCar, 20, 600, 400, 170);
+  textStyle(BOLD);
+  text("RESTART", middleWidth, 600);
+  text("MENU", middleWidth, 700);
+  stroke(237, 195, 40);
+  strokeWeight(2);
+  line(middleWidth - 50, 610, middleWidth + 50, 610);
+  line(middleWidth - 50, 710, middleWidth + 50, 710);
   pop();
+
+  if (
+    mouseX > middleWidth - 100 &&
+    mouseX < middleWidth + 100 &&
+    mouseY > 585 &&
+    mouseY < 615 &&
+    mouseIsPressed
+  ) {
+    state = "onePlayer";
+  } else if (
+    mouseX > middleWidth - 100 &&
+    mouseX < middleWidth + 100 &&
+    mouseY > 685 &&
+    mouseY < 710 &&
+    mouseIsPressed
+  ) {
+    state = "start";
+  }
 }
 function resultTwoScreen() {
+  twoPlayerIsRunning = false;
   push();
   background(37, 60, 129);
   noStroke();
@@ -347,11 +269,11 @@ function resultTwoScreen() {
   textStyle(BOLDITALIC);
   textFont("Verdana");
   textSize(60);
-  text("Result", innerWidth - 100, 150);
+  text("Result", middleWidth - 100, 150);
   textStyle(ITALIC);
   textSize(20);
-  text("Player 1", innerWidth - 150, 250);
-  text("Player 2", innerWidth + 100, 250);
+  text("Player 1", middleWidth - 150, 250);
+  text("Player 2", middleWidth + 100, 250);
   image(imgCar, 20, 400, 320, 140);
   pop();
 }
