@@ -159,7 +159,7 @@ function onePlayerScreen(x, y) {
     // Check collision
     if (
       collision(
-        singlePlayer.x,
+        singlePlayer.x, 
         singlePlayer.y,
         70,
         115,
@@ -192,7 +192,7 @@ function onePlayerScreen(x, y) {
   // Display score
   text("Score: " + score, middleWidth - 270, 90);
 
-  pop();
+  pop(); 
 }
 function twoPlayerScreen(x, y) {
   background(38, 139, 7);
@@ -222,7 +222,7 @@ function twoPlayerScreen(x, y) {
 function resultOneScreen() {
   onePlayerIsRunning = false;
   push();
-  background(37, 60, 129);
+  background(37, 60, 129); 
   noStroke();
   fill(255, 194, 1);
   textStyle(BOLDITALIC);
@@ -250,7 +250,9 @@ function resultOneScreen() {
     mouseY < height - 148 &&
     mouseIsPressed
   ) {
-    state = "onePlayer";
+    onePlayerScreen();
+    state = "onePlayer"; 
+    
   } else if (
     mouseX > middleWidth - 100 &&
     mouseX < middleWidth + 100 &&
@@ -267,14 +269,14 @@ function resultTwoScreen() {
   background(37, 60, 129);
   noStroke();
   fill(237, 195, 40);
-  textStyle(BOLDITALIC);
+  textStyle(BOLDITALIC); 
   textFont("Verdana");
-  textSize(60);
+  textSize(60); 
   text("Result", middleWidth - 100, 150);
   textStyle(ITALIC);
   textSize(20);
   text("Player 1", middleWidth - 150, 250);
-  text("Player 2", middleWidth + 100, 250);
+  text("Player 2", middleWidth + 100, 250); 
   image(imgCar, 20, 400, 320, 140);
   pop();
 }
@@ -287,7 +289,7 @@ function collision(x1, y1, w1, h1, x2, y2, w2, h2) {
 
 let state = "start";
 let onePlayerIsRunning = true;
-let twoPlayerIsRunning = true;
+let twoPlayerIsRunning = true; 
 
 /*<-- The following 20 lines were inspierd from the lunar lander game -->*/
 function draw() {
