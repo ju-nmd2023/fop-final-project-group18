@@ -29,6 +29,7 @@ class PlayerCar {
   }
 }
 
+//Different players
 let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
 let player1 = new PlayerCar(100, 550, [255, 194, 1]);
 let player2 = new PlayerCar(300, 550, [205, 52, 52]);
@@ -88,18 +89,18 @@ function menuPage() {
   textStyle(BOLD);
   textSize(20);
   textAlign(CENTER);
-  text("Single Player", middleWidth, 530);
-  text("Double Player", middleWidth, 590);
+  text("Single Player", middleWidth, height - 155);
+  text("Double Player", middleWidth, height - 105);
   stroke(237, 195, 40);
   strokeWeight(2);
-  line(middleWidth - 50, 540, middleWidth + 50, 540);
-  line(middleWidth - 50, 600, middleWidth + 50, 600);
+  line(middleWidth - 50, height - 148, middleWidth + 50, height - 148);
+  line(middleWidth - 50, height - 98, middleWidth + 50, height - 98);
   //Game mode
   if (
     mouseX > middleWidth - 100 &&
     mouseX < middleWidth + 100 &&
-    mouseY > 515 &&
-    mouseY < 545 &&
+    mouseY > height - 165 &&
+    mouseY < height - 146 &&
     mouseIsPressed
   ) {
     state = "onePlayer";
@@ -108,8 +109,8 @@ function menuPage() {
   if (
     mouseX > middleWidth - 100 &&
     mouseX < middleWidth + 100 &&
-    mouseY > 570 &&
-    mouseY < 610 &&
+    mouseY > height - 115 &&
+    mouseY < height - 96 &&
     mouseIsPressed
   ) {
     state = "twoPlayer";
@@ -227,34 +228,34 @@ function resultOneScreen() {
   textStyle(BOLDITALIC);
   textFont("Verdana");
   textSize(60);
-  text("Result", middleWidth - 100, 150);
+  text("Result", middleWidth, 150);
   textStyle(ITALIC);
   textSize(20);
-  text("Time:", middleWidth - 100, 250);
-  text("Score:", middleWidth - 100, 350);
-  image(imgCar, 20, 600, 400, 170);
+  text("Time:", middleWidth - 85, 250);
+  text("Score:", middleWidth - 85, 350);
+  image(imgCar, 20, height - 200, 400, 170);
   textStyle(BOLD);
-  text("RESTART", middleWidth, 600);
-  text("MENU", middleWidth, 700);
+  text("RESTART", middleWidth, height - 155);
+  text("MENU", middleWidth, height - 105);
   stroke(237, 195, 40);
   strokeWeight(2);
-  line(middleWidth - 50, 610, middleWidth + 50, 610);
-  line(middleWidth - 50, 710, middleWidth + 50, 710);
+  line(middleWidth - 50, height - 150, middleWidth + 50, height - 150);
+  line(middleWidth - 50, height - 100, middleWidth + 50, height - 100);
   pop();
 
   if (
     mouseX > middleWidth - 100 &&
     mouseX < middleWidth + 100 &&
-    mouseY > 585 &&
-    mouseY < 615 &&
+    mouseY > height - 165 &&
+    mouseY < height - 148 &&
     mouseIsPressed
   ) {
     state = "onePlayer";
   } else if (
     mouseX > middleWidth - 100 &&
     mouseX < middleWidth + 100 &&
-    mouseY > 685 &&
-    mouseY < 710 &&
+    mouseY > height - 115 &&
+    mouseY < height - 98 &&
     mouseIsPressed
   ) {
     state = "start";
