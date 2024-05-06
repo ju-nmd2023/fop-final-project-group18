@@ -303,9 +303,9 @@ function draw() {
     }
   } else if (state === "twoPlayer") {
     twoPlayerScreen();
-    if (keyIsDown(UP_ARROW)) {
+    if (keyIsDown(65)) {
       player1.x -= 8;
-    } else if (keyIsDown(DOWN_ARROW)) {
+    } else if (keyIsDown(68)) {
       player1.x += 8;
     }
     if (keyIsDown(LEFT_ARROW)) {
