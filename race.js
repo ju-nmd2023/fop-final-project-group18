@@ -1,4 +1,5 @@
 import { RedCar } from "traffic.js";
+import { PowerUp } from "powerup.js";
 
 class PlayerCar {
   constructor(x, y, color) {
@@ -24,7 +25,7 @@ class PlayerCar {
     quad(5, 25, 65, 25, 60, 55, 10, 55);
     ellipse(35, 25, 60, 15);
     triangle(3, 40, 10, 75, 3, 75);
-    triangle(68, 40, 68, 75, 60, 75); 
+    triangle(68, 40, 68, 75, 60, 75);
     pop();
   }
 }
@@ -43,6 +44,12 @@ let traficspeed = 6;
 let traficspeedright = 3;
 let spacing = 550; // Adjust this value to increase or decrease space between cars
 
+//powerup
+let powerup = [];
+let powerupsize = (20, 20);
+let numpowerup = 1;
+let powerupspeed = 8;
+
 function setup() {
   createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
@@ -58,6 +65,12 @@ function setup() {
     let x = random(300, 532);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     carsright.push(new RedCar(x, y, carSize));
+  }
+  //powerup
+  for (let i = 0; i < numpowerup; i++) {
+    let x = random(300, 532);
+    let y = random(-500, 0);
+    powerup.push(new PowerUp(x, y, powerupsize));
   }
 }
 
@@ -159,7 +172,7 @@ function onePlayerScreen(x, y) {
     // Check collision
     if (
       collision(
-        singlePlayer.x, 
+        singlePlayer.x,
         singlePlayer.y,
         70,
         115,
@@ -185,14 +198,20 @@ function onePlayerScreen(x, y) {
       if (cars[i].y > 200 && !cars[i].scored) {
         score++; // Increment the score
         cars[i].scored = true; // Mark the car as scored
-      }
+      } 
     }
+  }
+
+  //powerup
+  for (let i = 0; i < powerup.length; i++) {
+    powerup[i].fall();
+    powerup[i].display(); 
   }
 
   // Display score
   text("Score: " + score, middleWidth - 270, 90);
 
-  pop(); 
+  pop();
 }
 function twoPlayerScreen(x, y) {
   background(38, 139, 7);
@@ -217,12 +236,21 @@ function twoPlayerScreen(x, y) {
     }
   }
 
+  // Traffic loop, more code exsists
+  for (let i = 0; i < cars.length; i++) {
+    cars[i].fall();
+    cars[i].display();
+
+    carsright[i].fall();
+    carsright[i].display();
+  }
+
   pop();
 }
 function resultOneScreen() {
   onePlayerIsRunning = false;
   push();
-  background(37, 60, 129); 
+  background(37, 60, 129);
   noStroke();
   fill(255, 194, 1);
   textStyle(BOLDITALIC);
@@ -251,8 +279,7 @@ function resultOneScreen() {
     mouseIsPressed
   ) {
     onePlayerScreen();
-    state = "onePlayer"; 
-    
+    state = "onePlayer";
   } else if (
     mouseX > middleWidth - 100 &&
     mouseX < middleWidth + 100 &&
@@ -269,14 +296,14 @@ function resultTwoScreen() {
   background(37, 60, 129);
   noStroke();
   fill(237, 195, 40);
-  textStyle(BOLDITALIC); 
+  textStyle(BOLDITALIC);
   textFont("Verdana");
-  textSize(60); 
+  textSize(60);
   text("Result", middleWidth - 100, 150);
   textStyle(ITALIC);
   textSize(20);
   text("Player 1", middleWidth - 150, 250);
-  text("Player 2", middleWidth + 100, 250); 
+  text("Player 2", middleWidth + 100, 250);
   image(imgCar, 20, 400, 320, 140);
   pop();
 }
@@ -289,7 +316,7 @@ function collision(x1, y1, w1, h1, x2, y2, w2, h2) {
 
 let state = "start";
 let onePlayerIsRunning = true;
-let twoPlayerIsRunning = true; 
+let twoPlayerIsRunning = true;
 
 /*<-- The following 20 lines were inspierd from the lunar lander game -->*/
 function draw() {

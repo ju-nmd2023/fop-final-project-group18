@@ -1,4 +1,3 @@
-// traffic.js
 export class RedCar {
   constructor(x, y, size) {
     this.x = x;
@@ -10,11 +9,11 @@ export class RedCar {
   display() {
     push();
     translate(this.x, this.y);
-
+    //https://chat.openai.com/share/3f7a06dc-9c3a-4822-bb75-869fe8f0619e 
     // Red car
     fill(255, 0, 0); // Change color to red
     noStroke();
-    rect(0, 0, this.size, this.size * 1.6, 10); // Adjust size based on carSize
+    rect(0, 0, this.size, this.size * 1.2, 18); // Adjust size based on carSize
     ellipse(this.size / 2, 10, this.size * 1.07, this.size * 0.92); // Adjust position and size of ellipse
 
     // Car windows
