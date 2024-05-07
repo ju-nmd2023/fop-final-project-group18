@@ -24,7 +24,7 @@ class PlayerCar {
     quad(5, 25, 65, 25, 60, 55, 10, 55);
     ellipse(35, 25, 60, 15);
     triangle(3, 40, 10, 75, 3, 75);
-    triangle(68, 40, 68, 75, 60, 75);
+    triangle(68, 40, 68, 75, 60, 75); 
     pop();
   }
 }
