@@ -1,5 +1,5 @@
-import { RedCar } from "traffic.js";
-import { PowerUp } from "powerup.js";
+import { RedCar } from "./traffic.js";
+import { PowerUp } from "./powerup.js";
 
 class PlayerCar {
   constructor(x, y, color) {
@@ -68,11 +68,12 @@ function setup() {
   }
   //powerup
   for (let i = 0; i < numpowerup; i++) {
-    let x = random(300, 532);
+    let x = random(130, 532);
     let y = random(-500, 0);
     powerup.push(new PowerUp(x, y, powerupsize));
   }
 }
+window.setup = setup;
 
 let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
@@ -86,7 +87,7 @@ let playerCarY = 450;
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
 }
-
+window.preload = preload;
 function menuPage() {
   background(37, 60, 129);
   noStroke();
@@ -129,7 +130,7 @@ function menuPage() {
     state = "twoPlayer";
   }
 }
-
+window.menuPage = menuPage;
 //One player mode
 function onePlayerScreen(x, y) {
   background(38, 139, 7);
@@ -170,6 +171,7 @@ function onePlayerScreen(x, y) {
     carsright[i].display();
 
     // Check collision
+    //<-- The following 20 lines were inspierd from the p5.js site 14-04-2024, https://editor.p5js.org/dfeusse/sketches/H1vD7NQjb -->
     if (
       collision(
         singlePlayer.x,
@@ -198,14 +200,14 @@ function onePlayerScreen(x, y) {
       if (cars[i].y > 200 && !cars[i].scored) {
         score++; // Increment the score
         cars[i].scored = true; // Mark the car as scored
-      } 
+      }
     }
   }
 
   //powerup
   for (let i = 0; i < powerup.length; i++) {
     powerup[i].fall();
-    powerup[i].display(); 
+    powerup[i].display();
   }
 
   // Display score
@@ -213,6 +215,7 @@ function onePlayerScreen(x, y) {
 
   pop();
 }
+window.onePlayerScreen = onePlayerScreen;
 function twoPlayerScreen(x, y) {
   background(38, 139, 7);
   push();
@@ -247,6 +250,7 @@ function twoPlayerScreen(x, y) {
 
   pop();
 }
+window.twoPlayerScreen = twoPlayerScreen;
 function resultOneScreen() {
   onePlayerIsRunning = false;
   push();
@@ -271,6 +275,15 @@ function resultOneScreen() {
   line(middleWidth - 50, height - 100, middleWidth + 50, height - 100);
   pop();
 
+  // Reset red cars
+  for (let i = 0; i < numcars; i++) {
+    let x = random(130, 300);
+    let y = random(-500, 0) - i * spacing; // Add spacing between cars
+    cars[i].x = x;
+    cars[i].y = y;
+    cars[i].scored = false; // Reset scored flag
+  }
+
   if (
     mouseX > middleWidth - 100 &&
     mouseX < middleWidth + 100 &&
@@ -290,6 +303,7 @@ function resultOneScreen() {
     state = "start";
   }
 }
+window.resultOneScreen = resultOneScreen;
 function resultTwoScreen() {
   twoPlayerIsRunning = false;
   push();
@@ -307,12 +321,14 @@ function resultTwoScreen() {
   image(imgCar, 20, 400, 320, 140);
   pop();
 }
+window.resultTwoScreen = resultTwoScreen;
 
 // Function to check collision between two rectangles
 //<-- The following 2 lines were inspierd from the p5.js site 14-04-2024, https://editor.p5js.org/dfeusse/sketches/H1vD7NQjb -->
 function collision(x1, y1, w1, h1, x2, y2, w2, h2) {
   return x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h2 && y1 + h1 > y2;
 }
+window.collision = collision;
 
 let state = "start";
 let onePlayerIsRunning = true;
@@ -349,3 +365,4 @@ function draw() {
     resultTwoScreen();
   }
 }
+window.draw = draw;
