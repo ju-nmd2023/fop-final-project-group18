@@ -82,6 +82,7 @@ let powerup = [];
 let powerupsize = (20, 20);
 let numpowerup = 1;
 let powerupspeed = 8;
+let score = 0;
 
 function setup() {
   createCanvas(innerWidth, innerHeight);
@@ -176,10 +177,9 @@ function onePlayerScreen(x, y) {
   rect(middleWidth - 200, 0, 400, height);
   fill(0);
   textSize(15);
-  text("Speed", middleWidth - 270, 50);
+  text("Speed"+" "+ traficspeed, middleWidth - 270, 50);
 
-  // Variable to store the score
-  let score = 0;
+ 
 
   //lines
   fill(255);
@@ -232,10 +232,10 @@ function onePlayerScreen(x, y) {
       state = "resultOne";
     } else {
       // Check if a red car falls past the player car
-      if (cars[i].y > 200 && !cars[i].scored) {
+      if (cars[i].y > 300 && !cars[i].scored) {
         score++; // Increment the score
-        cars[i].scored = true; // Mark the car as scored
-      }
+        cars[i].scored = true; // Mark the car as scored to prevent double counting
+    }
     }
   }
 
