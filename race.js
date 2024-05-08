@@ -49,7 +49,7 @@ class Grass {
     line(145, 120, 145, 100);
     pop();
   }
-
+ 
   movingGrass() {
     this.y = traficspeed;
     if (this.y > height) {
@@ -70,8 +70,8 @@ let player2 = new PlayerCar(middleWidth * 1.5, 550, [205, 52, 52]);
 let cars = [];
 let carsright = [];
 let carSize = (40, 70);
-let numcars = 2;
-let traficspeed = 6;
+let numcars = 3;
+let traficspeed = 8;
 let traficspeedright = 3;
 let spacing = 550; // Adjust this value to increase or decrease space between cars
 
@@ -116,7 +116,7 @@ function preload() {
 }
 window.preload = preload;
 function menuPage() {
-  background(37, 60, 129);
+  background(37, 60, 129); 
   noStroke();
   fill(255, 194, 1);
   textStyle(BOLDITALIC);
@@ -201,7 +201,7 @@ function onePlayerScreen(x, y) {
     //<-- The following 20 lines were inspierd from the p5.js site 14-04-2024, https://editor.p5js.org/dfeusse/sketches/H1vD7NQjb -->
     if (
       collision(
-        singlePlayer.x,
+        singlePlayer.x, 
         singlePlayer.y,
         70,
         115,

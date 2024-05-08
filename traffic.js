@@ -70,9 +70,39 @@ export class RedCar {
   }
 
   fall() {
-    this.y += traficspeed; // Assuming traficspeed is the speed at which traffic cars fall
+    // Move the car down
+    this.y += traficspeed;
+
+    // Check if the car reaches the bottom of the canvas
     if (this.y > height) {
-      this.y = random(-500, 0); // Reset the car's position if it goes off the screen
+        // Set a new random position for the car, ensuring it doesn't overlap with existing cars
+        let overlapping = true;
+        while (overlapping) {
+            // Generate new position
+            let newX = random(130, 530); // Update the range as needed
+            let newY = random(-500, 0) - spacing; // Add spacing between cars
+
+            // Check if the new position overlaps with any existing car position
+            overlapping = false;
+            for (let i = 0; i < cars.length; i++) {
+                if (dist(newX, newY, cars[i].x, cars[i].y) < carSize * 2) {
+                    overlapping = true;
+                    break;
+                }
+            }
+            for (let i = 0; i < carsright.length; i++) {
+                if (dist(newX, newY, carsright[i].x, carsright[i].y) < carSize * 2) {
+                    overlapping = true;
+                    break;
+                }
+            }
+
+            // If the new position doesn't overlap, set it as the car's position
+            if (!overlapping) {
+                this.x = newX;
+                this.y = newY;
+            }
+        }
     }
-  }
+}
 }
