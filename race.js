@@ -30,7 +30,26 @@ class PlayerCar {
   }
 }
 
+class Grass {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
 
+  displayGrass() {
+    push();
+    translate(this.x, this.y);
+    stroke("Green");
+    strokeWeight(5);
+    line(100, 100, 100, 120);
+    line(100, 100, 110, 120);
+    line(110, 120, 125, 90);
+    line(125, 90, 135, 120);
+    line(135, 120, 145, 100);
+    line(145, 120, 145, 100);
+    pop();
+  }
+}
 //Different players
 let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
 let player1 = new PlayerCar(100, 550, [255, 194, 1]);
@@ -80,7 +99,7 @@ let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
 let imgCar;
 
-//Player1 car coordinates 
+//Player1 car coordinates
 let playerCarX1 = 200;
 let playerCarX2 = 400;
 let playerCarY = 450;
@@ -209,7 +228,6 @@ function onePlayerScreen(x, y) {
   for (let i = 0; i < powerup.length; i++) {
     powerup[i].fall();
     powerup[i].display();
-
   }
   // Display score
   text("Score: " + score, middleWidth - 270, 90);
@@ -342,7 +360,7 @@ function draw() {
     menuPage();
   } else if (state === "onePlayer") {
     onePlayerScreen();
-    //Move car 
+    //Move car
     if (keyIsDown(RIGHT_ARROW)) {
       singlePlayer.x += 8;
     }
