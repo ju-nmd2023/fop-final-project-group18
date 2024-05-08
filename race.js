@@ -60,7 +60,6 @@ class Grass {
 
 let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
-let imgCar;
 //Different players
 let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
 let player1 = new PlayerCar(middleWidth / 2, 550, [255, 194, 1]);
@@ -74,6 +73,9 @@ let numcars = 3;
 let traficspeed = 8;
 let traficspeedright = 3;
 let spacing = 550; // Adjust this value to increase or decrease space between cars
+
+// Grass
+let grass = [];
 
 //powerup
 let powerup = [];
@@ -161,6 +163,11 @@ window.menuPage = menuPage;
 //One player mode
 function onePlayerScreen(x, y) {
   background(38, 139, 7);
+
+  for (let i = 0; i < grass.length; i++) {
+    grass[i].movingGrass();
+    grass[i].displayGrass();
+  }
   push();
   translate(x, y);
   fill(102, 102, 95);
@@ -190,6 +197,7 @@ function onePlayerScreen(x, y) {
   singlePlayer.displayCar();
 
   // Traffic loop, more code exsists
+
   for (let i = 0; i < cars.length; i++) {
     cars[i].fall();
     cars[i].display();
