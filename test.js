@@ -163,6 +163,33 @@ function onePlayerScreen(x, y) {
 
   singlePlayer.displayCar();
 
+    // Check collision between power-up and player's car
+  for (let i = 0; i < powerup.length; i++) {
+    powerup[i].fall();
+    powerup[i].display();
+
+    if (
+      collision(
+        singlePlayer.x,
+        singlePlayer.y,
+        70,
+        115,
+        powerup[i].x,
+        powerup[i].y,
+        powerupsize[0],
+        powerupsize[1]
+      )
+    ) {
+      // Increase player's score
+      score += 10;
+
+      // Remove the power-up from the array
+      powerup.splice(i, 1);
+    }
+  }
+
+
+
   // Traffic loop, more code exsists
   for (let i = 0; i < cars.length; i++) {
     cars[i].fall();
