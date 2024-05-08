@@ -49,11 +49,22 @@ class Grass {
     line(145, 120, 145, 100);
     pop();
   }
+
+  movingGrass() {
+    this.y = traficspeed;
+    if (this.y > height) {
+      this.y = random(-500, 0);
+    }
+  }
 }
+
+let middleWidth = innerWidth / 2;
+let middleHeight = innerHeight / 2;
+let imgCar;
 //Different players
 let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
-let player1 = new PlayerCar(100, 550, [255, 194, 1]);
-let player2 = new PlayerCar(300, 550, [205, 52, 52]);
+let player1 = new PlayerCar(middleWidth / 2, 550, [255, 194, 1]);
+let player2 = new PlayerCar(middleWidth * 1.5, 550, [205, 52, 52]);
 
 //trafic cars
 let cars = [];
@@ -94,10 +105,6 @@ function setup() {
   }
 }
 window.setup = setup;
-
-let middleWidth = innerWidth / 2;
-let middleHeight = innerHeight / 2;
-let imgCar;
 
 //Player1 car coordinates
 let playerCarX1 = 200;
@@ -285,14 +292,14 @@ function resultOneScreen() {
   textSize(20);
   text("Time:", middleWidth - 85, 250);
   text("Score:", middleWidth - 85, 350);
-  image(imgCar, 20, height - 200, 400, 170);
+  image(imgCar, middleWidth / 8, height - 200, 400, 170);
   textStyle(BOLD);
-  text("RESTART", middleWidth, height - 155);
-  text("MENU", middleWidth, height - 105);
+  text("RESTART", middleWidth, height - 250);
+  text("MENU", middleWidth, height - 200);
   stroke(237, 195, 40);
   strokeWeight(2);
-  line(middleWidth - 50, height - 150, middleWidth + 50, height - 150);
-  line(middleWidth - 50, height - 100, middleWidth + 50, height - 100);
+  line(middleWidth - 50, height - 248, middleWidth + 50, height - 248);
+  line(middleWidth - 50, height - 198, middleWidth + 50, height - 198);
   pop();
 
   // Reset red cars
@@ -307,8 +314,8 @@ function resultOneScreen() {
   if (
     mouseX > middleWidth - 100 &&
     mouseX < middleWidth + 100 &&
-    mouseY > height - 165 &&
-    mouseY < height - 148 &&
+    mouseY > height - 260 &&
+    mouseY < height - 246 &&
     mouseIsPressed
   ) {
     onePlayerScreen();
@@ -316,8 +323,8 @@ function resultOneScreen() {
   } else if (
     mouseX > middleWidth - 100 &&
     mouseX < middleWidth + 100 &&
-    mouseY > height - 115 &&
-    mouseY < height - 98 &&
+    mouseY > height - 210 &&
+    mouseY < height - 196 &&
     mouseIsPressed
   ) {
     state = "start";
