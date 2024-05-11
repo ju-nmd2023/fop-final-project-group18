@@ -1,6 +1,9 @@
 import { RedCar } from "./traffic.js";
 import { PowerUp } from "./powerup.js";
 
+let middleWidth = innerWidth / 2;
+let middleHeight = innerHeight / 2;
+
 class PlayerCar {
   constructor(x, y, color) {
     this.x = x;
@@ -30,6 +33,7 @@ class PlayerCar {
   }
 }
 
+let grass = [];
 class Grass {
   constructor(x, y) {
     this.x = x;
@@ -55,10 +59,66 @@ class Grass {
   }
 }
 
-let grass = new Grass(50, 0);
+// This class with lines of code was adapted form https://pixelkind.github.io/foundationsofprogramming/oop/01-02-example. Accessed: 11/5-2024
+class Button {
+  constructor(x, y, width, height, text) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.text = text;
+  }
 
-let middleWidth = innerWidth / 2;
-let middleHeight = innerHeight / 2;
+  draw() {
+    push();
+    translate(this.x, this.y);
+    stroke(255, 194, 1);
+    fill(37, 60, 129);
+    rect(0, 0, this.width, this.height);
+
+    //text
+    fill(255, 194, 1);
+    noStroke();
+    textFont("Verdana");
+    textSize(20);
+    textAlign(CENTER);
+    textStyle(BOLD);
+    text(this.text, 0, this.height / 4, this.width);
+    pop();
+  }
+  hitTest(x, y) {
+    return (
+      x > this.x &&
+      x < this.x + this.width &&
+      y > this.y &&
+      y < this.y + this.height
+    );
+  }
+}
+
+let singlePlayerButton = new Button(
+  middleWidth - 95,
+  height - 190,
+  190,
+  50,
+  "Single Player"
+);
+let doublePlayerButton = new Button(
+  middleWidth - 95,
+  height - 130,
+  190,
+  50,
+  "Double Player"
+);
+let restartButton = new Button(
+  middleWidth - 95,
+  height - 190,
+  190,
+  50,
+  "RESTART"
+);
+let menuButton = new Button(middleWidth - 95, height - 130, 190, 50, "MENU");
+
 //Different players
 let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
 let player1 = new PlayerCar(middleWidth / 2, 550, [255, 194, 1]);
@@ -80,6 +140,7 @@ let numpowerup = 1;
 let powerupspeed = 8;
 let score = 0;
 
+// ====== SETUP ====== //
 function setup() {
   createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
@@ -102,18 +163,25 @@ function setup() {
     let y = random(-500, 0);
     powerup.push(new PowerUp(x, y, powerupsize));
   }
+
+  // Falling Grass
+  for (let i = 0; i < 50; i++) {
+    grass.push(new Grass(random(width), random(-400, -50)));
+  }
 }
 window.setup = setup;
 
 //Player1 car coordinates
-let playerCarX1 = 200;
-let playerCarX2 = 400;
+
 let playerCarY = 450;
 
+// ====== IMG PRELOAD ====== //
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
 }
 window.preload = preload;
+
+// ====== MENU ====== //
 function menuPage() {
   background(37, 60, 129);
   noStroke();
@@ -126,38 +194,22 @@ function menuPage() {
   text("Fantastic", middleWidth - 100, 290);
   image(imgCar, middleWidth - 80, 80, 400, 170);
 
-  textStyle(BOLD);
-  textSize(20);
-  textAlign(CENTER);
-  text("Single Player", middleWidth, height - 155);
-  text("Double Player", middleWidth, height - 105);
-  stroke(237, 195, 40);
-  strokeWeight(2);
-  line(middleWidth - 50, height - 148, middleWidth + 50, height - 148);
-  line(middleWidth - 50, height - 98, middleWidth + 50, height - 98);
-  //Game mode
-  if (
-    mouseX > middleWidth - 100 &&
-    mouseX < middleWidth + 100 &&
-    mouseY > height - 165 &&
-    mouseY < height - 146 &&
-    mouseIsPressed
-  ) {
-    state = "onePlayer";
-    onePlayerScreen();
-  }
-  if (
-    mouseX > middleWidth - 100 &&
-    mouseX < middleWidth + 100 &&
-    mouseY > height - 115 &&
-    mouseY < height - 96 &&
-    mouseIsPressed
-  ) {
-    state = "twoPlayer";
+  singlePlayerButton.draw();
+  doublePlayerButton.draw();
+
+  // These 8 lines of code was adapted from https://pixelkind.github.io/foundationsofprogramming/oop/01-02-example. Accessed: 11/5-2024
+  if (mouseIsPressed) {
+    if (singlePlayerButton.hitTest(mouseX, mouseY)) {
+      state = "onePlayer";
+    }
+    if (doublePlayerButton.hitTest(mouseX, mouseY)) {
+      state = "twoPlayer";
+    }
   }
 }
 window.menuPage = menuPage;
-//One player mode
+
+// ====== ONE PLAYER MODE ====== //
 function onePlayerScreen(x, y) {
   background(38, 139, 7);
   grass.draw();
@@ -247,6 +299,47 @@ function onePlayerScreen(x, y) {
 }
 window.onePlayerScreen = onePlayerScreen;
 
+function resultOneScreen() {
+  onePlayerIsRunning = false;
+  push();
+  background(37, 60, 129);
+  noStroke();
+  fill(255, 194, 1);
+  textStyle(BOLDITALIC);
+  textFont("Verdana");
+  textSize(60);
+  text("Result", middleWidth, 150);
+  textStyle(ITALIC);
+  textSize(20);
+  text("Time:", middleWidth - 85, 250);
+  text("Score:", middleWidth - 85, 350);
+  image(imgCar, middleWidth / 8, height - 200, 400, 170);
+  restartButton.draw();
+  menuButton.draw();
+  pop();
+
+  // Reset red cars
+  for (let i = 0; i < numcars; i++) {
+    let x = random(130, 300);
+    let y = random(-500, 0) - i * spacing; // Add spacing between cars
+    cars[i].x = x;
+    cars[i].y = y;
+    cars[i].scored = false; // Reset scored flag
+  }
+
+  // These 8 lines of code was adapted from https://pixelkind.github.io/foundationsofprogramming/oop/01-02-example. Accessed: 11/5-2024
+  if (mouseIsPressed) {
+    if (restartButton.hitTest(mouseX, mouseY)) {
+      state = "onePlayer";
+    }
+    if (menuButton.hitTest(mouseX, mouseY)) {
+      state = "start";
+    }
+  }
+}
+window.resultOneScreen = resultOneScreen;
+
+// ====== TWO PLAYER MODE ====== //
 function twoPlayerScreen(x, y) {
   background(38, 139, 7);
   push();
@@ -282,59 +375,7 @@ function twoPlayerScreen(x, y) {
   pop();
 }
 window.twoPlayerScreen = twoPlayerScreen;
-function resultOneScreen() {
-  onePlayerIsRunning = false;
-  push();
-  background(37, 60, 129);
-  noStroke();
-  fill(255, 194, 1);
-  textStyle(BOLDITALIC);
-  textFont("Verdana");
-  textSize(60);
-  text("Result", middleWidth, 150);
-  textStyle(ITALIC);
-  textSize(20);
-  text("Time:", middleWidth - 85, 250);
-  text("Score:", middleWidth - 85, 350);
-  image(imgCar, middleWidth / 8, height - 200, 400, 170);
-  textStyle(BOLD);
-  text("RESTART", middleWidth, height - 250);
-  text("MENU", middleWidth, height - 200);
-  stroke(237, 195, 40);
-  strokeWeight(2);
-  line(middleWidth - 50, height - 248, middleWidth + 50, height - 248);
-  line(middleWidth - 50, height - 198, middleWidth + 50, height - 198);
-  pop();
 
-  // Reset red cars
-  for (let i = 0; i < numcars; i++) {
-    let x = random(130, 300);
-    let y = random(-500, 0) - i * spacing; // Add spacing between cars
-    cars[i].x = x;
-    cars[i].y = y;
-    cars[i].scored = false; // Reset scored flag
-  }
-
-  if (
-    mouseX > middleWidth - 100 &&
-    mouseX < middleWidth + 100 &&
-    mouseY > height - 260 &&
-    mouseY < height - 246 &&
-    mouseIsPressed
-  ) {
-    onePlayerScreen();
-    state = "onePlayer";
-  } else if (
-    mouseX > middleWidth - 100 &&
-    mouseX < middleWidth + 100 &&
-    mouseY > height - 210 &&
-    mouseY < height - 196 &&
-    mouseIsPressed
-  ) {
-    state = "start";
-  }
-}
-window.resultOneScreen = resultOneScreen;
 function resultTwoScreen() {
   twoPlayerIsRunning = false;
   push();
@@ -350,10 +391,23 @@ function resultTwoScreen() {
   text("Player 1", middleWidth - 150, 250);
   text("Player 2", middleWidth + 100, 250);
   image(imgCar, 20, 400, 320, 140);
+  restartButton.draw();
+  menuButton.draw();
   pop();
+
+  // These 8 lines of code was adapted from https://pixelkind.github.io/foundationsofprogramming/oop/01-02-example. Accessed: 11/5-2024
+  if (mouseIsPressed) {
+    if (restartButton.hitTest(mouseX, mouseY)) {
+      state = "TwoPlayer";
+    }
+    if (menuButton.hitTest(mouseX, mouseY)) {
+      state = "start";
+    }
+  }
 }
 window.resultTwoScreen = resultTwoScreen;
 
+// ====== COLLISION ====== //
 // Function to check collision between two rectangles
 //<-- The following 2 lines were inspierd from the p5.js site 14-04-2024, https://editor.p5js.org/dfeusse/sketches/H1vD7NQjb -->
 function collision(x1, y1, w1, h1, x2, y2, w2, h2) {
@@ -365,6 +419,7 @@ let state = "start";
 let onePlayerIsRunning = true;
 let twoPlayerIsRunning = true;
 
+// ====== DRAW FUNCTION ====== //
 /*<-- The following 20 lines were inspierd from the lunar lander game -->*/
 function draw() {
   if (state === "start") {
