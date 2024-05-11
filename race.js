@@ -111,13 +111,13 @@ let doublePlayerButton = new Button(
   "Double Player"
 );
 let restartButton = new Button(
-  middleWidth - 95,
-  height - 190,
+  middleWidth - 195,
+  height - 250,
   190,
   50,
   "RESTART"
 );
-let menuButton = new Button(middleWidth - 95, height - 130, 190, 50, "MENU");
+let menuButton = new Button(middleWidth + 5, height - 250, 190, 50, "MENU");
 
 //Different players
 let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
@@ -307,15 +307,16 @@ function onePlayerScreen(x, y) {
 window.onePlayerScreen = onePlayerScreen;
 
 function resultOneScreen() {
-  onePlayerIsRunning = false;
   push();
   background(37, 60, 129);
   noStroke();
   fill(255, 194, 1);
   textStyle(BOLDITALIC);
+  textAlign(CENTER);
   textFont("Verdana");
   textSize(60);
   text("Result", middleWidth, 150);
+  textAlign(RIGHT);
   textStyle(ITALIC);
   textSize(20);
   text("Time:", middleWidth - 85, 250);
