@@ -55,7 +55,7 @@ class Grass {
   }
 
   update() {
-    this.y += 1;
+    this.y += 5;
   }
 }
 
@@ -211,11 +211,16 @@ window.menuPage = menuPage;
 
 // ====== ONE PLAYER MODE ====== //
 function onePlayerScreen(x, y) {
-  background(38, 139, 7);
-  grass.draw();
-  grass.update();
   push();
+  background(38, 139, 7);
   translate(x, y);
+  for (let i = 0; i < grass.length; i++) {
+    grass[i].draw();
+    grass[i].update();
+    if (grass[i].y > height) {
+      grass[i].y = random(-400, -50);
+    }
+  }
   fill(102, 102, 95);
   noStroke();
   rect(middleWidth - 150, 0, 300, height);
@@ -236,6 +241,8 @@ function onePlayerScreen(x, y) {
       rect(lineX, lineY, 10, 80);
     }
   }
+
+  // Falling grass
 
   singlePlayer.displayCar();
 
