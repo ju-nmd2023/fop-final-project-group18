@@ -68,7 +68,7 @@ let player2 = new PlayerCar(middleWidth * 1.5, 550, [205, 52, 52]);
 let cars = [];
 let carsright = [];
 let carSize = (40, 70);
-let numcars = 3;
+let numcars = 2;
 let traficspeed = 8;
 let traficspeedright = 3;
 let spacing = 550; // Adjust this value to increase or decrease space between cars
@@ -234,6 +234,11 @@ function onePlayerScreen(x, y) {
   for (let i = 0; i < powerup.length; i++) {
     powerup[i].fall();
     powerup[i].display();
+
+    if (powerup[i].checkCollision(singlePlayer.x, singlePlayer.y, 70, 115)) {
+      // Collision detected, perform actions such as increasing score or activating power-up
+      score += 1; // Example action: Increase score by 10
+    }
   }
   // Display score
   text("Score: " + score, middleWidth - 270, 90);
