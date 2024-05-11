@@ -30,6 +30,44 @@ class PlayerCar {
   }
 }
 
+class Buttons {
+  constructor(x, y, width, height, text) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.text = text;
+  }
+
+  draw() {
+    push();
+    translate(this.x, this.y);
+    noStroke();
+    fill(37, 60, 129);
+    rect(0, 0, this.width, this.height);
+
+    // Text
+    fill(237, 195, 40);
+    textFont("Verdana");
+    textStyle(BOLD);
+    textSize(20);
+    textAlign(CENTER);
+    stroke(237, 195, 40);
+    strokeWeight(2);
+    line(this.x, this.y, this.x + this.width, this.y);
+    text(text(this.text, 0, this.height / 4, this.width));
+    poop();
+  }
+
+  hitTest(x, y) {
+    return (
+      x > this.x &&
+      x < this.x + this.width &&
+      y > this.y &&
+      y < this.y + this.height
+    );
+  }
+}
 
 //Different players
 let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
@@ -80,7 +118,7 @@ let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
 let imgCar;
 
-//Player1 car coordinates 
+//Player1 car coordinates
 let playerCarX1 = 200;
 let playerCarX2 = 400;
 let playerCarY = 450;
@@ -100,7 +138,6 @@ function menuPage() {
   text("And", middleWidth - 220, 220);
   text("Fantastic", middleWidth - 100, 290);
   image(imgCar, middleWidth - 80, 80, 400, 170);
-
   textStyle(BOLD);
   textSize(20);
   textAlign(CENTER);
@@ -163,7 +200,7 @@ function onePlayerScreen(x, y) {
 
   singlePlayer.displayCar();
 
-    // Check collision between power-up and player's car
+  // Check collision between power-up and player's car
   for (let i = 0; i < powerup.length; i++) {
     powerup[i].fall();
     powerup[i].display();
@@ -187,8 +224,6 @@ function onePlayerScreen(x, y) {
       powerup.splice(i, 1);
     }
   }
-
-
 
   // Traffic loop, more code exsists
   for (let i = 0; i < cars.length; i++) {
@@ -236,7 +271,6 @@ function onePlayerScreen(x, y) {
   for (let i = 0; i < powerup.length; i++) {
     powerup[i].fall();
     powerup[i].display();
-
   }
   // Display score
   text("Score: " + score, middleWidth - 270, 90);
@@ -369,7 +403,7 @@ function draw() {
     menuPage();
   } else if (state === "onePlayer") {
     onePlayerScreen();
-    //Move car 
+    //Move car
     if (keyIsDown(RIGHT_ARROW)) {
       singlePlayer.x += 8;
     }

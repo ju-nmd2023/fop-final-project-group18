@@ -36,27 +36,26 @@ class Grass {
     this.y = y;
   }
 
-  displayGrass() {
+  draw() {
     push();
     translate(this.x, this.y);
     stroke("Green");
     strokeWeight(5);
-    line(100, 100, 100, 120);
-    line(100, 100, 110, 120);
-    line(110, 120, 125, 90);
-    line(125, 90, 135, 120);
-    line(135, 120, 145, 100);
-    line(145, 120, 145, 100);
+    line(this.x, this.y, this.x, this.y + 20);
+    line(this.x, this.y, this.x + 10, this.y + 20);
+    line(this.x + 10, this.y + 20, this.x + 25, this.y - 10);
+    line(this.x + 25, this.y - 10, this.x + 35, this.y + 20);
+    line(this.x + 35, this.y + 20, this.x + 45, this.y);
+    line(this.x + 45, this.y + 20, this.x + 45, this.y);
     pop();
   }
- 
-  movingGrass() {
-    this.y = traficspeed;
-    if (this.y > height) {
-      this.y = random(-500, 0);
-    }
+
+  update() {
+    this.y += 1;
   }
 }
+
+let grass = new Grass(50, 0);
 
 let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
@@ -73,9 +72,6 @@ let numcars = 3;
 let traficspeed = 8;
 let traficspeedright = 3;
 let spacing = 550; // Adjust this value to increase or decrease space between cars
-
-// Grass
-let grass = [];
 
 //powerup
 let powerup = [];
@@ -119,7 +115,7 @@ function preload() {
 }
 window.preload = preload;
 function menuPage() {
-  background(37, 60, 129); 
+  background(37, 60, 129);
   noStroke();
   fill(255, 194, 1);
   textStyle(BOLDITALIC);
@@ -164,11 +160,8 @@ window.menuPage = menuPage;
 //One player mode
 function onePlayerScreen(x, y) {
   background(38, 139, 7);
-
-  for (let i = 0; i < grass.length; i++) {
-    grass[i].movingGrass();
-    grass[i].displayGrass();
-  }
+  grass.draw();
+  grass.update();
   push();
   translate(x, y);
   fill(102, 102, 95);
@@ -177,9 +170,7 @@ function onePlayerScreen(x, y) {
   rect(middleWidth - 200, 0, 400, height);
   fill(0);
   textSize(15);
-  text("Speed"+" "+ traficspeed, middleWidth - 270, 50);
-
- 
+  text("Speed" + " " + traficspeed, middleWidth - 270, 50);
 
   //lines
   fill(255);
@@ -209,7 +200,7 @@ function onePlayerScreen(x, y) {
     //<-- The following 20 lines were inspierd from the p5.js site 14-04-2024, https://editor.p5js.org/dfeusse/sketches/H1vD7NQjb -->
     if (
       collision(
-        singlePlayer.x, 
+        singlePlayer.x,
         singlePlayer.y,
         70,
         115,
@@ -235,7 +226,7 @@ function onePlayerScreen(x, y) {
       if (cars[i].y > 300 && !cars[i].scored) {
         score++; // Increment the score
         cars[i].scored = true; // Mark the car as scored to prevent double counting
-    }
+      }
     }
   }
 
