@@ -21,7 +21,7 @@ class PlayerCar {
     noStroke();
     rect(0, 0, 70, 115, 10);
     ellipse(35, 10, 75, 65);
-
+ 
     // Car windows
     fill(0);
     quad(10, 80, 60, 80, 57, 100, 13, 100);
@@ -239,6 +239,10 @@ function menuPage() {
 }
 window.menuPage = menuPage;
 
+let powerupActive = false; // Variable to track powerup effect
+let powerupActivatedTime; // Timestamp when powerup was activated
+let powerupTime = 0;
+
 // ====== ONE PLAYER MODE ====== //
 function onePlayerScreen(x, y) {
   push();
@@ -282,41 +286,21 @@ function onePlayerScreen(x, y) {
     cars[i].fall();
     cars[i].display();
 
-    carsright[i].fall();
+    carsright[i].fall(); 
     carsright[i].display();
 
     // Check collision
     //<-- The following 20 lines were inspierd from the p5.js site 14-04-2024, https://editor.p5js.org/dfeusse/sketches/H1vD7NQjb -->
-    if (
-      collision(
-        singlePlayer.x,
-        singlePlayer.y,
-        70,
-        115,
-        cars[i].x,
-        cars[i].y,
-        carSize,
-        carSize
-      ) ||
-      collision(
-        singlePlayer.x,
-        playerCarY,
-        70,
-        115,
-        carsright[i].x,
-        carsright[i].y,
-        carSize,
-        carSize
-      )
-    ) {
-      state = "resultOne";
-    } else {
-      // Check if a red car falls past the player car
-      if (cars[i].y > 300 && !cars[i].scored) {
+    if (!powerupActive && (collision(singlePlayer.x, singlePlayer.y, 70, 115, cars[i].x, cars[i].y, carSize, carSize) ||
+    collision(singlePlayer.x, playerCarY, 70, 115, carsright[i].x, carsright[i].y, carSize, carSize))) {
+    state = "resultOne";
+} else {
+    // Check if a red car falls past the player car
+    if (!powerupActive && cars[i].y > 300 && !cars[i].scored) {
         score++; // Increment the score
         cars[i].scored = true; // Mark the car as scored to prevent double counting
-      }
     }
+}
   }
 
   //powerup
@@ -325,12 +309,17 @@ function onePlayerScreen(x, y) {
     powerup[i].display();
 
     if (powerup[i].checkCollision(singlePlayer.x, singlePlayer.y, 70, 115)) {
-      // Collision detected, perform actions such as increasing score or activating power-up
-      score += 1; // Example action: Increase score by 10
+        // Collision detected, activate powerup effect
+        powerupActive = true;
+        powerupActivatedTime = millis(); // Record activation time
+        // Perform other actions if needed
+        score += 1; // Example action: Increase score by 1
     }
-  }
+}
   // Display score
   text("Score: " + score, middleWidth - 270, 90);
+  // Display poweruptime
+  text("Power: " + powerupTime, middleWidth - 270, 120);
 
   pop();
 }
@@ -460,8 +449,19 @@ let onePlayerIsRunning = true;
 let twoPlayerIsRunning = true;
 
 // ====== DRAW FUNCTION ====== //
-/*<-- The following 20 lines were inspierd from the lunar lander game -->*/
+
 function draw() {
+// Update powerup effect timer
+if (powerupActive) {
+    powerupTime = 4 - Math.floor((millis() - powerupActivatedTime) / 1000);
+    if (powerupTime <= 0) {
+        powerupActive = false; // Disable powerup effect when time is up
+        powerupTime = 0; // Ensure powerupTime doesn't become negative
+    }
+} else {
+    powerupTime = 0; // Reset powerupTime when powerup is not active
+}
+/*<-- The following 20 lines were inspierd from the lunar lander game -->*/
   if (state === "start") {
     menuPage();
   } else if (state === "onePlayer") {
