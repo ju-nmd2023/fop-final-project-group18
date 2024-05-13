@@ -194,7 +194,6 @@ function menuPage() {
   text("Fantastic", middleWidth - 100, 290);
   image(imgCar, middleWidth - 80, 80, 400, 170);
 
-<<<<<<< Updated upstream
   singlePlayerButton.draw();
   doublePlayerButton.draw();
 
@@ -205,10 +204,9 @@ function menuPage() {
     }
     if (doublePlayerButton.hitTest(mouseX, mouseY)) {
       state = "twoPlayer";
-    }
-=======
-  textStyle(BOLD);
-  textSize(20);
+    }  
+  textStyle(BOLD); 
+  textSize(20); 
   textAlign(CENTER);
   text("Single Player", middleWidth, height - 155);
   text("Double Player", middleWidth, height - 105);
@@ -235,8 +233,8 @@ function menuPage() {
     mouseIsPressed
   ) {
     state = "twoPlayer";
->>>>>>> Stashed changes
   }
+}
 }
 window.menuPage = menuPage;
 
