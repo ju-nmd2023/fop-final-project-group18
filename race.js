@@ -1,5 +1,6 @@
 import { RedCar } from "./traffic.js";
 import { PowerUp } from "./powerup.js";
+import { resetGame } from "./reset.js";
 
 let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
@@ -367,9 +368,11 @@ function resultOneScreen() {
   // These 8 lines of code was adapted from https://pixelkind.github.io/foundationsofprogramming/oop/01-02-example. Accessed: 11/5-2024
   if (mouseIsPressed) {
     if (restartButton.hitTest(mouseX, mouseY)) {
+      resetGame();
       state = "onePlayer";
     }
     if (menuButton.hitTest(mouseX, mouseY)) {
+      resetGame();
       state = "start";
     }
   }
@@ -387,9 +390,9 @@ function twoPlayerScreen(x, y) {
   rect(middleWidth * 1.5 - 150, 0, 300, height);
   player1.displayCar();
   player2.displayCar();
- 
+
   fill(255);
-  let lineSpacing = 400; 
+  let lineSpacing = 400;
   let lineX = middleWidth - 5;
   let startY = (frameCount % 20) * 20;
 
