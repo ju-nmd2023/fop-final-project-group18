@@ -5,6 +5,7 @@ import { FallingLine } from "./lines.js";
 
 let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
+let imgCar;
 
 class PlayerCar {
   constructor(x, y, color) {
@@ -22,7 +23,7 @@ class PlayerCar {
     noStroke();
     rect(0, 0, 70, 115, 10);
     ellipse(35, 10, 75, 65);
- 
+
     // Car windows
     fill(0);
     quad(10, 80, 60, 80, 57, 100, 13, 100);
@@ -98,28 +99,10 @@ class Button {
   }
 }
 
-let singlePlayerButton = new Button(
-  middleWidth - 95,
-  height - 190,
-  190,
-  50,
-  "Single Player"
-);
-let doublePlayerButton = new Button(
-  middleWidth - 95,
-  height - 130,
-  190,
-  50,
-  "Double Player"
-);
-let restartButton = new Button(
-  middleWidth - 195,
-  height - 250,
-  190,
-  50,
-  "RESTART"
-);
-let menuButton = new Button(middleWidth + 5, height - 250, 190, 50, "MENU");
+let singlePlayerButton;
+let doublePlayerButton;
+let restartButton;
+let menuButton;
 
 //Different players
 let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
@@ -132,7 +115,6 @@ let carsright = [];
 let carSize = (40, 70);
 let numcars = 2;
 let traficspeed = 8;
-let traficspeedright = 3;
 let spacing = 550; // Adjust this value to increase or decrease space between cars
 
 //powerup
@@ -146,8 +128,32 @@ let score = 0;
 function setup() {
   createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
-  //trafic cars left being positioned
+  
+  singlePlayerButton = new Button(
+    middleWidth - 95,
+    height - 190,
+    190,
+    50,
+    "Single Player"
+  );
+  doublePlayerButton = new Button(
+    middleWidth - 95,
+    height - 130,
+    190,
+    50,
+    "Double Player"
+  );
+  restartButton = new Button(
+    middleWidth - 195,
+    height - 250,
+    190,
+    50,
+    "RESTART"
+  );
 
+  menuButton = new Button(middleWidth + 5, height - 250, 190, 50, "MENU");
+
+//trafic cars left being positioned
   for (let i = 0; i < numcars; i++) {
     let x = random(130, 300);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
@@ -206,37 +212,37 @@ function menuPage() {
     }
     if (doublePlayerButton.hitTest(mouseX, mouseY)) {
       state = "twoPlayer";
-    }  
-  textStyle(BOLD); 
-  textSize(20); 
-  textAlign(CENTER);
-  text("Single Player", middleWidth, height - 155);
-  text("Double Player", middleWidth, height - 105);
-  stroke(237, 195, 40);
-  strokeWeight(2);
-  line(middleWidth - 50, height - 148, middleWidth + 50, height - 148);
-  line(middleWidth - 50, height - 98, middleWidth + 50, height - 98);
-  //Game mode
-  if (
-    mouseX > middleWidth - 100 &&
-    mouseX < middleWidth + 100 &&
-    mouseY > height - 165 &&
-    mouseY < height - 146 &&
-    mouseIsPressed
-  ) {
-    state = "onePlayer";
-    onePlayerScreen();
+    }
+    textStyle(BOLD);
+    textSize(20);
+    textAlign(CENTER);
+    text("Single Player", middleWidth, height - 155);
+    text("Double Player", middleWidth, height - 105);
+    stroke(237, 195, 40);
+    strokeWeight(2);
+    line(middleWidth - 50, height - 148, middleWidth + 50, height - 148);
+    line(middleWidth - 50, height - 98, middleWidth + 50, height - 98);
+    //Game mode
+    if (
+      mouseX > middleWidth - 100 &&
+      mouseX < middleWidth + 100 &&
+      mouseY > height - 165 &&
+      mouseY < height - 146 &&
+      mouseIsPressed
+    ) {
+      state = "onePlayer";
+      onePlayerScreen();
+    }
+    if (
+      mouseX > middleWidth - 100 &&
+      mouseX < middleWidth + 100 &&
+      mouseY > height - 115 &&
+      mouseY < height - 96 &&
+      mouseIsPressed
+    ) {
+      state = "twoPlayer";
+    }
   }
-  if (
-    mouseX > middleWidth - 100 &&
-    mouseX < middleWidth + 100 &&
-    mouseY > height - 115 && 
-    mouseY < height - 96 &&
-    mouseIsPressed
-  ) {
-    state = "twoPlayer";
-  }
-}
 }
 window.menuPage = menuPage;
 
@@ -287,21 +293,42 @@ function onePlayerScreen(x, y) {
     cars[i].fall();
     cars[i].display();
 
-    carsright[i].fall(); 
+    carsright[i].fall();
     carsright[i].display();
 
     // Check collision
     //<-- The following 20 lines were inspierd from the p5.js site 14-04-2024, https://editor.p5js.org/dfeusse/sketches/H1vD7NQjb -->
-    if (!powerupActive && (collision(singlePlayer.x, singlePlayer.y, 70, 115, cars[i].x, cars[i].y, carSize, carSize) ||
-    collision(singlePlayer.x, playerCarY, 70, 115, carsright[i].x, carsright[i].y, carSize, carSize))) {
-    state = "resultOne";
-} else {
-    // Check if a red car falls past the player car
-    if (!powerupActive && cars[i].y > 300 && !cars[i].scored) {
+    if (
+      !powerupActive &&
+      (collision(
+        singlePlayer.x,
+        singlePlayer.y,
+        70,
+        115,
+        cars[i].x,
+        cars[i].y,
+        carSize,
+        carSize
+      ) ||
+        collision(
+          singlePlayer.x,
+          playerCarY,
+          70,
+          115,
+          carsright[i].x,
+          carsright[i].y,
+          carSize,
+          carSize
+        ))
+    ) {
+      state = "resultOne";
+    } else {
+      // Check if a red car falls past the player car
+      if (!powerupActive && cars[i].y > 300 && !cars[i].scored) {
         score++; // Increment the score
         cars[i].scored = true; // Mark the car as scored to prevent double counting
+      }
     }
-}
   }
 
   //powerup
@@ -310,13 +337,13 @@ function onePlayerScreen(x, y) {
     powerup[i].display();
 
     if (powerup[i].checkCollision(singlePlayer.x, singlePlayer.y, 70, 115)) {
-        // Collision detected, activate powerup effect
-        powerupActive = true;
-        powerupActivatedTime = millis(); // Record activation time
-        // Perform other actions if needed
-        score += 1; // Example action: Increase score by 1
+      // Collision detected, activate powerup effect
+      powerupActive = true;
+      powerupActivatedTime = millis(); // Record activation time
+      // Perform other actions if needed
+      score += 1; // Example action: Increase score by 1
     }
-}
+  }
   // Display score
   text("Score: " + score, middleWidth - 270, 90);
   // Display poweruptime
@@ -335,7 +362,7 @@ function resultOneScreen() {
   textAlign(CENTER);
   textFont("Verdana");
   textSize(60);
-  text("Result", middleWidth, 150); 
+  text("Result", middleWidth, 150);
   textAlign(RIGHT);
   textStyle(ITALIC);
   textSize(20);
@@ -362,7 +389,7 @@ function resultOneScreen() {
       state = "onePlayer";
     }
     if (menuButton.hitTest(mouseX, mouseY)) {
-      resetGame(); 
+      resetGame();
       state = "start";
     }
   }
@@ -373,11 +400,11 @@ window.resultOneScreen = resultOneScreen;
 function twoPlayerScreen(x, y) {
   background(38, 139, 7);
   push();
-  translate(x, y); 
+  translate(x, y);
   fill(102, 102, 95);
   noStroke();
   rect(middleWidth / 2 - 150, 0, 300, height);
-  rect(middleWidth * 1.5 - 150, 0, 300, height); 
+  rect(middleWidth * 1.5 - 150, 0, 300, height);
   player1.displayCar();
   player2.displayCar();
 
@@ -386,7 +413,7 @@ function twoPlayerScreen(x, y) {
   let lineX = middleWidth - 150;
   let lineX2 = middleWidth + 150;
   let startY = (frameCount % 20) * 20;
- 
+
   for (let i = 0; i < 10; i++) {
     let lineY = startY - i * lineSpacing;
     if (lineY < height) {
@@ -397,10 +424,9 @@ function twoPlayerScreen(x, y) {
     let lineY = startY - i * lineSpacing;
     if (lineY < height) {
       rect(lineX2, lineY, 10, 80);
-    } 
+    }
   }
-  
- 
+
   // Traffic loop, more code exsists
   for (let i = 0; i < cars.length; i++) {
     cars[i].fall();
@@ -414,7 +440,18 @@ function twoPlayerScreen(x, y) {
   for (let i = 0; i < cars.length; i++) {
     cars[i].fall();
     cars[i].display();
-    if (collision(player1.x, player1.y, 70, 115, cars[i].x, cars[i].y, carSize, carSize)) {
+    if (
+      collision(
+        player1.x,
+        player1.y,
+        70,
+        115,
+        cars[i].x,
+        cars[i].y,
+        carSize,
+        carSize
+      )
+    ) {
       state = "resultTwo"; // Player 1 collision with traffic car
     }
   }
@@ -423,17 +460,28 @@ function twoPlayerScreen(x, y) {
   for (let i = 0; i < carsright.length; i++) {
     carsright[i].fall();
     carsright[i].display();
-    if (collision(player2.x, player2.y, 70, 115, carsright[i].x, carsright[i].y, carSize, carSize)) {
+    if (
+      collision(
+        player2.x,
+        player2.y,
+        70,
+        115,
+        carsright[i].x,
+        carsright[i].y,
+        carSize,
+        carSize
+      )
+    ) {
       state = "resultTwo"; // Player 2 collision with traffic car
     }
   }
- 
-  pop(); 
-}   
+
+  pop();
+}
 window.twoPlayerScreen = twoPlayerScreen;
 
 function resultTwoScreen() {
-  twoPlayerIsRunning = false; 
+  twoPlayerIsRunning = false;
   push();
   background(37, 60, 129);
   noStroke();
@@ -477,19 +525,19 @@ let twoPlayerIsRunning = true;
 
 // ====== DRAW FUNCTION ====== //
 
-function draw() { 
-// Update powerup effect timer
-if (powerupActive) {
+function draw() {
+  // Update powerup effect timer
+  if (powerupActive) {
     powerupTime = 2 - Math.floor((millis() - powerupActivatedTime) / 1000);
     if (powerupTime <= 0) {
-        powerupActive = false; // Disable powerup effect when time is up
-        powerupTime = 0; // Ensure powerupTime doesn't become negative
+      powerupActive = false; // Disable powerup effect when time is up
+      powerupTime = 0; // Ensure powerupTime doesn't become negative
     }
-} else {
+  } else {
     powerupTime = 0; // Reset powerupTime when powerup is not active
-}
+  }
 
-/*<-- The following 20 lines were inspierd from the lunar lander game -->*/
+  /*<-- The following 20 lines were inspierd from the lunar lander game -->*/
   if (state === "start") {
     menuPage();
   } else if (state === "onePlayer") {
@@ -520,4 +568,3 @@ if (powerupActive) {
   }
 }
 window.draw = draw;
-  

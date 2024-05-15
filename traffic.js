@@ -1,3 +1,9 @@
+let traficspeed = 8;
+let spacing = 550;
+let cars = [];
+let carsright = [];
+let carSize = (40, 70);
+let numcars = 2;
 export class RedCar {
   constructor(x, y, size) {
     this.x = x;
@@ -9,7 +15,7 @@ export class RedCar {
   display() {
     push();
     translate(this.x, this.y);
-    //https://chat.openai.com/share/3f7a06dc-9c3a-4822-bb75-869fe8f0619e 
+    //https://chat.openai.com/share/3f7a06dc-9c3a-4822-bb75-869fe8f0619e
     // Red car
     fill(255, 0, 0); // Change color to red
     noStroke();
@@ -75,34 +81,34 @@ export class RedCar {
 
     // Check if the car reaches the bottom of the canvas
     if (this.y > height) {
-        // Set a new random position for the car, ensuring it doesn't overlap with existing cars
-        let overlapping = true;
-        while (overlapping) {
-            // Generate new position
-            let newX = random(130, 530); // Update the range as needed
-            let newY = random(-500, 0) - spacing; // Add spacing between cars
+      // Set a new random position for the car, ensuring it doesn't overlap with existing cars
+      let overlapping = true;
+      while (overlapping) {
+        // Generate new position
+        let newX = random(130, 530); // Update the range as needed
+        let newY = random(-500, 0) - spacing; // Add spacing between cars
 
-            // Check if the new position overlaps with any existing car position
-            overlapping = false;
-            for (let i = 0; i < cars.length; i++) {
-                if (dist(newX, newY, cars[i].x, cars[i].y) < carSize * 2) {
-                    overlapping = true;
-                    break;
-                }
-            }
-            for (let i = 0; i < carsright.length; i++) {
-                if (dist(newX, newY, carsright[i].x, carsright[i].y) < carSize * 2) {
-                    overlapping = true;
-                    break;
-                }
-            }
-
-            // If the new position doesn't overlap, set it as the car's position
-            if (!overlapping) {
-                this.x = newX;
-                this.y = newY;
-            }
+        // Check if the new position overlaps with any existing car position
+        overlapping = false;
+        for (let i = 0; i < cars.length; i++) {
+          if (dist(newX, newY, cars[i].x, cars[i].y) < carSize * 2) {
+            overlapping = true;
+            break;
+          }
         }
+        for (let i = 0; i < carsright.length; i++) {
+          if (dist(newX, newY, carsright[i].x, carsright[i].y) < carSize * 2) {
+            overlapping = true;
+            break;
+          }
+        }
+
+        // If the new position doesn't overlap, set it as the car's position
+        if (!overlapping) {
+          this.x = newX;
+          this.y = newY;
+        }
+      }
     }
-}
+  }
 }
