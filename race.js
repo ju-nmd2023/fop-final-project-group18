@@ -1,6 +1,7 @@
 import { RedCar } from "./traffic.js";
 import { PowerUp } from "./powerup.js";
 import { resetGame } from "./reset.js";
+import { FallingLine } from "./lines.js";
 
 let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
@@ -334,7 +335,7 @@ function resultOneScreen() {
   textAlign(CENTER);
   textFont("Verdana");
   textSize(60);
-  text("Result", middleWidth, 150);
+  text("Result", middleWidth, 150); 
   textAlign(RIGHT);
   textStyle(ITALIC);
   textSize(20);
@@ -361,7 +362,7 @@ function resultOneScreen() {
       state = "onePlayer";
     }
     if (menuButton.hitTest(mouseX, mouseY)) {
-      resetGame();
+      resetGame(); 
       state = "start";
     }
   }
@@ -372,26 +373,34 @@ window.resultOneScreen = resultOneScreen;
 function twoPlayerScreen(x, y) {
   background(38, 139, 7);
   push();
-  translate(x, y);
+  translate(x, y); 
   fill(102, 102, 95);
   noStroke();
   rect(middleWidth / 2 - 150, 0, 300, height);
-  rect(middleWidth * 1.5 - 150, 0, 300, height);
+  rect(middleWidth * 1.5 - 150, 0, 300, height); 
   player1.displayCar();
   player2.displayCar();
 
   fill(255);
   let lineSpacing = 400;
-  let lineX = middleWidth - 5;
+  let lineX = middleWidth - 150;
+  let lineX2 = middleWidth + 150;
   let startY = (frameCount % 20) * 20;
-
+ 
   for (let i = 0; i < 10; i++) {
     let lineY = startY - i * lineSpacing;
     if (lineY < height) {
       rect(lineX, lineY, 10, 80);
     }
   }
-
+  for (let i = 0; i < 10; i++) {
+    let lineY = startY - i * lineSpacing;
+    if (lineY < height) {
+      rect(lineX2, lineY, 10, 80);
+    } 
+  }
+  
+ 
   // Traffic loop, more code exsists
   for (let i = 0; i < cars.length; i++) {
     cars[i].fall();
@@ -401,12 +410,30 @@ function twoPlayerScreen(x, y) {
     carsright[i].display();
   }
 
-  pop();
-}
+  // Check collision for player1 with traffic cars
+  for (let i = 0; i < cars.length; i++) {
+    cars[i].fall();
+    cars[i].display();
+    if (collision(player1.x, player1.y, 70, 115, cars[i].x, cars[i].y, carSize, carSize)) {
+      state = "resultTwo"; // Player 1 collision with traffic car
+    }
+  }
+
+  // Check collision for player2 with traffic cars
+  for (let i = 0; i < carsright.length; i++) {
+    carsright[i].fall();
+    carsright[i].display();
+    if (collision(player2.x, player2.y, 70, 115, carsright[i].x, carsright[i].y, carSize, carSize)) {
+      state = "resultTwo"; // Player 2 collision with traffic car
+    }
+  }
+ 
+  pop(); 
+}   
 window.twoPlayerScreen = twoPlayerScreen;
 
 function resultTwoScreen() {
-  twoPlayerIsRunning = false;
+  twoPlayerIsRunning = false; 
   push();
   background(37, 60, 129);
   noStroke();
@@ -450,10 +477,10 @@ let twoPlayerIsRunning = true;
 
 // ====== DRAW FUNCTION ====== //
 
-function draw() {
+function draw() { 
 // Update powerup effect timer
 if (powerupActive) {
-    powerupTime = 4 - Math.floor((millis() - powerupActivatedTime) / 1000);
+    powerupTime = 2 - Math.floor((millis() - powerupActivatedTime) / 1000);
     if (powerupTime <= 0) {
         powerupActive = false; // Disable powerup effect when time is up
         powerupTime = 0; // Ensure powerupTime doesn't become negative
@@ -461,6 +488,7 @@ if (powerupActive) {
 } else {
     powerupTime = 0; // Reset powerupTime when powerup is not active
 }
+
 /*<-- The following 20 lines were inspierd from the lunar lander game -->*/
   if (state === "start") {
     menuPage();
@@ -492,3 +520,4 @@ if (powerupActive) {
   }
 }
 window.draw = draw;
+  
