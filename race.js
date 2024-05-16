@@ -115,6 +115,7 @@ let carsright = [];
 let carSize = (40, 70);
 let numcars = 2;
 let traficspeed = 8;
+let traficspeedright = 3;
 let spacing = 550; // Adjust this value to increase or decrease space between cars
 
 //powerup
