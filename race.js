@@ -6,7 +6,6 @@ import { FallingLine } from "./lines.js";
 
 let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
-let imgCar;
 
 let grass = [];
 class Grass {
@@ -128,19 +127,19 @@ function setup() {
 
   //trafic cars left being positioned
   for (let i = 0; i < numcars; i++) {
-    let x = random(130, 300);
+    let x = random(middleWidth - 200, middleWidth);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     cars.push(new RedCar(x, y, carSize));
   }
   //trafic cars right being positioned
   for (let i = 0; i < numcars; i++) {
-    let x = random(300, 532);
+    let x = random(middleWidth, middleWidth + 200);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     carsright.push(new RedCar(x, y, carSize));
   }
   //powerup
   for (let i = 0; i < numpowerup; i++) {
-    let x = random(130, 532);
+    let x = random(middleWidth - 200, middleWidth + 200);
     let y = random(-500, 0);
     powerup.push(new PowerUp(x, y, powerupsize));
   }
@@ -157,6 +156,7 @@ window.setup = setup;
 let playerCarY = 450;
 
 // ====== IMG PRELOAD ====== //
+let imgCar;
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
 }
@@ -237,7 +237,6 @@ function onePlayerScreen(x, y) {
   }
   fill(102, 102, 95);
   noStroke();
-  rect(middleWidth - 150, 0, 300, height);
   rect(middleWidth - 200, 0, 400, height);
   fill(0);
   textSize(15);
@@ -503,11 +502,11 @@ function draw() {
   if (powerupActive) {
     powerupTime = 2 - Math.floor((millis() - powerupActivatedTime) / 1000);
     if (powerupTime <= 0) {
-      powerupActive = false; 
-      powerupTime = 0; 
+      powerupActive = false;
+      powerupTime = 0;
     }
   } else {
-    powerupTime = 0; 
+    powerupTime = 0;
   }
 
   /*<-- The following 20 lines were inspierd from the lunar lander game -->*/
