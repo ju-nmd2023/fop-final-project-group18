@@ -81,7 +81,7 @@ let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
 let player1 = new PlayerCar(middleWidth / 2, 550, [255, 194, 1]);
 let player2 = new PlayerCar(middleWidth * 1.5, 550, [205, 52, 52]);
 
-//trafic cars
+//trafic cars 
 let cars = [];
 let carsright = [];
 let carSize = (40, 70);
@@ -89,10 +89,10 @@ let numcars = 2;
 let traficspeed = 8;
 let traficspeedright = 3;
 let spacing = 550;
-
+   
 //powerup
 let powerup = [];
-let powerupsize = (20, 20);
+let powerupsize = (20, 20); 
 let numpowerup = 1;
 let powerupspeed = 8;
 let score = 0;
@@ -153,7 +153,7 @@ function setup() {
     grass.push(new Grass(random(width), random(-400, -50)));
   }
 }
-window.setup = setup;
+window.setup = setup; 
 
 //Player1 car coordinates
 
@@ -289,17 +289,17 @@ function onePlayerScreen(x, y) {
           carSize,
           carSize
         ))
-    ) {
+    ) { 
       state = "resultOne";
     } else {
       // Check if a red car falls past the player car
-      if (!powerupActive && cars[i].y > 300 && !cars[i].scored) {
+      if (!powerupActive && cars[i].y > 300 && ! cars[i].scored) {
         score++; // Increment the score
         cars[i].scored = true; // Mark the car as scored to prevent double counting
       }
     }
   }
-
+  
   //powerup
   for (let i = 0; i < powerup.length; i++) {
     powerup[i].fall();
@@ -335,7 +335,7 @@ function resultOneScreen() {
   textAlign(RIGHT);
   textStyle(ITALIC);
   textSize(20);
-  text("Time:", middleWidth - 85, 250);
+  //text("Time:", middleWidth - 85, 250);
   text("Score:" + "  " + score, middleWidth - 85, 350);
   image(imgCar, middleWidth / 8, height - 200, 400, 170);
   restartButton.draw();
