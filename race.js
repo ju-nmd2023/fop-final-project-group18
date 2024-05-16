@@ -81,7 +81,7 @@ let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
 let player1 = new PlayerCar(middleWidth / 2, 550, [255, 194, 1]);
 let player2 = new PlayerCar(middleWidth * 1.5, 550, [205, 52, 52]);
 
-//trafic cars 
+//trafic cars
 let cars = [];
 let carsright = [];
 let carSize = (40, 70);
@@ -89,10 +89,10 @@ let numcars = 2;
 let traficspeed = 8;
 let traficspeedright = 3;
 let spacing = 550;
-   
+
 //powerup
 let powerup = [];
-let powerupsize = (20, 20); 
+let powerupsize = (20, 20);
 let numpowerup = 1;
 let powerupspeed = 8;
 let score = 0;
@@ -131,19 +131,19 @@ function setup() {
 
   //trafic cars left being positioned
   for (let i = 0; i < numcars; i++) {
-    let x = random(130, 300);
+    let x = random(middleWidth - 180, middleWidth);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     cars.push(new RedCar(x, y, carSize));
   }
   //trafic cars right being positioned
   for (let i = 0; i < numcars; i++) {
-    let x = random(300, 532);
+    let x = random(middleWidth, middleWidth + 180);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     carsright.push(new RedCar(x, y, carSize));
   }
   //powerup
   for (let i = 0; i < numpowerup; i++) {
-    let x = random(130, 532);
+    let x = random(middleWidth - 200, middleWidth + 200);
     let y = random(-500, 0);
     powerup.push(new PowerUp(x, y, powerupsize));
   }
@@ -153,7 +153,7 @@ function setup() {
     grass.push(new Grass(random(width), random(-400, -50)));
   }
 }
-window.setup = setup; 
+window.setup = setup;
 
 //Player1 car coordinates
 
@@ -222,8 +222,6 @@ function menuPage() {
 }
 window.menuPage = menuPage;
 
-
-
 // ====== ONE PLAYER MODE ====== //
 function onePlayerScreen(x, y) {
   push();
@@ -270,8 +268,8 @@ function onePlayerScreen(x, y) {
     if (
       !powerupActive &&
       (collision(
-        singlePlayer.x,  
-        singlePlayer.y, 
+        singlePlayer.x,
+        singlePlayer.y,
         70,
         115,
         cars[i].x,
@@ -289,17 +287,17 @@ function onePlayerScreen(x, y) {
           carSize,
           carSize
         ))
-    ) { 
+    ) {
       state = "resultOne";
     } else {
       // Check if a red car falls past the player car
-      if (!powerupActive && cars[i].y > 300 && ! cars[i].scored) {
+      if (!powerupActive && cars[i].y > 300 && !cars[i].scored) {
         score++; // Increment the score
         cars[i].scored = true; // Mark the car as scored to prevent double counting
       }
     }
   }
-  
+
   //powerup
   for (let i = 0; i < powerup.length; i++) {
     powerup[i].fall();
@@ -499,11 +497,11 @@ function draw() {
   if (powerupActive) {
     powerupTime = 2 - Math.floor((millis() - powerupActivatedTime) / 1000);
     if (powerupTime <= 0) {
-      powerupActive = false; 
-      powerupTime = 0; 
+      powerupActive = false;
+      powerupTime = 0;
     }
   } else {
-    powerupTime = 0; 
+    powerupTime = 0;
   }
 
   /*<-- The following 20 lines were inspierd from the lunar lander game -->*/

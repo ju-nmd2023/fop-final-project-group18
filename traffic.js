@@ -87,7 +87,7 @@ export class RedCar {
       let overlapping = true;
       while (overlapping) {
         // Generate new position
-        let newX = random(middleWidth - 200, middleWidth + 200); // Update the range as needed
+        let newX = random(middleWidth - 180, middleWidth + 180); // Update the range as needed
         let newY = random(-500, 0) - spacing; // Add spacing between cars
 
         //<== These 18 lines of code was made with help of chatgpt https://chat.openai.com/share/bf3dcc8b-6732-448b-a59c-be2d667625ef ==>
