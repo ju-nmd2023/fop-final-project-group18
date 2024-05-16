@@ -1,40 +1,12 @@
 import { RedCar } from "./traffic.js";
 import { PowerUp } from "./powerup.js";
 import { resetGame } from "./reset.js";
+import { PlayerCar } from "./playercar.js";
 import { FallingLine } from "./lines.js";
 
 let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
 let imgCar;
-
-class PlayerCar {
-  constructor(x, y, color) {
-    this.x = x;
-    this.y = y;
-    this.color = color;
-  }
-
-  displayCar() {
-    push();
-    translate(this.x, this.y);
-
-    // Player ones car
-    fill(this.color);
-    noStroke();
-    rect(0, 0, 70, 115, 10);
-    ellipse(35, 10, 75, 65);
-
-    // Car windows
-    fill(0);
-    quad(10, 80, 60, 80, 57, 100, 13, 100);
-    ellipse(35, 100, 43, 10);
-    quad(5, 25, 65, 25, 60, 55, 10, 55);
-    ellipse(35, 25, 60, 15);
-    triangle(3, 40, 10, 75, 3, 75);
-    triangle(68, 40, 68, 75, 60, 75);
-    pop();
-  }
-}
 
 let grass = [];
 class Grass {
@@ -129,7 +101,7 @@ let score = 0;
 function setup() {
   createCanvas(innerWidth, innerHeight);
   angleMode(DEGREES);
-  
+
   singlePlayerButton = new Button(
     middleWidth - 95,
     height - 190,
@@ -154,7 +126,7 @@ function setup() {
 
   menuButton = new Button(middleWidth + 5, height - 250, 190, 50, "MENU");
 
-//trafic cars left being positioned
+  //trafic cars left being positioned
   for (let i = 0; i < numcars; i++) {
     let x = random(130, 300);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
@@ -531,11 +503,11 @@ function draw() {
   if (powerupActive) {
     powerupTime = 2 - Math.floor((millis() - powerupActivatedTime) / 1000);
     if (powerupTime <= 0) {
-      powerupActive = false; // Disable powerup effect when time is up
-      powerupTime = 0; // Ensure powerupTime doesn't become negative
+      powerupActive = false; 
+      powerupTime = 0; 
     }
   } else {
-    powerupTime = 0; // Reset powerupTime when powerup is not active
+    powerupTime = 0; 
   }
 
   /*<-- The following 20 lines were inspierd from the lunar lander game -->*/

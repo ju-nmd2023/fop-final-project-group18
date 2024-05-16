@@ -4,6 +4,7 @@ let cars = [];
 let carsright = [];
 let carSize = (40, 70);
 let numcars = 2;
+
 export class RedCar {
   constructor(x, y, size) {
     this.x = x;
@@ -87,7 +88,8 @@ export class RedCar {
         // Generate new position
         let newX = random(130, 530); // Update the range as needed
         let newY = random(-500, 0) - spacing; // Add spacing between cars
-
+        
+        //<== These 18 lines of code was made with help of chatgpt https://chat.openai.com/share/bf3dcc8b-6732-448b-a59c-be2d667625ef ==>
         // Check if the new position overlaps with any existing car position
         overlapping = false;
         for (let i = 0; i < cars.length; i++) {
