@@ -133,6 +133,7 @@ function setup() {
     let x = random(middleWidth - 180, middleWidth);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     cars.push(new RedCar(x, y, carSize));
+    cars[i].scored = false; // Initialize scored fla
   }
   //trafic cars right being positioned
   for (let i = 0; i < numcars; i++) {
@@ -328,8 +329,8 @@ function onePlayerScreen(x, y) {
       state = "resultOne";
     } else {
       // Check if a red car falls past the player car
-      if (!powerupActive && cars[i].y > 300 && !cars[i].scored) {
-        score++; // Increment the score
+      if (!powerupActive && cars[i].y > 400 && !cars[i].scored) {
+        score+=2; // Increment the score
         cars[i].scored = true; // Mark the car as scored to prevent double counting
       }
     }
