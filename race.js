@@ -2,7 +2,7 @@ import { RedCar } from "./traffic.js";
 import { PowerUp } from "./powerup.js";
 import { PlayerCar } from "./playercar.js";
 import { FallingLine } from "./lines.js";
-import { resetGame } from "./reset.js";
+
 
 let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
@@ -141,7 +141,7 @@ function setup() {
   );
 
   menuButton = new Button(middleWidth + 5, height - 250, 190, 50, "MENU");
-
+////Reset
   //trafic cars left being positioned
   for (let i = 0; i < numcars; i++) {
     let x = random(middleWidth - 180, middleWidth);
@@ -157,7 +157,7 @@ function setup() {
   }
   //powerup
   for (let i = 0; i < numpowerup; i++) {
-    let x = random(middleWidth - 200, middleWidth + 200);
+    let x = random(middleWidth - 100, middleWidth + 200);
     let y = random(-500, 0);
     powerup.push(new PowerUp(x, y, powerupsize));
   }
@@ -175,6 +175,44 @@ function preload() {
 }
 window.preload = preload;
 
+function resetGame() {
+ 
+  // Reset player car position
+  singlePlayer.x = innerWidth / 2;
+  singlePlayer.y = 550;
+
+  // Reset traffic cars on the left side
+  for (let i = 0; i < numcars; i++) {
+    let x = random(middleWidth + 180, middleWidth);
+    let y = random(-500, 0) - i * spacing;
+    cars[i].x = x;
+    cars[i].y = y;
+    cars[i].scored = false; // Reset scored flag
+  }
+
+  // Reset traffic cars on the right side
+  for (let i = 0; i < numcars; i++) {
+    let x = random(middleWidth - 180, middleWidth);
+    let y = random(-500, 0) - i * spacing;
+    carsright[i].x = x;
+    carsright[i].y = y;
+    carsright[i].scored = false; // Reset scored flag
+  }
+
+  // Reset powerups
+  for (let i = 0; i < numpowerup; i++) {
+    let x = random(middleWidth - 100, middleWidth + 200);
+    let y = random(-500, 0);
+    powerup[i].x = x;
+    powerup[i].y = y;
+  }
+
+  // Reset score and powerup state
+  score = 0;
+  powerupActive = false;
+  powerupTime = 0;
+}
+window.resetGame = resetGame;
 
 
 // ====== MENU ====== //
