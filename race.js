@@ -469,7 +469,8 @@ function resultTwoScreen() {
   // These 8 lines of code was adapted from https://pixelkind.github.io/foundationsofprogramming/oop/01-02-example. Accessed: 11/5-2024
   if (mouseIsPressed) {
     if (restartButton.hitTest(mouseX, mouseY)) {
-      state = "TwoPlayer";
+      resetGame();
+      state = "twoPlayer";
     }
     if (menuButton.hitTest(mouseX, mouseY)) {
       state = "start";
