@@ -1,4 +1,4 @@
-let powerupspeed = 8;
+//let powerupspeed = 8;
 export class PowerUp {
   constructor(x, y, size) {
     this.x = x;

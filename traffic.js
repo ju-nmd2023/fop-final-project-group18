@@ -1,10 +1,10 @@
-let traficspeed = 8;
-let spacing = 550;
-let cars = [];
-let carsright = [];
-let carSize = (40, 70);
-let numcars = 2;
-let middleWidth = innerWidth / 2;
+// let traficspeed = 8;
+// let spacing = 550;
+// let cars = [];
+// let carsright = [];
+// let carSize = (40, 70);
+// let numcars = 2;
+// let middleWidth = innerWidth / 2;
 
 export class RedCar {
   constructor(x, y, size) {

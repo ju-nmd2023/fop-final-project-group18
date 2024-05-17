@@ -2,6 +2,7 @@ import { RedCar } from "./traffic.js";
 import { PowerUp } from "./powerup.js";
 import { PlayerCar } from "./playercar.js";
 import { FallingLine } from "./lines.js";
+import { resetGame } from "./reset.js";
 
 let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
@@ -60,7 +61,7 @@ class Button {
     text(this.text, 0, this.height / 4, this.width);
     pop();
   }
-  hitTest(x, y) {
+  hitTest(x, y) { 
     return (
       x > this.x &&
       x < this.x + this.width &&
@@ -73,7 +74,7 @@ class Button {
 let singlePlayerButton;
 let doublePlayerButton;
 let restartButton;
-let menuButton;
+let menuButton; 
 
 //Different players
 let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
@@ -98,6 +99,13 @@ let score = 0;
 let powerupActive = false; // Variable to track powerup effect
 let powerupActivatedTime; // Timestamp when powerup was activated
 let powerupTime = 0;
+
+//Bounderys
+const leftRoadBoundary = middleWidth - 205;
+const rightRoadBoundary = middleWidth + 205;
+function isOnGrass(carX) {
+  return carX < leftRoadBoundary || carX > rightRoadBoundary;
+}
 
 let playerCarY = 450;
 
@@ -167,44 +175,7 @@ function preload() {
 }
 window.preload = preload;
 
-// ====== RESET GAME ====== //
-function resetGame() {
-  // Reset player car position
-  singlePlayer.x = innerWidth / 2;
-  singlePlayer.y = 550;
 
-  // Reset traffic cars on the left side
-  for (let i = 0; i < numcars; i++) {
-    let x = random(130, 300);
-    let y = random(-500, 0) - i * spacing;
-    cars[i].x = x;
-    cars[i].y = y;
-    cars[i].scored = false; // Reset scored flag
-  }
-
-  // Reset traffic cars on the right side
-  for (let i = 0; i < numcars; i++) {
-    let x = random(300, 532);
-    let y = random(-500, 0) - i * spacing;
-    carsright[i].x = x;
-    carsright[i].y = y;
-    carsright[i].scored = false; // Reset scored flag
-  }
-
-  // Reset powerups
-  for (let i = 0; i < numpowerup; i++) {
-    let x = random(130, 532);
-    let y = random(-500, 0);
-    powerup[i].x = x;
-    powerup[i].y = y;
-  }
-
-  // Reset score and powerup state
-  score = 0;
-  powerupActive = false;
-  powerupTime = 0;
-}
-window.resetGame = resetGame;
 
 // ====== MENU ====== //
 function menuPage() {
@@ -217,7 +188,7 @@ function menuPage() {
   text("Fast", middleWidth - 250, 150);
   text("And", middleWidth - 220, 220);
   text("Fantastic", middleWidth - 100, 290);
-  image(imgCar, middleWidth - 80, 80, 400, 170);
+  image(imgCar, middleWidth - 80, 80, 400, 170); 
 
   singlePlayerButton.draw();
   doublePlayerButton.draw();
@@ -263,6 +234,8 @@ function menuPage() {
 }
 window.menuPage = menuPage;
 
+
+
 // ====== ONE PLAYER MODE ====== //
 function onePlayerScreen(x, y) {
   push();
@@ -270,15 +243,15 @@ function onePlayerScreen(x, y) {
   translate(x, y);
   for (let i = 0; i < grass.length; i++) {
     grass[i].draw();
-    grass[i].update();
+    grass[i].update(); 
     if (grass[i].y > height) {
       grass[i].y = random(-400, -50);
     }
   }
   fill(102, 102, 95);
   noStroke();
-  rect(middleWidth - 150, 0, 300, height);
   rect(middleWidth - 200, 0, 400, height);
+ 
   fill(0);
   textSize(15);
   text("Speed" + " " + traficspeed, middleWidth - 270, 50);
@@ -291,7 +264,7 @@ function onePlayerScreen(x, y) {
   for (let i = 0; i < 10; i++) {
     let lineY = startY - i * lineSpacing;
     if (lineY < height) {
-      rect(lineX, lineY, 10, 80);
+      rect(lineX, lineY, 10, 80); 
     }
   }
 
@@ -350,6 +323,14 @@ function onePlayerScreen(x, y) {
       powerupActivatedTime = millis(); // Record activation time
       // Perform other actions if needed
       score += 1; // Example action: Increase score by 1
+    }
+  }
+  // Check if the car is on the grass and decrease score if true
+  if (isOnGrass(singlePlayer.x)) {
+    score -= 1;
+    // Ensure the score doesn't go below zero
+    if (score < 0) {
+      score = 0;
     }
   }
   // Display score
