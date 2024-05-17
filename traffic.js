@@ -12,6 +12,7 @@ export class RedCar {
     this.y = y;
     this.size = size;
     this.color = color;
+    this.scored = false;
   }
 
   display() {
@@ -110,6 +111,7 @@ export class RedCar {
         if (!overlapping) {
           this.x = newX;
           this.y = newY;
+          this.scored = false; // Reset scored property when repositioned
         }
       }
     }
