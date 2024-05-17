@@ -291,7 +291,7 @@ function onePlayerScreen(x, y) {
       state = "resultOne";
     } else {
       // Check if a red car falls past the player car
-      if (!powerupActive && cars[i].y > 300 && !cars[i].scored) {
+      if (!powerupActive && cars[i].y > 400 && !cars[i].scored) {
         score++; // Increment the score
         cars[i].scored = true; // Mark the car as scored to prevent double counting
       }
