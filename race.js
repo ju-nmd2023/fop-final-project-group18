@@ -99,6 +99,12 @@ let powerupActive = false; // Variable to track powerup effect
 let powerupActivatedTime; // Timestamp when powerup was activated
 let powerupTime = 0;
 
+let playerCarY = 450;
+
+let state = "start";
+let onePlayerIsRunning = true;
+let twoPlayerIsRunning = true;
+
 // ====== SETUP ====== //
 function setup() {
   createCanvas(innerWidth, innerHeight);
@@ -155,8 +161,13 @@ function setup() {
 }
 window.setup = setup;
 
-//Player1 car coordinates
+// ====== IMG PRELOAD ====== //
+function preload() {
+  imgCar = loadImage("img/RaceCar.png");
+}
+window.preload = preload;
 
+// ====== RESET GAME ====== //
 function resetGame() {
   // Reset player car position
   singlePlayer.x = innerWidth / 2;
@@ -194,14 +205,6 @@ function resetGame() {
   powerupTime = 0;
 }
 window.resetGame = resetGame;
-
-let playerCarY = 450;
-
-// ====== IMG PRELOAD ====== //
-function preload() {
-  imgCar = loadImage("img/RaceCar.png");
-}
-window.preload = preload;
 
 // ====== MENU ====== //
 function menuPage() {
@@ -330,7 +333,7 @@ function onePlayerScreen(x, y) {
     } else {
       // Check if a red car falls past the player car
       if (!powerupActive && cars[i].y > 400 && !cars[i].scored) {
-        score+=2; // Increment the score
+        score += 2; // Increment the score
         cars[i].scored = true; // Mark the car as scored to prevent double counting
       }
     }
@@ -527,12 +530,7 @@ function collision(x1, y1, w1, h1, x2, y2, w2, h2) {
 }
 window.collision = collision;
 
-let state = "start";
-let onePlayerIsRunning = true;
-let twoPlayerIsRunning = true;
-
 // ====== DRAW FUNCTION ====== //
-
 function draw() {
   // Update powerup effect timer
   if (powerupActive) {
