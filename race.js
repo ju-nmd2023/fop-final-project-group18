@@ -3,7 +3,6 @@ import { PowerUp } from "./powerup.js";
 import { PlayerCar } from "./playercar.js";
 import { FallingLine } from "./lines.js";
 
-
 let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
 let imgCar;
@@ -61,7 +60,7 @@ class Button {
     text(this.text, 0, this.height / 4, this.width);
     pop();
   }
-  hitTest(x, y) { 
+  hitTest(x, y) {
     return (
       x > this.x &&
       x < this.x + this.width &&
@@ -74,7 +73,7 @@ class Button {
 let singlePlayerButton;
 let doublePlayerButton;
 let restartButton;
-let menuButton; 
+let menuButton;
 
 //Different players
 let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
@@ -107,12 +106,6 @@ function isOnGrass(carX) {
   return carX < leftRoadBoundary || carX > rightRoadBoundary;
 }
 
-let playerCarY = 450;
-
-let state = "start";
-let onePlayerIsRunning = true;
-let twoPlayerIsRunning = true;
-
 // ====== SETUP ====== //
 function setup() {
   createCanvas(innerWidth, innerHeight);
@@ -141,23 +134,24 @@ function setup() {
   );
 
   menuButton = new Button(middleWidth + 5, height - 250, 190, 50, "MENU");
-////Reset
+
   //trafic cars left being positioned
   for (let i = 0; i < numcars; i++) {
     let x = random(middleWidth - 180, middleWidth);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     cars.push(new RedCar(x, y, carSize));
-    cars[i].scored = false; // Initialize scored fla
+    cars[i].scored = false;
   }
   //trafic cars right being positioned
   for (let i = 0; i < numcars; i++) {
     let x = random(middleWidth, middleWidth + 180);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     carsright.push(new RedCar(x, y, carSize));
+    cars[i].scored = false;
   }
   //powerup
   for (let i = 0; i < numpowerup; i++) {
-    let x = random(middleWidth - 100, middleWidth + 200);
+    let x = random(middleWidth - 200, middleWidth + 200);
     let y = random(-500, 0);
     powerup.push(new PowerUp(x, y, powerupsize));
   }
@@ -169,6 +163,12 @@ function setup() {
 }
 window.setup = setup;
 
+//Player1 car coordinates
+let playerCarY = 450;
+let state = "start";
+let onePlayerIsRunning = true;
+let twoPlayerIsRunning = true;
+
 // ====== IMG PRELOAD ====== //
 function preload() {
   imgCar = loadImage("img/RaceCar.png");
@@ -176,7 +176,6 @@ function preload() {
 window.preload = preload;
 
 function resetGame() {
- 
   // Reset player car position
   singlePlayer.x = innerWidth / 2;
   singlePlayer.y = 550;
@@ -214,7 +213,6 @@ function resetGame() {
 }
 window.resetGame = resetGame;
 
-
 // ====== MENU ====== //
 function menuPage() {
   background(37, 60, 129);
@@ -226,7 +224,7 @@ function menuPage() {
   text("Fast", middleWidth - 250, 150);
   text("And", middleWidth - 220, 220);
   text("Fantastic", middleWidth - 100, 290);
-  image(imgCar, middleWidth - 80, 80, 400, 170); 
+  image(imgCar, middleWidth - 80, 80, 400, 170);
 
   singlePlayerButton.draw();
   doublePlayerButton.draw();
@@ -272,8 +270,6 @@ function menuPage() {
 }
 window.menuPage = menuPage;
 
-
-
 // ====== ONE PLAYER MODE ====== //
 function onePlayerScreen(x, y) {
   push();
@@ -281,15 +277,15 @@ function onePlayerScreen(x, y) {
   translate(x, y);
   for (let i = 0; i < grass.length; i++) {
     grass[i].draw();
-    grass[i].update(); 
+    grass[i].update();
     if (grass[i].y > height) {
       grass[i].y = random(-400, -50);
     }
   }
   fill(102, 102, 95);
   noStroke();
+  rect(middleWidth - 150, 0, 300, height);
   rect(middleWidth - 200, 0, 400, height);
- 
   fill(0);
   textSize(15);
   text("Speed" + " " + traficspeed, middleWidth - 270, 50);
@@ -302,7 +298,7 @@ function onePlayerScreen(x, y) {
   for (let i = 0; i < 10; i++) {
     let lineY = startY - i * lineSpacing;
     if (lineY < height) {
-      rect(lineX, lineY, 10, 80); 
+      rect(lineX, lineY, 10, 80);
     }
   }
 
@@ -343,8 +339,8 @@ function onePlayerScreen(x, y) {
       state = "resultOne";
     } else {
       // Check if a red car falls past the player car
-      if (!powerupActive && cars[i].y > 400 && !cars[i].scored) {
-        score += 2; // Increment the score
+      if (!powerupActive && cars[i].y > 300 && !cars[i].scored) {
+        score++; // Increment the score
         cars[i].scored = true; // Mark the car as scored to prevent double counting
       }
     }
@@ -412,12 +408,10 @@ function resultOneScreen() {
   // These 8 lines of code was adapted from https://pixelkind.github.io/foundationsofprogramming/oop/01-02-example. Accessed: 11/5-2024
   if (mouseIsPressed) {
     if (restartButton.hitTest(mouseX, mouseY)) {
-      console.log("reset button was clicked");
       resetGame();
       state = "onePlayer";
     }
     if (menuButton.hitTest(mouseX, mouseY)) {
-      console.log("menu button was clicked");
       resetGame();
       state = "start";
     }
@@ -532,7 +526,7 @@ function resultTwoScreen() {
   if (mouseIsPressed) {
     if (restartButton.hitTest(mouseX, mouseY)) {
       resetGame();
-      state = "twoPlayer";
+      state = "TwoPlayer";
     }
     if (menuButton.hitTest(mouseX, mouseY)) {
       state = "start";
