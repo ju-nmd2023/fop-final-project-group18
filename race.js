@@ -1,7 +1,7 @@
 import { RedCar } from "./traffic.js";
 import { PowerUp } from "./powerup.js";
 import { PlayerCar } from "./playercar.js";
-import { FallingLine } from "./lines.js";
+//import { Line } from "./lines.js";
 
 let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
@@ -99,6 +99,11 @@ let powerupActive = false; // Variable to track powerup effect
 let powerupActivatedTime; // Timestamp when powerup was activated
 let powerupTime = 0;
 
+//lines
+// let lines = [];
+// let numLines = 4;
+// let spacingLines;
+
 //Bounderys
 const leftRoadBoundary = middleWidth - 205;
 const rightRoadBoundary = middleWidth + 205;
@@ -134,6 +139,12 @@ function setup() {
   );
 
   menuButton = new Button(middleWidth + 5, height - 250, 190, 50, "MENU");
+
+  // spacingLines = height / numLines;
+  // // Initialize the lines
+  // for (let i = 0; i < numLines; i++) {
+  //   lines.push(new Line(i * spacingLines));
+  // }
 
   //trafic cars left being positioned
   for (let i = 0; i < numcars; i++) {
@@ -291,6 +302,11 @@ function onePlayerScreen(x, y) {
   text("Speed" + " " + traficspeed, middleWidth - 270, 50);
 
   //lines
+  // for (let line of lines) {
+  //   line.update();
+  //   line.display();
+  // }
+
   fill(255);
   let lineSpacing = 400;
   let lineX = middleWidth - 5;
@@ -367,6 +383,7 @@ function onePlayerScreen(x, y) {
       score = 0;
     }
   }
+  noStroke();
   // Display score
   text("Score: " + score, middleWidth - 270, 90);
   // Display poweruptime
