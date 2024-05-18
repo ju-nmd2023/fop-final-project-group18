@@ -6,15 +6,6 @@ let carSize = (40, 70);
 let numcars = 2;
 let middleWidth = innerWidth / 2;
 
-let traffic = {
-  speed: 8,
-  spacing: 550,
-  car: [],
-  carsRight: [],
-  size: (40, 70),
-  numcars: 2,
-};
-
 export class RedCar {
   constructor(x, y, size) {
     this.x = x;
