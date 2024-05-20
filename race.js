@@ -328,7 +328,7 @@ function onePlayerScreen(x, y) {
     carsright[i].display();
 
     // Check collision
-    //<-- The following 20 lines were inspierd from the p5.js site 14-04-2024, https://editor.p5js.org/dfeusse/sketches/H1vD7NQjb -->
+     //<-- The following 22 lines were used https://chatgpt.com/share/91f1ff0d-c0a6-4cd8-abe3-66ab2c25c009 16-04-2024 -->
     if (
       !powerupActive &&
       (collision(
