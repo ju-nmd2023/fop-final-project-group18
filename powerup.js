@@ -1,4 +1,3 @@
-let powerupspeed = 8;
 export class PowerUp {
   constructor(x, y, size) {
     this.x = x;
@@ -9,15 +8,46 @@ export class PowerUp {
   display() {
     push();
     translate(this.x, this.y);
-    fill(255, 255, 0); // Yellow color for power-up
     noStroke();
-    rect(0, 0, this.size, this.size * 1.2, 18);
-    ellipse(this.size / 2, 10, this.size * 1.07, this.size * 0.92);
+    fill(255, 194, 1);
+    rect(this.x, this.y, this.PowerUpWidth, this.PowerUpHeight);
+    triangle(
+      this.x,
+      this.y + 30,
+      this.x + 50,
+      this.y + 30,
+      this.x + 25,
+      this.y + 53
+    );
+    triangle(this.x, this.y, this.x + 50, this.y, this.x + 25, this.y - 10);
+    fill(215, 144, 1);
+    rect(
+      this.x + 5,
+      this.y + 5,
+      this.PowerUpWidth - 10,
+      this.PowerUpHeight - 10
+    );
+    triangle(
+      this.x + 5,
+      this.y + 25,
+      this.x + 45,
+      this.y + 25,
+      this.x + 25,
+      this.y + 43
+    );
+    triangle(
+      this.x + 5,
+      this.y + 5,
+      this.x + 45,
+      this.y + 5,
+      this.x + 25,
+      this.y - 3
+    );
     pop();
   }
 
   fall() {
-    this.y += powerupspeed; // Assuming powerupspeed is the speed at which power-ups fall
+    this.y += 8; // Assuming powerupspeed is the speed at which power-ups fall
     if (this.y > height) {
       this.y = random(-500, 0); // Reset the power-up's position if it goes off the screen
     }

@@ -86,14 +86,11 @@ let carsright = [];
 let carSize = (40, 70);
 let numcars = 2;
 let traficspeed = 8;
-let traficspeedright = 3;
 let spacing = 550;
 
 //powerup
 let powerup = [];
-let powerupsize = (20, 20);
 let numpowerup = 1;
-let powerupspeed = 8;
 let score = 0;
 let powerupActive = false; // Variable to track powerup effect
 let powerupActivatedTime; // Timestamp when powerup was activated
@@ -158,13 +155,13 @@ function setup() {
     let x = random(middleWidth, middleWidth + 180);
     let y = random(-500, 0) - i * spacing; // Add spacing between cars
     carsright.push(new RedCar(x, y, carSize));
-    cars[i].scored = false;
+    carsright[i].scored = false;
   }
   //powerup
   for (let i = 0; i < numpowerup; i++) {
     let x = random(middleWidth - 200, middleWidth + 200);
     let y = random(-500, 0);
-    powerup.push(new PowerUp(x, y, powerupsize));
+    powerup.push(new PowerUp(x, y, 50, 30));
   }
 
   // Falling Grass
@@ -328,7 +325,7 @@ function onePlayerScreen(x, y) {
     carsright[i].display();
 
     // Check collision
-     //<-- The following 22 lines were used https://chatgpt.com/share/91f1ff0d-c0a6-4cd8-abe3-66ab2c25c009 16-04-2024 -->
+    //<-- The following 22 lines were used https://chatgpt.com/share/91f1ff0d-c0a6-4cd8-abe3-66ab2c25c009 16-04-2024 -->
     if (
       !powerupActive &&
       (collision(
