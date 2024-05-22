@@ -90,17 +90,18 @@ class Button {
   }
 }
 
+// The Buttons
 let singlePlayerButton;
 let doublePlayerButton;
 let restartButton;
 let menuButton;
 
-//Different players
+// Different players
 let singlePlayer = new PlayerCar(innerWidth / 2, 500, [255, 194, 1]);
 let player1 = new PlayerCar(middleWidth / 2, 550, [255, 194, 1]);
 let player2 = new PlayerCar(middleWidth * 1.5, 550, [205, 52, 52]);
 
-//trafic cars
+// Traffic cars variables
 let cars = [];
 let carsright = [];
 let carSize = (40, 70);
@@ -108,7 +109,7 @@ let numcars = 2;
 let traficspeed = 8;
 let spacing = 550;
 
-//powerup
+// Powerup variables
 let powerup = [];
 let numpowerup = 1;
 let score = 0;
@@ -116,11 +117,9 @@ let powerupActive = false; // Variable to track powerup effect
 let powerupActivatedTime; // Timestamp when powerup was activated
 let powerupTime = 0;
 
-//Player1 car coordinates
+// Player1 car coordinates
 let playerCarY = 450;
 let state = "start";
-let onePlayerIsRunning = true;
-let twoPlayerIsRunning = true;
 
 //Bounderys
 const leftRoadBoundary = middleWidth - 205;
