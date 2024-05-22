@@ -171,11 +171,7 @@ function setup() {
   for (let i = 0; i < numpowerup; i++) {
     let x = random(middleWidth - 200, middleWidth + 200);
     let y = random(-500, 0);
-<<<<<<< Updated upstream
     powerup.push(new PowerUp(x, y, carSize));
-=======
-    powerup.push(new PowerUp(x, y, 20, 20));
->>>>>>> Stashed changes
   }
 
   // Falling Grass
@@ -346,11 +342,7 @@ function onePlayerScreen(x, y) {
     carsright[i].display();
 
     // Check collision
-<<<<<<< Updated upstream
     //<-- The following 22 lines were used https://chatgpt.com/share/91f1ff0d-c0a6-4cd8-abe3-66ab2c25c009 16-04-2024 -->
-=======
-    //<-- The following 22 lines were used from chat gtp https://chatgpt.com/share/91f1ff0d-c0a6-4cd8-abe3-66ab2c25c009 16-04-2024 -->
->>>>>>> Stashed changes
     if (
       !powerupActive &&
       (collision(
