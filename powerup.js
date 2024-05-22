@@ -8,7 +8,7 @@ export class PowerUp {
   display() {
     push();
     translate(this.x, this.y);
-    fill(255, 255, 0); // Yellow color for power-up
+    fill(255, 255, 0);
     noStroke();
     rect(0, 0, this.size, this.size * 1.2, 18);
     ellipse(this.size / 2, 10, this.size * 1.07, this.size * 0.92);
@@ -16,9 +16,13 @@ export class PowerUp {
   }
 
   fall() {
+<<<<<<< Updated upstream
     this.y += 8; // Assuming powerupspeed is the speed at which power-ups fall
+=======
+    this.y += 8; 
+>>>>>>> Stashed changes
     if (this.y > height) {
-      this.y = random(-500, 0); // Reset the power-up's position if it goes off the screen
+      this.y = random(-500, 0); 
     }
   }
 

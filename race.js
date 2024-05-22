@@ -1,7 +1,6 @@
 import { RedCar } from "./traffic.js";
 import { PowerUp } from "./powerup.js";
 import { PlayerCar } from "./playercar.js";
-//import { Line } from "./lines.js";
 
 let middleWidth = innerWidth / 2;
 let middleHeight = innerHeight / 2;
@@ -25,6 +24,28 @@ class Grass {
     line(this.x + 25, this.y - 10, this.x + 35, this.y + 20);
     line(this.x + 35, this.y + 20, this.x + 45, this.y);
     line(this.x + 45, this.y + 20, this.x + 45, this.y);
+    pop();
+  }
+
+  update() {
+    this.y += 5;
+  }
+}
+
+let rocks = [];
+class Rocks {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  draw() {
+    push();
+    translate(this.x, this.y);
+    stroke("Grey");
+    fill("Grey");
+    strokeWeight(5);
+    ellipse(this.x, this.y, 26, 24);
+    ellipse(this.x + 10, this.y, 20, 20);
     pop();
   }
 
@@ -96,11 +117,6 @@ let powerupActive = false; // Variable to track powerup effect
 let powerupActivatedTime; // Timestamp when powerup was activated
 let powerupTime = 0;
 
-//lines
-// let lines = [];
-// let numLines = 4;
-// let spacingLines;
-
 //Bounderys
 const leftRoadBoundary = middleWidth - 205;
 const rightRoadBoundary = middleWidth + 205;
@@ -137,12 +153,6 @@ function setup() {
 
   menuButton = new Button(middleWidth + 5, height - 250, 190, 50, "MENU");
 
-  // spacingLines = height / numLines;
-  // // Initialize the lines
-  // for (let i = 0; i < numLines; i++) {
-  //   lines.push(new Line(i * spacingLines));
-  // }
-
   //trafic cars left being positioned
   for (let i = 0; i < numcars; i++) {
     let x = random(middleWidth - 180, middleWidth);
@@ -161,12 +171,21 @@ function setup() {
   for (let i = 0; i < numpowerup; i++) {
     let x = random(middleWidth - 200, middleWidth + 200);
     let y = random(-500, 0);
+<<<<<<< Updated upstream
     powerup.push(new PowerUp(x, y, carSize));
+=======
+    powerup.push(new PowerUp(x, y, 20, 20));
+>>>>>>> Stashed changes
   }
 
   // Falling Grass
   for (let i = 0; i < 50; i++) {
     grass.push(new Grass(random(width), random(-400, -50)));
+  }
+
+  //Falling rocks
+  for (let i = 0; i < 30; i++) {
+    rocks.push(new Rocks(random(width), random(-400, -50)));
   }
 }
 window.setup = setup;
@@ -237,7 +256,7 @@ function menuPage() {
   singlePlayerButton.draw();
   doublePlayerButton.draw();
 
-  // These 8 lines of code was adapted from https://pixelkind.github.io/foundationsofprogramming/oop/01-02-example. Accessed: 11/5-2024
+  // These 7 lines of code was adapted from https://pixelkind.github.io/foundationsofprogramming/oop/01-02-example. Accessed: 11/5-2024
   if (mouseIsPressed) {
     if (singlePlayerButton.hitTest(mouseX, mouseY)) {
       state = "onePlayer";
@@ -249,7 +268,7 @@ function menuPage() {
     textSize(20);
     textAlign(CENTER);
     text("Single Player", middleWidth, height - 155);
-    text("Double Player", middleWidth, height - 105);
+    text("Double Player (beta)", middleWidth, height - 105);
     stroke(237, 195, 40);
     strokeWeight(2);
     line(middleWidth - 50, height - 148, middleWidth + 50, height - 148);
@@ -290,19 +309,21 @@ function onePlayerScreen(x, y) {
       grass[i].y = random(-400, -50);
     }
   }
+
+  for (let i = 0; i < rocks.length; i++) {
+    rocks[i].draw();
+    rocks[i].update();
+    if (rocks[i].y > height) {
+      rocks[i].y = random(-400, -50);
+    }
+  }
   fill(102, 102, 95);
   noStroke();
-  rect(middleWidth - 150, 0, 300, height);
-  rect(middleWidth - 200, 0, 400, height);
+
+  rect(middleWidth - 225, 0, 450, height);
   fill(0);
   textSize(15);
   text("Speed" + " " + traficspeed, middleWidth - 270, 50);
-
-  //lines
-  // for (let line of lines) {
-  //   line.update();
-  //   line.display();
-  // }
 
   fill(255);
   let lineSpacing = 400;
@@ -325,7 +346,11 @@ function onePlayerScreen(x, y) {
     carsright[i].display();
 
     // Check collision
+<<<<<<< Updated upstream
     //<-- The following 22 lines were used https://chatgpt.com/share/91f1ff0d-c0a6-4cd8-abe3-66ab2c25c009 16-04-2024 -->
+=======
+    //<-- The following 22 lines were used from chat gtp https://chatgpt.com/share/91f1ff0d-c0a6-4cd8-abe3-66ab2c25c009 16-04-2024 -->
+>>>>>>> Stashed changes
     if (
       !powerupActive &&
       (collision(
@@ -366,8 +391,10 @@ function onePlayerScreen(x, y) {
 
     if (powerup[i].checkCollision(singlePlayer.x, singlePlayer.y, 70, 115)) {
       // Collision detected, activate powerup effect
+      //<-- The following 2 lines were used from chat gpt https://chatgpt.com/share/0d01f7c9-baa8-4942-b1f5-b2ca4802962b -->
       powerupActive = true;
       powerupActivatedTime = millis(); // Record activation time
+      splice(i, 1);
       // Perform other actions if needed
       score += 1; // Example action: Increase score by 1
     }
@@ -440,8 +467,8 @@ function twoPlayerScreen(x, y) {
   translate(x, y);
   fill(102, 102, 95);
   noStroke();
-  rect(middleWidth / 2 - 150, 0, 300, height);
-  rect(middleWidth * 1.5 - 150, 0, 300, height);
+  rect(middleWidth / 2 - 150, 0, 400, height);
+  rect(middleWidth * 1.5 - 150, 0, 400, height);
   player1.displayCar();
   player2.displayCar();
 
@@ -454,13 +481,13 @@ function twoPlayerScreen(x, y) {
   for (let i = 0; i < 10; i++) {
     let lineY = startY - i * lineSpacing;
     if (lineY < height) {
-      rect(lineX, lineY, 10, 80);
+      rect(lineX - 200, lineY, 10, 80);
     }
   }
   for (let i = 0; i < 10; i++) {
     let lineY = startY - i * lineSpacing;
     if (lineY < height) {
-      rect(lineX2, lineY, 10, 80);
+      rect(lineX2 + 200, lineY, 10, 80);
     }
   }
 
