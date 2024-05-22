@@ -3,7 +3,6 @@ import { PowerUp } from "./powerup.js";
 import { PlayerCar } from "./playercar.js";
 
 let middleWidth = innerWidth / 2;
-let middleHeight = innerHeight / 2;
 let imgCar;
 
 let grass = [];
@@ -117,6 +116,12 @@ let powerupActive = false; // Variable to track powerup effect
 let powerupActivatedTime; // Timestamp when powerup was activated
 let powerupTime = 0;
 
+//Player1 car coordinates
+let playerCarY = 450;
+let state = "start";
+let onePlayerIsRunning = true;
+let twoPlayerIsRunning = true;
+
 //Bounderys
 const leftRoadBoundary = middleWidth - 205;
 const rightRoadBoundary = middleWidth + 205;
@@ -185,12 +190,6 @@ function setup() {
   }
 }
 window.setup = setup;
-
-//Player1 car coordinates
-let playerCarY = 450;
-let state = "start";
-let onePlayerIsRunning = true;
-let twoPlayerIsRunning = true;
 
 // ====== IMG PRELOAD ====== //
 function preload() {
@@ -298,6 +297,7 @@ function onePlayerScreen(x, y) {
   push();
   background(38, 139, 7);
   translate(x, y);
+  //Grass
   for (let i = 0; i < grass.length; i++) {
     grass[i].draw();
     grass[i].update();
@@ -305,7 +305,7 @@ function onePlayerScreen(x, y) {
       grass[i].y = random(-400, -50);
     }
   }
-
+  //Rocks
   for (let i = 0; i < rocks.length; i++) {
     rocks[i].draw();
     rocks[i].update();
@@ -381,12 +381,10 @@ function onePlayerScreen(x, y) {
     powerup[i].display();
 
     if (powerup[i].checkCollision(singlePlayer.x, singlePlayer.y, 70, 115)) {
-      // Collision detected, activate powerup effect
       //<-- The following 2 lines were used from chat gpt https://chatgpt.com/share/0d01f7c9-baa8-4942-b1f5-b2ca4802962b -->
       score += 10; // Example action: Increase score by 1
       powerupActive = true;
       powerupActivatedTime = millis(); // Record activation time
-
       powerup.splice(powerup.indexOf(i), 1);
       let x = random(middleWidth - 100, middleWidth + 200);
       let y = random(-500, 0);
@@ -396,7 +394,6 @@ function onePlayerScreen(x, y) {
   // Check if the car is on the grass and decrease score if true
   if (isOnGrass(singlePlayer.x)) {
     score -= 1;
-    // Ensure the score doesn't go below zero
     if (score < 0) {
       score = 0;
     }
@@ -424,7 +421,6 @@ function resultOneScreen() {
   textAlign(RIGHT);
   textStyle(ITALIC);
   textSize(20);
-  //text("Time:", middleWidth - 85, 250);
   text("Score:" + "  " + score, middleWidth, 250);
   image(imgCar, middleWidth / 8, height - 200, 400, 170);
   restartButton.draw();
