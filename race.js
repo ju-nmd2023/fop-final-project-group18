@@ -425,7 +425,7 @@ function resultOneScreen() {
   textStyle(ITALIC);
   textSize(20);
   //text("Time:", middleWidth - 85, 250);
-  text("Score:" + "  " + score, middleWidth - 85, 350);
+  text("Score:" + "  " + score, middleWidth, 250);
   image(imgCar, middleWidth / 8, height - 200, 400, 170);
   restartButton.draw();
   menuButton.draw();
