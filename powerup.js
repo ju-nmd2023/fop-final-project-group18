@@ -36,3 +36,5 @@ export class PowerUp {
     return false; // No collision
   }
 }
+
+// För att få bort powerupen efter att man tagit den använd

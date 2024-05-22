@@ -161,7 +161,7 @@ function setup() {
   for (let i = 0; i < numpowerup; i++) {
     let x = random(middleWidth - 200, middleWidth + 200);
     let y = random(-500, 0);
-    powerup.push(new PowerUp(x, y, 50, 30));
+    powerup.push(new PowerUp(x, y, carSize));
   }
 
   // Falling Grass
