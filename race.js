@@ -97,7 +97,7 @@ let restartButton;
 let menuButton;
 
 //Different players
-let singlePlayer = new PlayerCar(innerWidth / 2, 550, [255, 194, 1]);
+let singlePlayer = new PlayerCar(innerWidth / 2, 500, [255, 194, 1]);
 let player1 = new PlayerCar(middleWidth / 2, 550, [255, 194, 1]);
 let player2 = new PlayerCar(middleWidth * 1.5, 550, [205, 52, 52]);
 
@@ -171,11 +171,7 @@ function setup() {
   for (let i = 0; i < numpowerup; i++) {
     let x = random(middleWidth - 200, middleWidth + 200);
     let y = random(-500, 0);
-<<<<<<< Updated upstream
     powerup.push(new PowerUp(x, y, carSize));
-=======
-    powerup.push(new PowerUp(x, y, 20, 20));
->>>>>>> Stashed changes
   }
 
   // Falling Grass
@@ -205,7 +201,7 @@ window.preload = preload;
 function resetGame() {
   // Reset player car position
   singlePlayer.x = innerWidth / 2;
-  singlePlayer.y = 550;
+  singlePlayer.y = 500;
 
   // Reset traffic cars on the left side
   for (let i = 0; i < numcars; i++) {
@@ -319,7 +315,6 @@ function onePlayerScreen(x, y) {
   }
   fill(102, 102, 95);
   noStroke();
-
   rect(middleWidth - 225, 0, 450, height);
   fill(0);
   textSize(15);
@@ -346,11 +341,7 @@ function onePlayerScreen(x, y) {
     carsright[i].display();
 
     // Check collision
-<<<<<<< Updated upstream
-    //<-- The following 22 lines were used https://chatgpt.com/share/91f1ff0d-c0a6-4cd8-abe3-66ab2c25c009 16-04-2024 -->
-=======
     //<-- The following 22 lines were used from chat gtp https://chatgpt.com/share/91f1ff0d-c0a6-4cd8-abe3-66ab2c25c009 16-04-2024 -->
->>>>>>> Stashed changes
     if (
       !powerupActive &&
       (collision(
@@ -392,11 +383,14 @@ function onePlayerScreen(x, y) {
     if (powerup[i].checkCollision(singlePlayer.x, singlePlayer.y, 70, 115)) {
       // Collision detected, activate powerup effect
       //<-- The following 2 lines were used from chat gpt https://chatgpt.com/share/0d01f7c9-baa8-4942-b1f5-b2ca4802962b -->
+      score += 10; // Example action: Increase score by 1
       powerupActive = true;
       powerupActivatedTime = millis(); // Record activation time
-      splice(i, 1);
-      // Perform other actions if needed
-      score += 1; // Example action: Increase score by 1
+
+      powerup.splice(powerup.indexOf(i), 1);
+      let x = random(middleWidth - 100, middleWidth + 200);
+      let y = random(-500, 0);
+      powerup.push(new PowerUp(x, y, carSize));
     }
   }
   // Check if the car is on the grass and decrease score if true

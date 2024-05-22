@@ -10,19 +10,14 @@ export class PowerUp {
     translate(this.x, this.y);
     fill(255, 255, 0);
     noStroke();
-    rect(0, 0, this.size, this.size * 1.2, 18);
-    ellipse(this.size / 2, 10, this.size * 1.07, this.size * 0.92);
+    ellipse(this.size / 2, 10, this.size * 0.5, this.size * 0.5);
     pop();
   }
 
   fall() {
-<<<<<<< Updated upstream
     this.y += 8; // Assuming powerupspeed is the speed at which power-ups fall
-=======
-    this.y += 8; 
->>>>>>> Stashed changes
     if (this.y > height) {
-      this.y = random(-500, 0); 
+      this.y = random(-500, 0);
     }
   }
 
